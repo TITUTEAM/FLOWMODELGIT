@@ -8,6 +8,6 @@ namespace FLOWMODEL
 {
     interface MathInt
     {
-
+		public void SomeMath();
     }
 }
