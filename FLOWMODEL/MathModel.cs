@@ -10,8 +10,10 @@ namespace FLOWMODEL
 	public class MathModel
 	{
 		private double H, W, Vu, Mu0, N, L, DeltaL, B, Tr, Tu, Alpha, Ro, C, T0;
-		private double F, Q, Gamma, qGamma, qAlpha, m, Li;
-		private double[] K;
+		private double F, Q, Gamma, qGamma, qAlpha, Li, G, Tp, EtaP;
+		private int m;
+		private double[] K, T, Eta;
+
 
 		// Конструктор
 		public MathModel(double H, double W, double Vu, double Mu0, double N, double L, 
@@ -34,7 +36,30 @@ namespace FLOWMODEL
 			this.T0 = T0;
 		}
 
-		public bool Algorithm()
+		// Проверка
+		public String Check()
+		{
+			String VarName = "Некорректные значения: ";
+			if (H <= 0.001)	{ VarName += "H, "; }
+			if (W <= 0.001) { VarName += "W, "; }
+			if (Vu <= 0.001) { VarName += "Vu, "; }
+			if (Mu0 <= 0.001) { VarName += "Mu0, "; }
+			if (N <= 0.001) { VarName += "n, "; }
+			if (L <= 0.001) { VarName += "L, "; }
+			if (DeltaL <= 0.001) { VarName += "deltaL, "; }
+			if (B <= 0.001) { VarName += "b, "; }
+			if (Tr <= 0.001) { VarName += "Tr, "; }
+			if (Tu <= 0.001) { VarName += "Tu, "; }
+			if (Alpha <= 0.001) { VarName += "alpha, "; }
+			if (Ro <= 0.001) { VarName += "ro, "; }
+			if (C <= 0.001) { VarName += "C, "; }
+			if (T0 <= 0.001) { VarName += "T0, "; }
+
+			return VarName;
+		}
+
+		// Алгоритм
+		public void Algorithm()
 		{
 			F = CorrectionCoefficientF(H, W);
 			Q = VolumetricFlowRateQ(H, W, Vu, F);
@@ -42,16 +67,55 @@ namespace FLOWMODEL
 			qGamma = HeatFluxQGamma(H, W, Mu0, N, Gamma);
 			qAlpha = HeatFluxQAlpha(H, Tu, B, Tr, Alpha);
 			m = NumberOfStepsM(L, DeltaL);
-			for (int i = 0; i < m; i++)
-			{
-				Li = DeltaL * i;
 
-				
+			K = new double[m + 1];
+			T = new double[m + 1];
+			Eta = new double[m + 1];
+
+			for (int i = 0; i <= m; i++)
+			{
+				Li = i * DeltaL;
+				K[i] = HeatBalanceKI(B, qGamma, W, Alpha, qAlpha, Li, Ro, C, Q, T0, Tr);
+				T[i] = MaterialTemperatureTI(Tr, B, K[i]);
+				Eta[i] = MaterialViscosityEtaI(Mu0, B, T[i], Tr, Gamma, N);
 			}
-			return true;
+
+			Tp = T[m];
+			EtaP = Eta[m];
+
+			G = ChannelOutputG(Q, Ro);
 		}
 
+		// Распределение температуры по длинне канала
+		public double[] GetTI()
+		{
+			return T;
+		}
 
+		// Распределение вязкости по длинне канала
+		public double[] GetEtaI()
+		{
+			return Eta;
+		}
+		
+		// Температура продукта
+		public double GetTp()
+		{
+			return Tp;
+		}
+
+		// Вязкость продукта
+		public double GetEtaP()
+		{
+			return EtaP;
+		}
+
+		// Производительность
+		public double GetG()
+		{
+			return G;
+		}
+		
 		// Поправочный коэффициент F
 		// H -- ширина
 		// W -- длинна
@@ -105,9 +169,17 @@ namespace FLOWMODEL
 		// Число шагов вычисления модели m
 		// L -- длинна канала
 		// DeltaL -- длинна промежутка?????
-		private double NumberOfStepsM(double L, double DeltaL)
+		private int NumberOfStepsM(double L, double DeltaL)
 		{
-			return L / DeltaL;
+			double m = L / DeltaL;
+			if (m - System.Math.Round(m) < 0.5)
+			{
+				return Convert.ToInt32(System.Math.Round(m)) + 1;
+			}
+			else
+			{
+				return Convert.ToInt32(System.Math.Round(m));
+			}
 		}
 
 
