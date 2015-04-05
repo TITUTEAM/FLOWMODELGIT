@@ -83,7 +83,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MathInt.cs" />
+    <Compile Include="Math.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
