@@ -14,7 +14,7 @@ namespace FLOWMODEL
 		private double[] K;
 
 		// Конструктор
-		void MathModel(double H, double W, double Vu, double Mu0, double N, double L, 
+		public MathModel(double H, double W, double Vu, double Mu0, double N, double L, 
 						double DeltaL, double B, double Tr, double Tu, double Alpha,
 						double Ro, double C, double T0)
 		{
