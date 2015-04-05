@@ -15,9 +15,6 @@ using System.Windows.Shapes;
 
 namespace FLOWMODEL
 {
-	/// <summary>
-	/// Interaction logic for MainWindow.xaml
-	/// </summary>
 	public partial class MainWindow : Window
 	{
 		public MainWindow()
@@ -39,12 +36,15 @@ namespace FLOWMODEL
 			}
 		}
 
+		// Переключение видимости WPF Grid'ов при выборе вкладки "Расчет"
+		// Grid расчетов - показан, Grid результатов - скрыт
 		private void CalculationsButton_Click(object sender, RoutedEventArgs e)
 		{
 			CalcGrid.Visibility = Visibility.Visible;
 			ResultGrid.Visibility = Visibility.Hidden;
 		}
-
+		// Переключение видимости WPF Grid'ов при выборе вкладки "Результаты"
+		// Grid расчетов - скрыт, Grid результатов - показан
 		private void ResultsButton_Click(object sender, RoutedEventArgs e)
 		{
 			CalcGrid.Visibility = Visibility.Hidden;
