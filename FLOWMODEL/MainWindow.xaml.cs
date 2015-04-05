@@ -24,5 +24,31 @@ namespace FLOWMODEL
 		{
 			InitializeComponent();
 		}
+
+		// Вывод диалогового окна с подтверждением при закрытии программы
+		private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+		{
+			MessageBoxResult ExitResult = MessageBox.Show("Вы действительно хотите выйти?", "", MessageBoxButton.YesNo, MessageBoxImage.Question);
+			if (ExitResult == MessageBoxResult.Yes)
+			{
+				Application.Current.Shutdown();
+			}
+			else
+			{
+				e.Cancel = true;
+			}
+		}
+
+		private void CalculationsButton_Click(object sender, RoutedEventArgs e)
+		{
+			CalcGrid.Visibility = Visibility.Visible;
+			ResultGrid.Visibility = Visibility.Hidden;
+		}
+
+		private void ResultsButton_Click(object sender, RoutedEventArgs e)
+		{
+			CalcGrid.Visibility = Visibility.Hidden;
+			ResultGrid.Visibility = Visibility.Visible;
+		}
 	}
 }

@@ -1,9 +1,79 @@
 ﻿<Window x:Class="FLOWMODEL.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="FLOWMODEL" Height="350" Width="525" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" >
-    <Grid>
-		<TextBox HorizontalAlignment="Left" Height="23" Margin="172,175,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        Title="FLOWMODEL: Исследователь" Height="600" Width="800" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Background="#FF323232" Foreground="#FFE2E2E2" Icon="Content/MainIcon.png" Closing="Window_Closing">
+	<Grid>
+	
+		
+		<StackPanel Height="25" Margin="0, 3" VerticalAlignment="Top" Orientation="Horizontal" HorizontalAlignment="Left">
+			<Button x:Name="MenuFile" Content="ФАЙЛ" Width="75" Foreground="#FFE2E2E2" Background="{x:Null}" BorderBrush="{x:Null}"/>
+			<Button x:Name="MenuEdit" Content="ПРАВКА" Width="75" Foreground="#FFE2E2E2" Background="{x:Null}" BorderBrush="{x:Null}"/>
+			<Button x:Name="MenuService" Content="СЕРВИС" Width="75" Foreground="#FFE2E2E2" Background="{x:Null}" BorderBrush="{x:Null}"/>
+			<Button x:Name="MenuRun" Content="ВЫПОЛНИТЬ" Width="105" Foreground="#FFE2E2E2" Background="{x:Null}" BorderBrush="{x:Null}"/>
+			<Button x:Name="MenuHelp" Content="ПОМОЩЬ" Width="75" Foreground="#FFE2E2E2" Background="{x:Null}" BorderBrush="{x:Null}"/>
+		</StackPanel>
+		<Grid VerticalAlignment="Top" Margin="0,31,0,0" Height="30" >
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*" />
+				<ColumnDefinition Width="*" />
+			</Grid.ColumnDefinitions>
+			<Button x:Name="CalculationsButton" Grid.Column="0" BorderBrush="{x:Null}" Foreground="#FFE2E2E2" Background="#FF232323" Click="CalculationsButton_Click">
+				<StackPanel>
+					<TextBlock TextWrapping="Wrap" Text="Расчет" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,3" />
+					<Rectangle Fill="#FFABBB41" Height="2"   Width="900" HorizontalAlignment="Center" Margin="0,0,0,0"/>
+				</StackPanel>
+			</Button>
+			<Button x:Name="ResultsButton" Grid.Column="1" BorderBrush="{x:Null}" Foreground="#FFE2E2E2" Background="#FF232323" Click="ResultsButton_Click">
+				<StackPanel>
+					<TextBlock TextWrapping="Wrap" Text="Результаты" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,3" />
+					<Rectangle Fill="#FFABBB41" Height="2"   Width="900" HorizontalAlignment="Center" Margin="0,0,0,0"/>
+				</StackPanel>
+			</Button>
+		</Grid>
+
+		<Grid x:Name="CalcGrid" Margin="0,60,0,0" >
+			<StackPanel HorizontalAlignment="Left" Height="20" Margin="25,25,0,0" VerticalAlignment="Top" Orientation="Horizontal">
+				<TextBlock TextWrapping="Wrap" Text="Тип материала: " FontWeight="Bold"/>
+				<ComboBox x:Name="MaterialTypeCombox" Margin="10, 0" Width="200"/>
+			</StackPanel>
+			
+			<StackPanel HorizontalAlignment="Left" Margin="25,55,0,0" VerticalAlignment="Top" Width="200">
+				<TextBlock TextWrapping="Wrap" Text="Геометрические параметры:" Margin="0,0,0,5" FontWeight="Bold"/>
+				<DockPanel Margin="0,0,0,5">
+					<TextBlock  Width="70" TextWrapping="Wrap"  Text="Длина, м: "/>
+					<TextBox TextWrapping="Wrap" Margin="5, 0, 0, 0" Text="1" Width="120" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+				</DockPanel>
+				<DockPanel Margin="0,0,0,5">
+					<TextBlock  Width="70" TextWrapping="Wrap"  Text="Ширина, м: "/>
+					<TextBox TextWrapping="Wrap" Margin="5, 0, 0, 0" Text="1" Width="120" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+				</DockPanel>
+				<DockPanel Margin="0,0,0,5">
+					<TextBlock  Width="70" TextWrapping="Wrap"  Text="Глубина, м: "/>
+					<TextBox TextWrapping="Wrap" Margin="5, 0, 0, 0" Text="1" Width="120" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+				</DockPanel>
+			</StackPanel>
+
+			<StackPanel HorizontalAlignment="Left" Margin="275,55,0,0" VerticalAlignment="Top" Width="250">
+				<TextBlock TextWrapping="Wrap" Text="Свойства материала:" Margin="0,0,0,5" FontWeight="Bold"/>
+				<DockPanel Margin="0,0,0,5">
+					<TextBlock  Width="110" TextWrapping="Wrap"  Text="Плотность, кг/м3: "/>
+					<TextBox TextWrapping="Wrap" Margin="5, 0, 0, 0" Text="1" Width="120" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+				</DockPanel>
+				<DockPanel Margin="0,0,0,5">
+					<TextBlock  Width="110" TextWrapping="Wrap" Text="Удельная теплоемкость, Дж/(кг*С): "/>
+					<TextBox TextWrapping="Wrap" Margin="5, 0, 0, 0" Text="1" Width="120" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+				</DockPanel>
+				<DockPanel Margin="0,0,0,5">
+					<TextBlock  Width="110" TextWrapping="Wrap"  Text="Температура плавления, С: "/>
+					<TextBox TextWrapping="Wrap" Margin="5, 0, 0, 0" Text="1" Width="120" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+				</DockPanel>
+			</StackPanel>
+
+		</Grid>
+
+		<Grid x:Name="ResultGrid" Margin="0,60,0,0" Visibility="Hidden">
+			<TextBox HorizontalAlignment="Left" Height="23" Margin="145,130,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="200"/>
+		</Grid>
 
 	</Grid>
 </Window>
