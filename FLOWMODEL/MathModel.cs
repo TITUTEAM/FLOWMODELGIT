@@ -7,12 +7,55 @@ using System.Threading.Tasks;
 
 namespace FLOWMODEL
 {
-	public static class Math
+	public class MathModel
 	{
+		private double H, W, Vu, Mu0, N, L, DeltaL, B, Tr, Tu, Alpha, Ro, C, T0;
+		private double F, Q, Gamma, qGamma, qAlpha, m, Li;
+		private double[] K;
+
+		// Конструктор
+		void MathModel(double H, double W, double Vu, double Mu0, double N, double L, 
+						double DeltaL, double B, double Tr, double Tu, double Alpha,
+						double Ro, double C, double T0)
+		{
+			this.H = H;
+			this.W = W;
+			this.Vu = Vu;
+			this.Mu0 = Mu0;
+			this.N = N;
+			this.L = L;
+			this.DeltaL = DeltaL;
+			this.B = B;
+			this.Tr = Tr;
+			this.Tu = Tu;
+			this.Alpha = Alpha;
+			this.Ro = Ro;
+			this.C = C;
+			this.T0 = T0;
+		}
+
+		public bool Algorithm()
+		{
+			F = CorrectionCoefficientF(H, W);
+			Q = VolumetricFlowRateQ(H, W, Vu, F);
+			Gamma = ShearStainRateGamma(H, Vu);
+			qGamma = HeatFluxQGamma(H, W, Mu0, N, Gamma);
+			qAlpha = HeatFluxQAlpha(H, Tu, B, Tr, Alpha);
+			m = NumberOfStepsM(L, DeltaL);
+			for (int i = 0; i < m; i++)
+			{
+				Li = DeltaL * i;
+
+				
+			}
+			return true;
+		}
+
+
 		// Поправочный коэффициент F
 		// H -- ширина
 		// W -- длинна
-		double CorrectionCoefficientF(double H, double W)
+		private double CorrectionCoefficientF(double H, double W)
 		{
 			return 0.125 * System.Math.Pow((H / W), 2) - 0.625 * (H / W) + 1;
 		}
@@ -22,7 +65,7 @@ namespace FLOWMODEL
 		// W -- длинна
 		// Vu -- скорость верней крышки канала
 		// F -- поравочный коэффициент -- CorrectionCoefficientF
-		double VolumetricFlowRateQ(double H, double W, double Vu, double F)
+		private double VolumetricFlowRateQ(double H, double W, double Vu, double F)
 		{
 			return ((W * H * Vu) / 2) * F;
 		}
@@ -30,11 +73,10 @@ namespace FLOWMODEL
 		// Скорость деформации сдвига
 		// H -- ширина
 		// Vu -- скорость верней крышки канала
-		double ShearStainRateGamma(double H, double Vu)
+		private double ShearStainRateGamma(double H, double Vu)
 		{
 			return Vu / H;
 		}
-
 
 		// Удельный тепловой поток qGamma
 		// H -- ширина
@@ -42,7 +84,7 @@ namespace FLOWMODEL
 		// Mu0 -- коэффициент консистенции при температуре приведения
 		// N -- индекс течения материала
 		// Gamma -- скорость деформации сдвига -- ShearStainRateGamma 
-		double HeatFluxQGamma(double H, double W, double Mu0, double N, double Gamma)
+		private double HeatFluxQGamma(double H, double W, double Mu0, double N, double Gamma)
 		{
 			return W * H * Mu0 * System.Math.Pow(Gamma, N + 1);
 		}
@@ -54,7 +96,7 @@ namespace FLOWMODEL
 		// B -- темепературный коэффициент вязкости
 		// Tr -- температура приведения
 		// Alpha -- коэффициент теплоотдачи??????
-		double HeatFluxQAlpha(double W, double Tu, double B, double Tr, double Alpha)
+		private double HeatFluxQAlpha(double W, double Tu, double B, double Tr, double Alpha)
 		{
 			return W * ((Alpha / B) - Alpha * Tu + Alpha * Tr);
 		}
@@ -63,7 +105,7 @@ namespace FLOWMODEL
 		// Число шагов вычисления модели m
 		// L -- длинна канала
 		// DeltaL -- длинна промежутка?????
-		double NumberOfStepsM(double L, double DeltaL)
+		private double NumberOfStepsM(double L, double DeltaL)
 		{
 			return L / DeltaL;
 		}
@@ -82,7 +124,7 @@ namespace FLOWMODEL
 		// Q -- удельный расход -- VolumetricFlowRateQ
 		// T0 -- начальная температура
 		// Tr -- температура приведения
-		double HeatBalanceKI(double B, double QGamma, double W, double Alpha, double QAlpha,
+		private double HeatBalanceKI(double B, double QGamma, double W, double Alpha, double QAlpha,
 							double L, double Ro, double C, double Q, double T0, double Tr)
 		{
 			return ((B * QGamma + W * Alpha) / (B * QAlpha)) * 
@@ -94,7 +136,7 @@ namespace FLOWMODEL
 		// Tr -- температура приведения
 		// B -- темепературный коэффициент вязкости
 		// Ki -- уравнение теплового баланса HeatBalanceKI
-		double MaterialTemperatureTI(double Tr, double B, double Ki)
+		private double MaterialTemperatureTI(double Tr, double B, double Ki)
 		{
 			return Tr + ((1 / B) * System.Math.Log(Ki));
 		}
@@ -106,7 +148,7 @@ namespace FLOWMODEL
 		// Tr -- температура приведения
 		// Gamma -- скорость деформации сдвига -- ShearStainRateGamma 
 		// N -- индекс течения материала
-		double MaterialViscosityEtaI(double Mu0, double B, double Ti, double Tr, double Gamma, double N)
+		private double MaterialViscosityEtaI(double Mu0, double B, double Ti, double Tr, double Gamma, double N)
 		{
 			return Mu0 * System.Math.Exp(-B * (Ti - Tr)) * System.Math.Pow(Gamma, N - 1);
 		}
@@ -114,7 +156,7 @@ namespace FLOWMODEL
 		// Прозводительность канала
 		// Ro -- плотность
 		// Q -- удельный расход -- VolumetricFlowRateQ
-		double ChannelOutputG(double Q, double Ro)
+		private double ChannelOutputG(double Q, double Ro)
 		{
 			return Q * Ro;
 		}
