@@ -77,7 +77,7 @@ namespace FLOWMODEL
 			{
 				Li = i * DeltaL;
 				K[i] = HeatBalanceKI(B, qGamma, W, Alpha, qAlpha, Li, Ro, C, Q, T0, Tr);
-				T[i] = Math.Round(MaterialTemperatureTI(Tr, B, K[i]), 1);
+				T[i] = Math.Round(MaterialTemperatureTI(Tr, B, K[i]), 2);
 				Eta[i] = Math.Round(MaterialViscosityEtaI(Mu0, B, T[i], Tr, Gamma, N));
 			}
 
@@ -102,7 +102,7 @@ namespace FLOWMODEL
 		// Температура продукта
 		public double GetTp()
 		{
-			return Math.Round(Tp, 1);
+			return Math.Round(Tp, 2);
 		}
 
 		// Вязкость продукта
@@ -231,7 +231,7 @@ namespace FLOWMODEL
 		// Q -- удельный расход -- VolumetricFlowRateQ
 		private double ChannelOutputG(double Q, double Ro)
 		{
-			return Q * Ro;
+			return Q * Ro * 3600;
 		}
 
 
