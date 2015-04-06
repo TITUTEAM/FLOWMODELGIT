@@ -78,7 +78,7 @@
 				<TextBlock TextWrapping="Wrap" Text="Свойства материала:" Margin="0,0,0,5" FontWeight="Bold"/>
 				<!-- Плотность -->
 				<DockPanel Margin="0,0,0,5">
-					<TextBlock  Width="110" TextWrapping="Wrap"  Text="Плотность, кг/м3: "/>
+					<TextBlock  Width="110" TextWrapping="Wrap"  Text="Плотность, кг/м^3: "/>
 					<TextBox x:Name="Ro_TBox" TextWrapping="Wrap" Margin="5, 0, 0, 0" Text="1200" Width="70" HorizontalAlignment="Right" VerticalAlignment="Center"/>
 				</DockPanel>
 				<!-- Удельная теплоемкость -->
@@ -109,7 +109,7 @@
 				<TextBlock  TextWrapping="Wrap"  Text="Индекс течения материала: "/>
 				<TextBox x:Name="N_TBox" TextWrapping="Wrap" Margin="0, 3" Text="0.3" VerticalAlignment="Center"/>
 				<!-- Коэффициент теплоотдачи от крышки к материалу -->
-				<TextBlock   TextWrapping="Wrap"  Text="Коэффициент теплоотдачи от крышки к материалу, Вт*(м^2 * C): "/>
+				<TextBlock   TextWrapping="Wrap"  Text="Коэффициент теплоотдачи от крышки к материалу, Вт/(м^2 * C): "/>
 				<TextBox x:Name="Alpha_TBox" TextWrapping="Wrap" Margin="0, 3" Text="450" VerticalAlignment="Center"/>
 			</StackPanel>
 
@@ -120,7 +120,7 @@
 				<TextBlock  TextWrapping="Wrap"  Text="Скорость движения крышки, м/с: "/>
 				<TextBox x:Name="Vu_TBox" TextWrapping="Wrap" Margin="0, 3" Text="1.2" VerticalAlignment="Center"/>
 				<!-- Температура верхней крышки -->
-				<TextBlock  TextWrapping="Wrap" Text="Температура крышки, Т: "/>
+				<TextBlock  TextWrapping="Wrap" Text="Температура крышки, C "/>
 				<TextBox x:Name="Tu_TBox" TextWrapping="Wrap" Margin="0, 3" Text="150" VerticalAlignment="Center"/>
 			</StackPanel>
 
@@ -152,7 +152,7 @@
 			</StackPanel>
 			<StackPanel HorizontalAlignment="Left" Margin="300,50" VerticalAlignment="Bottom" Width="250">
 				<!-- Производительность -->
-				<TextBlock TextWrapping="Wrap"  Text="Производительность, кг/с: "/>
+				<TextBlock TextWrapping="Wrap"  Text="Производительность, кг/ч: "/>
 				<TextBox x:Name="G_TBox" Margin="0, 3" Text="" VerticalAlignment="Center"/>
 			</StackPanel>
 		</Grid>
