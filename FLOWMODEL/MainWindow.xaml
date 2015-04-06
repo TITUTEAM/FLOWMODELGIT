@@ -133,7 +133,7 @@
 			</StackPanel>
 
 			<!-- Кнопка РАССЧИТАТЬ -->
-			<Button x:Name="CalculateButton" Content="РАССЧИТАТЬ" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="250" Height="40" Margin="250, 15"/>
+			<Button x:Name="CalculateButton" Content="РАССЧИТАТЬ" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="250" Height="40" Margin="250, 15" Click="CalculateButton_Click"/>
 		</Grid>
 
 		<!-- Results mode window grid ========================================================== -->

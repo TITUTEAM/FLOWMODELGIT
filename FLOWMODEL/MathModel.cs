@@ -68,11 +68,11 @@ namespace FLOWMODEL
 			qAlpha = HeatFluxQAlpha(H, Tu, B, Tr, Alpha);
 			m = NumberOfStepsM(L, DeltaL);
 
-			K = new double[m + 1];
-			T = new double[m + 1];
-			Eta = new double[m + 1];
+			K = new double[m];
+			T = new double[m];
+			Eta = new double[m];
 
-			for (int i = 0; i <= m; i++)
+			for (int i = 0; i < m; i++)
 			{
 				Li = i * DeltaL;
 				K[i] = HeatBalanceKI(B, qGamma, W, Alpha, qAlpha, Li, Ro, C, Q, T0, Tr);
@@ -80,8 +80,8 @@ namespace FLOWMODEL
 				Eta[i] = MaterialViscosityEtaI(Mu0, B, T[i], Tr, Gamma, N);
 			}
 
-			Tp = T[m];
-			EtaP = Eta[m];
+			Tp = T[m - 1];
+			EtaP = Eta[m - 1];
 
 			G = ChannelOutputG(Q, Ro);
 		}
