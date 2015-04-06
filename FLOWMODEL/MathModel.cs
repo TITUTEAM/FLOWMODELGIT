@@ -77,8 +77,8 @@ namespace FLOWMODEL
 			{
 				Li = i * DeltaL;
 				K[i] = HeatBalanceKI(B, qGamma, W, Alpha, qAlpha, Li, Ro, C, Q, T0, Tr);
-				T[i] = MaterialTemperatureTI(Tr, B, K[i]);
-				Eta[i] = MaterialViscosityEtaI(Mu0, B, T[i], Tr, Gamma, N);
+				T[i] = Math.Round(MaterialTemperatureTI(Tr, B, K[i]), 1);
+				Eta[i] = Math.Round(MaterialViscosityEtaI(Mu0, B, T[i], Tr, Gamma, N));
 			}
 
 			Tp = T[m - 1];
@@ -102,19 +102,19 @@ namespace FLOWMODEL
 		// Температура продукта
 		public double GetTp()
 		{
-			return Tp;
+			return Math.Round(Tp, 1);
 		}
 
 		// Вязкость продукта
 		public double GetEtaP()
 		{
-			return EtaP;
+			return Math.Round(EtaP);
 		}
 
 		// Производительность
 		public double GetG()
 		{
-			return G;
+			return Math.Round(G, 1);
 		}
 		
 		// Поправочный коэффициент F

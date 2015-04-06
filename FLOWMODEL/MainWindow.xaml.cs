@@ -85,7 +85,7 @@ namespace FLOWMODEL
 				// перечисления ошибочных параметров)
 				if (!errorMessage.Equals("Некорректные значения: "))
 				{
-					MessageBox.Show(errorMessage.Substring(0, errorMessage.Length - 2), "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+					MessageBox.Show(errorMessage, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
 					DefaultModel = null;
 				}
 				// В ином случае (строка ошибки не менялась от исходной) мы запускает алгоритм
@@ -99,6 +99,7 @@ namespace FLOWMODEL
 						EtaP_TBox.Text = Convert.ToString(DefaultModel.GetEtaP());
 						G_TBox.Text = Convert.ToString(DefaultModel.GetG());
 
+						// Получение массивов температур и вязкостей для таблицы
 						T = DefaultModel.GetTI();
 						Eta = DefaultModel.GetEtaI();
 
