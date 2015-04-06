@@ -45,6 +45,7 @@ namespace FLOWMODEL
 			CalcGrid.Visibility = Visibility.Visible;
 			ResultGrid.Visibility = Visibility.Hidden;
 		}
+
 		// Переключение видимости WPF Grid'ов при выборе вкладки "Результаты"
 		// Grid расчетов - скрыт, Grid результатов - показан
 		private void ResultsButton_Click(object sender, RoutedEventArgs e)
@@ -53,6 +54,7 @@ namespace FLOWMODEL
 			ResultGrid.Visibility = Visibility.Visible;
 		}
 
+		// Нажата кнопка РАССЧИТАТЬ
         private void CalculateButton_Click(object sender, RoutedEventArgs e)
         {
 			String errorMessage;
@@ -62,12 +64,12 @@ namespace FLOWMODEL
 			{
 				// Инициализация мат. модели
 				DefaultModel = new MathModel(
-					double.Parse(D_TBox.Text, CultureInfo.InvariantCulture),
-					double.Parse(H_TBox.Text, CultureInfo.InvariantCulture), 
+					double.Parse(H_TBox.Text, CultureInfo.InvariantCulture),
+					double.Parse(W_TBox.Text, CultureInfo.InvariantCulture), 
 					double.Parse(Vu_TBox.Text, CultureInfo.InvariantCulture),
 					double.Parse(Mu0_TBox.Text, CultureInfo.InvariantCulture),
 					double.Parse(N_TBox.Text, CultureInfo.InvariantCulture),
-					double.Parse(W_TBox.Text, CultureInfo.InvariantCulture),
+					double.Parse(L_TBox.Text, CultureInfo.InvariantCulture),
 					double.Parse(DeltaL_TBox.Text, CultureInfo.InvariantCulture),
 					double.Parse(B_TBox.Text, CultureInfo.InvariantCulture),
 					double.Parse(Tr_TBox.Text, CultureInfo.InvariantCulture),
@@ -79,12 +81,14 @@ namespace FLOWMODEL
 
 				// Проверка корректных числовых значений на > 0.001
 				errorMessage = DefaultModel.Check();
-
+				// Если исходная строка ошибки изменялась (к ней прибавлялись
+				// перечисления ошибочных параметров)
 				if (!errorMessage.Equals("Некорректные значения: "))
 				{
-					MessageBox.Show(errorMessage.Substring(0, errorMessage.Length - 2), "Error");
+					MessageBox.Show(errorMessage.Substring(0, errorMessage.Length - 2), "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
 					DefaultModel = null;
 				}
+				// В ином случае (строка ошибки не менялась от исходной) мы запускает алгоритм
 				else
 				{
 					try
@@ -111,22 +115,22 @@ namespace FLOWMODEL
 						ResultsGataGrid.Columns[1].Header = "Температура, С";
 						ResultsGataGrid.Columns[2].Header = "Вязкость, Па*с";
 
-						MessageBox.Show("Рассчеты успешно произведены", "Готово");
+						MessageBox.Show("Рассчеты успешно произведены", "Готово", MessageBoxButton.OK, MessageBoxImage.Information);
 
 						CalcGrid.Visibility = Visibility.Hidden;
 						ResultGrid.Visibility = Visibility.Visible;
 					}
 					catch
 					{
-						MessageBox.Show("Ошибка при выполнении алгоритма", "Error");
+						MessageBox.Show("Ошибка при выполнении алгоритма", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
 						DefaultModel = null;
 					}
 				}
 			}
 				catch
 			{
-				// Если в заданных значениях присутствуют некореекстные значения: буквы, знаки, кидаем ошибку
-				MessageBox.Show("Неправильный формат данных", "Error");
+				// Если в заданных значениях присутствуют некорректные значения: буквы, знаки, кидаем ошибку
+				MessageBox.Show("Неправильный формат данных", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
 				DefaultModel = null;
 			}
 

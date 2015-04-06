@@ -40,20 +40,21 @@ namespace FLOWMODEL
 		public String Check()
 		{
 			String VarName = "Некорректные значения: ";
-			if (H <= 0.001)	{ VarName += "H, "; }
-			if (W <= 0.001) { VarName += "W, "; }
-			if (Vu <= 0.001) { VarName += "Vu, "; }
-			if (Mu0 <= 0.001) { VarName += "Mu0, "; }
-			if (N <= 0.001) { VarName += "n, "; }
-			if (L <= 0.001) { VarName += "L, "; }
-			if (DeltaL <= 0.001) { VarName += "deltaL, "; }
-			if (B <= 0.001) { VarName += "b, "; }
-			if (Tr <= 0.001) { VarName += "Tr, "; }
-			if (Tu <= 0.001) { VarName += "Tu, "; }
-			if (Alpha <= 0.001) { VarName += "alpha, "; }
-			if (Ro <= 0.001) { VarName += "ro, "; }
-			if (C <= 0.001) { VarName += "C, "; }
-			if (T0 <= 0.001) { VarName += "T0, "; }
+			if (H <= 0.001)	{ VarName += "\n Глубина"; }
+			if (W <= 0.001) { VarName += "\n Ширина"; }
+			if (L <= 0.001) { VarName += "\n Длина"; }
+
+			if (Vu <= 0.001) { VarName += "\n Скорость крышки"; }
+			if (Mu0 <= 0.001) { VarName += "\n Коэффициент консистенции"; }
+			if (N <= 0.001) { VarName += "\n Индекс течения материала"; }
+			if (DeltaL <= 0.001) { VarName += "\n Шаг движения по длине канала"; }
+			if (B <= 0.001) { VarName += "\n Коэффициент вязкости"; }
+			if (Tr <= 0.001) { VarName += "\n Температура приведения"; }
+			if (Tu <= 0.001) { VarName += "\n Температура крышки"; }
+			if (Alpha <= 0.001) { VarName += "\n Коэффициент теплоотдачи"; }
+			if (Ro <= 0.001) { VarName += "\n Плотность"; }
+			if (C <= 0.001) { VarName += "\n Удельная теплоемкость"; }
+			if (T0 <= 0.001) { VarName += "\n Температура плавления"; }
 
 			return VarName;
 		}

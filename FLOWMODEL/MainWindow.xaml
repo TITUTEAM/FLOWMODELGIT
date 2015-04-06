@@ -59,17 +59,17 @@
 				<!-- Длина -->
 				<DockPanel Margin="0,0,0,5">
 					<TextBlock  Width="70" TextWrapping="Wrap"  Text="Длина, м: "/>
-					<TextBox x:Name="W_TBox" TextWrapping="Wrap" Margin="5, 0, 0, 0" Text="8.2" Width="120" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+					<TextBox x:Name="L_TBox" TextWrapping="Wrap" Margin="5, 0, 0, 0" Text="8.2" Width="120" HorizontalAlignment="Right" VerticalAlignment="Center"/>
 				</DockPanel>
 				<!-- Ширина -->
 				<DockPanel Margin="0,0,0,5">
 					<TextBlock  Width="70" TextWrapping="Wrap"  Text="Ширина, м: "/>
-					<TextBox x:Name="H_TBox" TextWrapping="Wrap" Margin="5, 0, 0, 0" Text="0.21" Width="120" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+					<TextBox x:Name="W_TBox" TextWrapping="Wrap" Margin="5, 0, 0, 0" Text="0.21" Width="120" HorizontalAlignment="Right" VerticalAlignment="Center"/>
 				</DockPanel>
 				<!-- Глубина -->
 				<DockPanel Margin="0,0,0,5">
 					<TextBlock  Width="70" TextWrapping="Wrap"  Text="Глубина, м: "/>
-					<TextBox x:Name="D_TBox" TextWrapping="Wrap" Margin="5, 0, 0, 0" Text="0.04" Width="120" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+					<TextBox x:Name="H_TBox" TextWrapping="Wrap" Margin="5, 0, 0, 0" Text="0.04" Width="120" HorizontalAlignment="Right" VerticalAlignment="Center"/>
 				</DockPanel>
 			</StackPanel>
 			
@@ -139,7 +139,7 @@
 		<!-- Results mode window grid ========================================================== -->
 		<Grid x:Name="ResultGrid" Margin="0,62,0,0" Visibility="Hidden">
 			<!-- RESULTS DATA GRID -->
-			<DataGrid x:Name="ResultsGataGrid" Margin="0,0,0,0" VerticalAlignment="Top" Height="250" CanUserReorderColumns="False" CanUserSortColumns="False" CanUserResizeColumns="False"/>
+			<DataGrid x:Name="ResultsGataGrid" Margin="0,0,0,0" VerticalAlignment="Top" Height="250" CanUserReorderColumns="False" CanUserSortColumns="False" CanUserResizeColumns="False" MinColumnWidth="150" MaxColumnWidth="200"/>
 
 			<!-- RESULTS PARAMETERS -->
 			<StackPanel HorizontalAlignment="Left" Margin="25,10" VerticalAlignment="Bottom" Width="250">
