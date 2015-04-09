@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Diagnostics;
 
 namespace FLOWMODEL
 {
@@ -59,7 +60,8 @@ namespace FLOWMODEL
         {
 			String errorMessage;
 			double[] T, Eta;
-
+			Stopwatch AlgoritmTime;
+			String time;
 			try
 			{
 				// Инициализация мат. модели
@@ -93,8 +95,11 @@ namespace FLOWMODEL
 				{
 					try
 					{
+						AlgoritmTime = new Stopwatch();
+						AlgoritmTime.Start();
 						DefaultModel.Algorithm();
-
+						AlgoritmTime.Stop();
+						time = Convert.ToString(AlgoritmTime.ElapsedMilliseconds);
 						Tp_TBox.Text = Convert.ToString(DefaultModel.GetTp());
 						EtaP_TBox.Text = Convert.ToString(DefaultModel.GetEtaP());
 						G_TBox.Text = Convert.ToString(DefaultModel.GetG());
@@ -116,7 +121,7 @@ namespace FLOWMODEL
 						ResultsGataGrid.Columns[1].Header = "Температура, С";
 						ResultsGataGrid.Columns[2].Header = "Вязкость, Па*с";
 
-						MessageBox.Show("Рассчеты успешно произведены", "Готово", MessageBoxButton.OK, MessageBoxImage.Information);
+						MessageBox.Show("Рассчеты успешно произведены. \n Затраченное время: " + time + " мс", "Готово", MessageBoxButton.OK, MessageBoxImage.Information);
 
 						CalcGrid.Visibility = Visibility.Hidden;
 						ResultGrid.Visibility = Visibility.Visible;
