@@ -100,10 +100,11 @@ namespace FLOWMODEL
 						DefaultModel.Algorithm();
 						AlgoritmTime.Stop();
 						time = Convert.ToString(AlgoritmTime.ElapsedMilliseconds);
-						Tp_TBox.Text = Convert.ToString(DefaultModel.GetTp());
-						EtaP_TBox.Text = Convert.ToString(DefaultModel.GetEtaP());
-						G_TBox.Text = Convert.ToString(DefaultModel.GetG());
 
+						Tp_TBox.Text = Convert.ToString(DefaultModel.GetTp(), CultureInfo.InvariantCulture);
+						EtaP_TBox.Text = Convert.ToString(DefaultModel.GetEtaP(), CultureInfo.InvariantCulture);
+						G_TBox.Text = Convert.ToString(DefaultModel.GetG(), CultureInfo.InvariantCulture);
+ 
 						// Получение массивов температур и вязкостей для таблицы
 						T = DefaultModel.GetTI();
 						Eta = DefaultModel.GetEtaI();
