@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,50 +14,51 @@ namespace FLOWMODEL
 		private double F, Q, Gamma, qGamma, qAlpha, Li, G, Tp, EtaP;
 		private int m;
 		private double[] K, T, Eta;
+		private string Error = "Некорректные значения: ";
 
 
 		// Конструктор
-		public MathModel(double H, double W, double Vu, double Mu0, double N, double L, 
-						double DeltaL, double B, double Tr, double Tu, double Alpha,
-						double Ro, double C, double T0)
+		public MathModel(string H, string W, string Vu, string Mu0, string N, string L, 
+						string DeltaL, string B, string Tr, string Tu, string Alpha,
+						string Ro, string C, string T0)
 		{
-			this.H = H;
-			this.W = W;
-			this.Vu = Vu;
-			this.Mu0 = Mu0;
-			this.N = N;
-			this.L = L;
-			this.DeltaL = DeltaL;
-			this.B = B;
-			this.Tr = Tr;
-			this.Tu = Tu;
-			this.Alpha = Alpha;
-			this.Ro = Ro;
-			this.C = C;
-			this.T0 = T0;
+			this.H = TryToParse(H, "\n Глубина");
+			this.W = TryToParse(W, "\n Ширина");
+			this.Vu = TryToParse(Vu, "\n Скорость крышки");
+			this.Mu0 = TryToParse(Mu0, "\n Коэффициент консистенции");
+			this.N = TryToParse(N, "\n Индекс течения материала");
+			this.L = TryToParse(L, "\n Длина");
+			this.DeltaL = TryToParse(DeltaL, "\n Шаг движения по длине канала");
+			this.B = TryToParse(B, "\n Коэффициент вязкости");
+			this.Tr = TryToParse(Tr, "\n Температура приведения");
+			this.Tu = TryToParse(Tu, "\n Температура крышки");
+			this.Alpha = TryToParse(Alpha, "\n Коэффициент теплоотдачи");
+			this.Ro = TryToParse(Ro, "\n Плотность");
+			this.C = TryToParse(C, "\n Удельная теплоемкость");
+			this.T0 = TryToParse(T0, "\n Температура плавления");
 		}
 
-		// Проверка
-		public String Check()
+		public double TryToParse(string Var, string ErrorMsg)
 		{
-			String VarName = "Некорректные значения: ";
-			if (H <= 0.001)	{ VarName += "\n Глубина"; }
-			if (W <= 0.001) { VarName += "\n Ширина"; }
-			if (L <= 0.001) { VarName += "\n Длина"; }
-
-			if (Vu <= 0.001) { VarName += "\n Скорость крышки"; }
-			if (Mu0 <= 0.001) { VarName += "\n Коэффициент консистенции"; }
-			if (N <= 0.001) { VarName += "\n Индекс течения материала"; }
-			if (DeltaL <= 0.001) { VarName += "\n Шаг движения по длине канала"; }
-			if (B <= 0.001) { VarName += "\n Коэффициент вязкости"; }
-			if (Tr <= 0.001) { VarName += "\n Температура приведения"; }
-			if (Tu <= 0.001) { VarName += "\n Температура крышки"; }
-			if (Alpha <= 0.001) { VarName += "\n Коэффициент теплоотдачи"; }
-			if (Ro <= 0.001) { VarName += "\n Плотность"; }
-			if (C <= 0.001) { VarName += "\n Удельная теплоемкость"; }
-			if (T0 <= 0.001) { VarName += "\n Температура плавления"; }
-
-			return VarName;
+			double ResultVar;
+			try
+			{
+				ResultVar = Double.Parse(Var, CultureInfo.InvariantCulture);
+				if (ResultVar >= 0.001)
+				{
+					return ResultVar;
+				}
+				else
+				{
+					Error += ErrorMsg;
+					return -1;
+				}
+			}
+			catch
+			{
+				Error += ErrorMsg;
+				return -1;
+			}
 		}
 
 		// Алгоритм
@@ -115,6 +117,10 @@ namespace FLOWMODEL
 		public double GetG()
 		{
 			return Math.Round(G, 1);
+		}
+		public string GetError()
+		{
+			return Error;
 		}
 		
 		// Поправочный коэффициент F
@@ -233,8 +239,6 @@ namespace FLOWMODEL
 		{
 			return Q * Ro * 3600;
 		}
-
-
 
 	}
 }

@@ -61,87 +61,64 @@ namespace FLOWMODEL
 			String errorMessage;
 			double[] T, Eta;
 			Stopwatch AlgoritmTime;
-			String time;
-			try
-			{
-				// Инициализация мат. модели
-				DefaultModel = new MathModel(
-					double.Parse(H_TBox.Text, CultureInfo.InvariantCulture),
-					double.Parse(W_TBox.Text, CultureInfo.InvariantCulture), 
-					double.Parse(Vu_TBox.Text, CultureInfo.InvariantCulture),
-					double.Parse(Mu0_TBox.Text, CultureInfo.InvariantCulture),
-					double.Parse(N_TBox.Text, CultureInfo.InvariantCulture),
-					double.Parse(L_TBox.Text, CultureInfo.InvariantCulture),
-					double.Parse(DeltaL_TBox.Text, CultureInfo.InvariantCulture),
-					double.Parse(B_TBox.Text, CultureInfo.InvariantCulture),
-					double.Parse(Tr_TBox.Text, CultureInfo.InvariantCulture),
-					double.Parse(Tu_TBox.Text, CultureInfo.InvariantCulture),
-					double.Parse(Alpha_TBox.Text, CultureInfo.InvariantCulture),
-					double.Parse(Ro_TBox.Text, CultureInfo.InvariantCulture),
-					double.Parse(C_TBox.Text, CultureInfo.InvariantCulture),
-					double.Parse(Tm_TBox.Text, CultureInfo.InvariantCulture));
+			String Time;
+			String Error = "sdfsdf";
 
-				// Проверка корректных числовых значений на > 0.001
-				errorMessage = DefaultModel.Check();
-				// Если исходная строка ошибки изменялась (к ней прибавлялись
-				// перечисления ошибочных параметров)
-				if (!errorMessage.Equals("Некорректные значения: "))
+			// Инициализация мат. модели
+			DefaultModel = new MathModel(H_TBox.Text, W_TBox.Text, Vu_TBox.Text,Mu0_TBox.Text, N_TBox.Text, L_TBox.Text,
+				DeltaL_TBox.Text, B_TBox.Text, Tr_TBox.Text, Tu_TBox.Text, Alpha_TBox.Text, Ro_TBox.Text, C_TBox.Text, Tm_TBox.Text);
+
+			// Если исходная строка ошибки изменялась (к ней прибавлялись
+			// перечисления ошибочных параметров)
+			if (!DefaultModel.GetError().Equals("Некорректные значения: "))
+			{
+				MessageBox.Show(DefaultModel.GetError(), "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+			}
+			// В ином случае (строка ошибки не менялась от исходной) мы запускает алгоритм
+			else
+			{
+				try
 				{
-					MessageBox.Show(errorMessage, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+					AlgoritmTime = new Stopwatch();
+					AlgoritmTime.Start();
+					DefaultModel.Algorithm();
+					AlgoritmTime.Stop();
+					Time = Convert.ToString(AlgoritmTime.ElapsedMilliseconds);
+
+					Tp_TBox.Text = Convert.ToString(DefaultModel.GetTp(), CultureInfo.InvariantCulture);
+					EtaP_TBox.Text = Convert.ToString(DefaultModel.GetEtaP(), CultureInfo.InvariantCulture);
+					G_TBox.Text = Convert.ToString(DefaultModel.GetG(), CultureInfo.InvariantCulture);
+ 
+					// Получение массивов температур и вязкостей для таблицы
+					T = DefaultModel.GetTI();
+					Eta = DefaultModel.GetEtaI();
+
+					List<DataGridItem> list = new List<DataGridItem>();
+
+					for (int i = 0; i < T.Length; i++)
+					{
+						list.Add(new DataGridItem() { id = Convert.ToDouble(i) / 10, T = T[i], Eta = Eta[i] });
+					}
+
+					ResultsGataGrid.ItemsSource = list;
+
+					ResultsGataGrid.Columns[0].Header = "Длина, м";
+					ResultsGataGrid.Columns[1].Header = "Температура, С";
+					ResultsGataGrid.Columns[2].Header = "Вязкость, Па*с";
+
+					MessageBox.Show("Рассчеты успешно произведены. \n Затраченное время: " + Time + " мс", "Готово", MessageBoxButton.OK, MessageBoxImage.Information);
+
+					CalcGrid.Visibility = Visibility.Hidden;
+					ResultGrid.Visibility = Visibility.Visible;
+				}
+				catch
+				{
+					MessageBox.Show("Ошибка при выполнении алгоритма", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
 					DefaultModel = null;
 				}
-				// В ином случае (строка ошибки не менялась от исходной) мы запускает алгоритм
-				else
-				{
-					try
-					{
-						AlgoritmTime = new Stopwatch();
-						AlgoritmTime.Start();
-						DefaultModel.Algorithm();
-						AlgoritmTime.Stop();
-						time = Convert.ToString(AlgoritmTime.ElapsedMilliseconds);
-
-						Tp_TBox.Text = Convert.ToString(DefaultModel.GetTp(), CultureInfo.InvariantCulture);
-						EtaP_TBox.Text = Convert.ToString(DefaultModel.GetEtaP(), CultureInfo.InvariantCulture);
-						G_TBox.Text = Convert.ToString(DefaultModel.GetG(), CultureInfo.InvariantCulture);
- 
-						// Получение массивов температур и вязкостей для таблицы
-						T = DefaultModel.GetTI();
-						Eta = DefaultModel.GetEtaI();
-
-						List<DataGridItem> list = new List<DataGridItem>();
-
-						for (int i = 0; i < T.Length; i++)
-						{
-							list.Add(new DataGridItem() { id = Convert.ToDouble(i) / 10, T = T[i], Eta = Eta[i] });
-						}
-
-						ResultsGataGrid.ItemsSource = list;
-
-						ResultsGataGrid.Columns[0].Header = "Длина, м";
-						ResultsGataGrid.Columns[1].Header = "Температура, С";
-						ResultsGataGrid.Columns[2].Header = "Вязкость, Па*с";
-
-						MessageBox.Show("Рассчеты успешно произведены. \n Затраченное время: " + time + " мс", "Готово", MessageBoxButton.OK, MessageBoxImage.Information);
-
-						CalcGrid.Visibility = Visibility.Hidden;
-						ResultGrid.Visibility = Visibility.Visible;
-					}
-					catch
-					{
-						MessageBox.Show("Ошибка при выполнении алгоритма", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-						DefaultModel = null;
-					}
-				}
-			}
-				catch
-			{
-				// Если в заданных значениях присутствуют некорректные значения: буквы, знаки, кидаем ошибку
-				MessageBox.Show("Неправильный формат данных", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-				DefaultModel = null;
 			}
 
-			DefaultModel = null;
+		DefaultModel = null;
         }
 	}
 }
