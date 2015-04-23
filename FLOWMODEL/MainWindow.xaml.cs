@@ -40,19 +40,30 @@ namespace FLOWMODEL
 		}
 
 		// Переключение видимости WPF Grid'ов при выборе вкладки "Расчет"
-		// Grid расчетов - показан, Grid результатов - скрыт
+		// Grid расчетов - показан, Grid результатов - скрыт, Grid графиков - скрыт
 		private void CalculationsButton_Click(object sender, RoutedEventArgs e)
 		{
 			CalcGrid.Visibility = Visibility.Visible;
 			ResultGrid.Visibility = Visibility.Hidden;
+			GraphGrid.Visibility = Visibility.Hidden;
 		}
 
 		// Переключение видимости WPF Grid'ов при выборе вкладки "Результаты"
-		// Grid расчетов - скрыт, Grid результатов - показан
+		// Grid расчетов - скрыт, Grid результатов - показан, Grid графиков - скрыт
 		private void ResultsButton_Click(object sender, RoutedEventArgs e)
 		{
 			CalcGrid.Visibility = Visibility.Hidden;
 			ResultGrid.Visibility = Visibility.Visible;
+			GraphGrid.Visibility = Visibility.Hidden;
+		}
+
+		// Переключение видимости WPF Grid'ов при выборе вкладки "Графики"
+		// Grid расчетов - скрыт, Grid результатов - скрыт, Grid графиков - показан
+		private void GraphButton_Click(object sender, RoutedEventArgs e)
+		{
+			CalcGrid.Visibility = Visibility.Hidden;
+			ResultGrid.Visibility = Visibility.Hidden;
+			GraphGrid.Visibility = Visibility.Visible;
 		}
 
 		// Нажата кнопка РАССЧИТАТЬ

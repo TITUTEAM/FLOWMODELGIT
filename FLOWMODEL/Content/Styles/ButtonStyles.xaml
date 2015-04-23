@@ -1,0 +1,220 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:FLOW="clr-namespace:FLOWMODEL">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="Resources.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+  
+    <Style x:Key="StandardButton" TargetType="Button">
+      <Setter Property="Visibility" Value="Visible"/>
+      <Setter Property="Foreground" Value="{DynamicResource ForegroundColorBrush}"/>
+      <Setter Property="Background" Value="Transparent"/>
+
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="Button">
+            <Border SnapsToDevicePixels="True" Background="{TemplateBinding Background}">
+              <Grid>
+                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" RecognizesAccessKey="True"/>
+              </Grid>
+            </Border>
+            <ControlTemplate.Triggers>
+              <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="BorderBrush" Value="{DynamicResource BlueColorBrush}" />
+                <Setter Property="Background" Value="{DynamicResource HighlightColorBrush}" />
+              </Trigger>
+              <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Background" Value="{DynamicResource BlueColorBrush}"/>
+                <Setter Property="BorderBrush" Value="{DynamicResource BlueColorBrush}"/>
+              </Trigger>
+              <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Opacity" Value=".5"/>
+              </Trigger>
+            </ControlTemplate.Triggers>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style>
+
+	<!-- Кнопка для вкладок, разделяющих все по категориям (Расчеты, Графики, Результаты) в окне программы -->
+	<Style x:Key="BigTabButton" TargetType="Button">
+		<Setter Property="Visibility" Value="Visible"/>
+		<Setter Property="Foreground" Value="{DynamicResource ForegroundColorBrush}"/>
+		<!-- Стандартный параметр заднего фона можно менять в свойствах кнопки -->
+		<Setter Property="Background" Value="{DynamicResource YellowTabButtonBrush}"/>
+		<!-- !!!!! ВАЖНО: Стандартный параметр рамки используется для изменения цвета текста при наведении мышки !!!!!
+		Этот параметр можно менять в свойствах кнопки (например, если задаем светлый фон Background, то BorderBrush надо задать тёмным) -->
+		<Setter Property="BorderBrush" Value="{DynamicResource DarkColorBrush}"/>
+		
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="Button">
+					<Grid>
+						<Rectangle Name="TabButtonRectangle" SnapsToDevicePixels="True" Fill="{TemplateBinding Background}" Opacity="0"/>
+						<Rectangle HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Height="7" Fill="{TemplateBinding Background}"/>
+						<ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" RecognizesAccessKey="True"/>
+					</Grid>
+					<ControlTemplate.Triggers>
+						<Trigger Property="IsMouseOver" Value="True">
+							<Setter Property="Foreground" Value="{Binding BorderBrush, RelativeSource={RelativeSource Self}}"/>
+							<Setter Property="Opacity" TargetName="TabButtonRectangle" Value="1"/>
+						</Trigger>
+						<Trigger Property="IsPressed" Value="True">
+							<Setter Property="Opacity" TargetName="TabButtonRectangle" Value="0.5"/>
+						</Trigger>
+						<Trigger Property="IsEnabled" Value="False">
+							<Setter Property="Opacity" Value=".5"/>
+						</Trigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<!-- Кнопка запуска расчетов -->
+	<Style x:Key="RunCalcButton" TargetType="Button">
+		<Setter Property="Visibility" Value="Visible"/>
+		<Setter Property="Foreground" Value="{DynamicResource ForegroundColorBrush}"/>
+		<Setter Property="Background" Value="{DynamicResource YellowTabButtonBrush}"/>
+
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="Button">
+					<Grid>
+						<Ellipse SnapsToDevicePixels="True" Fill="{TemplateBinding Background}" Stroke="{DynamicResource DarkBkgColorBrush}" StrokeThickness="2"/>
+						<ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" RecognizesAccessKey="True"/>
+					</Grid>
+					<ControlTemplate.Triggers>
+						<Trigger Property="IsMouseOver" Value="True">
+							<Setter Property="Background" Value="{DynamicResource HighlightColorBrush}" />
+						</Trigger>
+						<Trigger Property="IsPressed" Value="True">
+							<Setter Property="BorderBrush" Value="{DynamicResource BlueColorBrush}"/>
+						</Trigger>
+						<Trigger Property="IsEnabled" Value="False">
+							<Setter Property="Opacity" Value=".5"/>
+						</Trigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<!-- Кнопки выбора режима пользователя -->
+	<Style x:Key="LoginButton" TargetType="Button">
+		<Setter Property="Visibility" Value="Visible"/>
+		<Setter Property="Foreground" Value="{DynamicResource DarkColorBrush}"/>
+		<!-- Стандартный параметр заднего фона можно менять в свойствах кнопки -->
+		<Setter Property="Background" Value="{DynamicResource YellowTabButtonBrush}"/>
+		<!-- !!!!! ВАЖНО: Стандартный параметр рамки используется для изменения цвета текста при наведении мышки !!!!!
+		Этот параметр можно менять в свойствах кнопки (например, если задаем светлый фон Background, то BorderBrush надо задать тёмным) -->
+		<Setter Property="BorderBrush" Value="{DynamicResource ForegroundColorBrush}"/>
+		
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="Button">
+					<Grid>
+						<Rectangle Name="LoginButtonRectangle" SnapsToDevicePixels="True" Fill="{TemplateBinding Background}"/>
+						<Rectangle Name="LoginButtonDimmer" Fill="{DynamicResource DarkColorBrush}" Opacity="0"/>
+						<ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" RecognizesAccessKey="True"/>
+					</Grid>
+					<ControlTemplate.Triggers>
+						<Trigger Property="IsMouseOver" Value="True">
+							<Setter Property="Foreground" Value="{Binding BorderBrush, RelativeSource={RelativeSource Self}}"/>
+							<Setter Property="Opacity" TargetName="LoginButtonDimmer" Value="0.5"/>
+						</Trigger>
+						<Trigger Property="IsPressed" Value="True">
+							<Setter Property="Opacity" TargetName="LoginButtonDimmer" Value="0.8"/>
+						</Trigger>
+						<Trigger Property="IsEnabled" Value="False">
+							<Setter Property="Opacity" Value=".5"/>
+						</Trigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<Style x:Key="WindowButtonStyle" TargetType="Button">
+      <Setter Property="Foreground" Value="{DynamicResource ForegroundColorBrush}" />
+      <Setter Property="Background" Value="Transparent" />
+      <Setter Property="HorizontalContentAlignment" Value="Center" />
+      <Setter Property="VerticalContentAlignment" Value="Center" />
+      <Setter Property="Padding" Value="1" />
+
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="{x:Type Button}">
+            <Grid Background="{TemplateBinding Background}">
+              <ContentPresenter x:Name="contentPresenter"
+                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                  Margin="{TemplateBinding Padding}"
+                  RecognizesAccessKey="True" />
+            </Grid>
+            <ControlTemplate.Triggers>
+              <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{DynamicResource HighlightColorBrush}" />
+              </Trigger>
+              <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Background" Value="{DynamicResource BlueColorBrush}" />
+              </Trigger>
+              <Trigger Property="IsEnabled" Value="false">
+                <Setter TargetName="contentPresenter" Property="Visibility" Value="Hidden" />
+              </Trigger>
+            </ControlTemplate.Triggers>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style>
+
+    <Style x:Key="InTabButtonStyle" TargetType="Button">
+        <Setter Property="Visibility" Value="Visible"/>
+        <Setter Property="Foreground" Value="{DynamicResource ForegroundColorBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource BackgroundNormal}"/>
+
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border SnapsToDevicePixels="True" Background="{TemplateBinding Background}">
+                        <Grid>
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" RecognizesAccessKey="True"/>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="BorderBrush" Value="{DynamicResource BorderBrushHighlighted}" />
+                            <Setter Property="Background" Value="{DynamicResource BackgroundHighlighted}" />
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" Value="{DynamicResource BorderBrushSelected}"/>
+                            <Setter Property="BorderBrush" Value="{DynamicResource BorderBrushSelected}"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value=".5"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="LinkButton" TargetType="Button">
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Foreground" Value="{DynamicResource LinkButtonForeground}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <TextBlock><ContentPresenter/></TextBlock>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="true">
+                <Setter Property="Foreground" Value="{DynamicResource LinkButtonForegroundHighlighted}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+</ResourceDictionary>

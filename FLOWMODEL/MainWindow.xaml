@@ -1,161 +1,202 @@
 ﻿<Window x:Class="FLOWMODEL.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="FLOWMODEL: Исследователь" Height="450" Width="810" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Background="#FF323232" Foreground="#FFE2E2E2" Icon="Content/MainIcon.png" Closing="Window_Closing">
+		xmlns:FLOW="clr-namespace:FLOWMODEL"
+        Title="FLOWMODEL: Исследователь" Height="670" Width="850" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Background="{DynamicResource LightBkgColorBrush}" Foreground="#FFE2E2E2" Icon="Content/MainIcon.png" Closing="Window_Closing">
 	<Grid>
+		<Rectangle HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="80" Fill="{DynamicResource DarkBkgColorBrush}"/>
 		<!-- Main menu bar   =================================================================== -->
-		<StackPanel Height="25" Margin="0, 3" VerticalAlignment="Top" Orientation="Horizontal" HorizontalAlignment="Left">
+		<StackPanel Height="25" Margin="0, 7" VerticalAlignment="Top" Orientation="Horizontal" HorizontalAlignment="Left">
 			<Button x:Name="MenuFile" Content="ФАЙЛ" Width="75" Foreground="#FFE2E2E2" Background="{x:Null}" BorderBrush="{x:Null}"/>
 			<Button x:Name="MenuEdit" Content="ПРАВКА" Width="75" Foreground="#FFE2E2E2" Background="{x:Null}" BorderBrush="{x:Null}"/>
 			<Button x:Name="MenuService" Content="СЕРВИС" Width="75" Foreground="#FFE2E2E2" Background="{x:Null}" BorderBrush="{x:Null}"/>
-			<Button x:Name="MenuRun" Content="ВЫПОЛНИТЬ" Width="105" Foreground="#FFE2E2E2" Background="{x:Null}" BorderBrush="{x:Null}"/>
 			<Button x:Name="MenuHelp" Content="ПОМОЩЬ" Width="75" Foreground="#FFE2E2E2" Background="{x:Null}" BorderBrush="{x:Null}"/>
 		</StackPanel>
 
+		<Rectangle Height="25" VerticalAlignment="Bottom" Fill="{DynamicResource DarkBkgColorBrush}"/>
+		<TextBlock Text="Готово" VerticalAlignment="Bottom" Margin="10, 5"/>
+		
 		<!-- Mode switch bar grid  ============================================================= -->
-		<Grid VerticalAlignment="Top" Margin="0,31,0,0" Height="30" >
+		<Grid VerticalAlignment="Top" Margin="0,41,0,0" Height="40">
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="*" />
 				<ColumnDefinition Width="*" />
 				<ColumnDefinition Width="*" />
 			</Grid.ColumnDefinitions>
 			<!--Calculation button-->
-			<Button x:Name="CalculationsButton" Grid.Column="0" BorderBrush="{x:Null}" Foreground="#FFE2E2E2" Background="#FF232323" Click="CalculationsButton_Click">
-				<StackPanel>
-					<TextBlock TextWrapping="Wrap" Text="Расчет" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,3" />
-					
-				</StackPanel>
+			<Rectangle Visibility="{Binding Visibility, ElementName=CalcGrid}" Fill="{DynamicResource YellowTabButtonBrush}" Opacity="0.9"/>
+			<Button x:Name="CalculationsButton" Style="{DynamicResource BigTabButton}" Grid.Column="0" Click="CalculationsButton_Click">
+				<TextBlock TextWrapping="Wrap" Text="Расчет" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,7" />
 			</Button>
+
 			<!--Results button-->
-			<Button x:Name="ResultsButton" Grid.Column="1" BorderBrush="{x:Null}" Foreground="#FFE2E2E2" Background="#FF232323" Click="ResultsButton_Click">
+			<Rectangle Grid.Column="1" Visibility="{Binding Visibility, ElementName=ResultGrid}" Fill="{DynamicResource DarkTabButtonBrush}" Opacity="0.9"/>
+			<Button x:Name="ResultsButton" Grid.Column="1" Style="{DynamicResource BigTabButton}" BorderBrush="{DynamicResource ForegroundColorBrush}" Background="{DynamicResource DarkTabButtonBrush}"  Click="ResultsButton_Click">
 				<StackPanel>
-					<TextBlock TextWrapping="Wrap" Text="Результаты" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,3" />
-				
+					<TextBlock TextWrapping="Wrap" Text="Результаты" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,7" />
+
 				</StackPanel>
 			</Button>
 			<!--Graphics button-->
-			<Button x:Name="GraphButton" Grid.Column="2" BorderBrush="{x:Null}" Foreground="#FFE2E2E2" Background="#FF232323">
+			<Rectangle Grid.Column="2" Visibility="{Binding Visibility, ElementName=GraphGrid}" Fill="{DynamicResource WhiteTabButtonBrush}" Opacity="0.8"/>
+			<Button x:Name="GraphButton" Grid.Column="2" Style="{DynamicResource BigTabButton}" Background="{DynamicResource WhiteTabButtonBrush}" Click="GraphButton_Click">
 				<StackPanel>
-					<TextBlock TextWrapping="Wrap" Text="Графики" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,3" />
+					<TextBlock TextWrapping="Wrap" Text="Графики" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,7" />
 				</StackPanel>
 			</Button>
 		</Grid>
 
-		<Rectangle Fill="#FFA2FF00" Height="2" Margin="0,60,0,0" VerticalAlignment="Top"/>
-		
 		<!-- Calculation mode window grid  ===================================================== -->
-		<Grid x:Name="CalcGrid" Margin="0,62,0,0">
-			<!-- MATERIAL SELECT COMBO BOX -->
-			<StackPanel HorizontalAlignment="Left" Height="20" Margin="25,15,0,0" VerticalAlignment="Top" Orientation="Horizontal">
-				<!-- Тип материала -->
-				<TextBlock TextWrapping="Wrap" Text="Тип материала: " FontWeight="Bold"/>
-				<ComboBox x:Name="MaterialTypeCombox" Margin="10, 0" Width="200"/>
-			</StackPanel>
-
+		<Grid x:Name="CalcGrid" Margin="0,82,0,0" Visibility="Visible">
 			<!-- CALCULATION PARAMETERS -->
-			<StackPanel HorizontalAlignment="Left" Margin="25,55,0,0" VerticalAlignment="Top" Width="200">
-				<!-- Геометрические параметры -->
-				<TextBlock TextWrapping="Wrap" Text="Геометрические параметры:" Margin="0,0,0,5" FontWeight="Bold"/>
-				<!-- Длина -->
-				<DockPanel Margin="0,0,0,5">
-					<TextBlock  Width="70" TextWrapping="Wrap"  Text="Длина, м: "/>
-					<TextBox x:Name="L_TBox" TextWrapping="Wrap" Margin="5, 0, 0, 0" Text="8.2" Width="120" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-				</DockPanel>
-				<!-- Ширина -->
-				<DockPanel Margin="0,0,0,5">
-					<TextBlock  Width="70" TextWrapping="Wrap"  Text="Ширина, м: "/>
-					<TextBox x:Name="W_TBox" TextWrapping="Wrap" Margin="5, 0, 0, 0" Text="0.21" Width="120" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-				</DockPanel>
-				<!-- Глубина -->
-				<DockPanel Margin="0,0,0,5">
-					<TextBlock  Width="70" TextWrapping="Wrap"  Text="Глубина, м: "/>
-					<TextBox x:Name="H_TBox" TextWrapping="Wrap" Margin="5, 0, 0, 0" Text="0.04" Width="120" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-				</DockPanel>
+			<StackPanel Orientation="Horizontal" Margin="20,20,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" >
+				<Image HorizontalAlignment="Center" Height="100" VerticalAlignment="Top" Margin="0,15" Width="100" Source="Content/PlaceholderIcon.png"/>
+				<StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Width="280" Margin="20,0">
+					<!-- Геометрические параметры -->
+					<TextBlock TextWrapping="Wrap" Text="Геометрические параметры:" Margin="0,0,0,10" FontSize="16" VerticalAlignment="Center"/>
+					<!-- Длина -->
+					<DockPanel Margin="0,0,0,5">
+						<TextBlock  Width="150" TextWrapping="Wrap" FontSize="14" Text="Длина канала, м: " VerticalAlignment="Center"/>
+						<TextBox x:Name="L_TBox" TextWrapping="Wrap" Margin="5, 0, 0, 0" Text="8.2" Width="90" Height="25" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+					</DockPanel>
+					<!-- Ширина -->
+					<DockPanel Margin="0,0,0,5">
+						<TextBlock  Width="150" TextWrapping="Wrap" FontSize="14" Text="Ширина канала, м: " VerticalAlignment="Center"/>
+						<TextBox x:Name="W_TBox" TextWrapping="Wrap" Margin="5, 0, 0, 0" Text="0.21" Width="90" Height="25" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+					</DockPanel>
+					<!-- Глубина -->
+					<DockPanel Margin="0,0,0,5">
+						<TextBlock  Width="150" TextWrapping="Wrap" FontSize="14" Text="Глубина канала, м: " VerticalAlignment="Center"/>
+						<TextBox x:Name="H_TBox" TextWrapping="Wrap" Margin="5, 0, 0, 0" Text="0.04" Width="90" Height="25" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+					</DockPanel>
+				</StackPanel>
 			</StackPanel>
 			
+
 			<!-- Свойства материала -->
-			<StackPanel HorizontalAlignment="Left" Margin="25,175,0,0" VerticalAlignment="Top" Width="200">
-				<TextBlock TextWrapping="Wrap" Text="Свойства материала:" Margin="0,0,0,5" FontWeight="Bold"/>
-				<!-- Плотность -->
-				<DockPanel Margin="0,0,0,5">
-					<TextBlock  Width="110" TextWrapping="Wrap"  Text="Плотность, кг/м^3: "/>
-					<TextBox x:Name="Ro_TBox" TextWrapping="Wrap" Margin="5, 0, 0, 0" Text="1200" Width="70" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-				</DockPanel>
-				<!-- Удельная теплоемкость -->
-				<DockPanel Margin="0,0,0,5">
-					<TextBlock  Width="110" TextWrapping="Wrap" Text="Удельная теплоемкость, Дж/(кг*С): "/>
-					<TextBox x:Name="C_TBox" TextWrapping="Wrap" Margin="5, 0, 0, 0" Text="2100" Width="70" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-				</DockPanel>
-				<!-- Температура плавления -->
-				<DockPanel Margin="0,0,0,5">
-					<TextBlock  Width="110" TextWrapping="Wrap"  Text="Температура плавления, С: "/>
-					<TextBox x:Name="Tm_TBox" TextWrapping="Wrap" Margin="5, 0, 0, 0" Text="180" Width="70" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-				</DockPanel>
+			<StackPanel Orientation="Horizontal" Margin="20,220,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" >
+				<Image HorizontalAlignment="Center" Height="100" VerticalAlignment="Top" Margin="0, 23" Width="100" Source="Content/PlaceholderIcon.png"/>
+				<StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Width="280" Margin="20,0">
+					<!-- Тип материала -->
+					<TextBlock TextWrapping="Wrap" Text="Тип материала: " Margin="0,0,0,10" FontSize="16"  VerticalAlignment="Center"/>
+					<ComboBox x:Name="MaterialTypeCombox" Margin="0,3,0,13" Height="25"/>
+					
+					<TextBlock TextWrapping="Wrap" Text="Свойства материала:" Margin="0,0,0,5" FontSize="16" VerticalAlignment="Center"/>
+					<!-- Плотность -->
+					<DockPanel Margin="0,0,0,5">
+						<TextBlock  Width="180" TextWrapping="Wrap" FontSize="14" Text="Плотность, кг/м^3: " VerticalAlignment="Center"/>
+						<TextBox x:Name="Ro_TBox" TextWrapping="Wrap" Margin="5, 0, 0, 0" Text="1200" Width="90" Height="25" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+					</DockPanel>
+					<!-- Удельная теплоемкость -->
+					<DockPanel Margin="0,0,0,5">
+						<TextBlock  Width="180" TextWrapping="Wrap" FontSize="14" Text="Удельная теплоемкость, Дж/(кг*С): " VerticalAlignment="Center"/>
+						<TextBox x:Name="C_TBox" TextWrapping="Wrap" Margin="5, 0, 0, 0" Text="2100" Width="90" Height="25" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+					</DockPanel>
+					<!-- Температура плавления -->
+					<DockPanel Margin="0,0,0,5">
+						<TextBlock  Width="180" TextWrapping="Wrap" FontSize="14" Text="Температура плавления, С: " VerticalAlignment="Center"/>
+						<TextBox x:Name="Tm_TBox" TextWrapping="Wrap" Margin="5, 0, 0, 0" Text="180" Width="90" Height="25" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+					</DockPanel>
+				</StackPanel>
 			</StackPanel>
 
+			
+
 			<!-- Эмпирические коэффициенты -->
-			<StackPanel HorizontalAlignment="Left" Margin="525,55,0,0" VerticalAlignment="Top" Width="250">
-				<TextBlock TextWrapping="Wrap" Text="Эмпирические коэффициенты:" Margin="0,0,0,5" FontWeight="Bold"/>
+			<StackPanel HorizontalAlignment="Right" Margin="0,220,30,0" VerticalAlignment="Top" Width="340">
+				<TextBlock TextWrapping="Wrap" Text="Эмпирические коэффициенты:" Margin="0,0,0,10" FontSize="16" VerticalAlignment="Center"/>
 				<!-- Коэффициент консистенции при температуре приведения -->
-				<TextBlock  TextWrapping="Wrap"  Text="Коэффициент консистенции, Па*с^n: "/>
-				<TextBox x:Name="Mu0_TBox" TextWrapping="Wrap" Margin="0, 3" Text="10000" VerticalAlignment="Center"/>
+				<DockPanel Margin="0,0,0,5">
+					<TextBlock Width="240"  TextWrapping="Wrap" FontSize="14" Text="Коэффициент консистенции, Па*с^n: " VerticalAlignment="Center"/>
+					<TextBox x:Name="Mu0_TBox" TextWrapping="Wrap" Text="10000" Width="90" Height="25" Margin="5, 0, 0, 0" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+				</DockPanel>
 				<!-- Температурный коэффициент вязкости -->
-				<TextBlock  TextWrapping="Wrap" Text="Температурный коэффициент вязкости, 1/C: "/>
-				<TextBox x:Name="B_TBox" TextWrapping="Wrap" Margin="0, 3" Text="0.04" VerticalAlignment="Center"/>
+				<DockPanel Margin="0,0,0,5">
+					<TextBlock Width="240"  TextWrapping="Wrap" FontSize="14" Text="Температурный коэффициент вязкости, 1/C: " VerticalAlignment="Center"/>
+					<TextBox x:Name="B_TBox" TextWrapping="Wrap" Text="0.04" Width="90" Height="25" Margin="5, 0, 0, 0" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+				</DockPanel>
 				<!-- Температура приведения -->
-				<TextBlock TextWrapping="Wrap"  Text="Температура приведения, С: "/>
-				<TextBox x:Name="Tr_TBox" TextWrapping="Wrap" Margin="0, 3" Text="170" VerticalAlignment="Center"/>
+				<DockPanel Margin="0,0,0,5">
+					<TextBlock Width="240"  TextWrapping="Wrap" FontSize="14" Text="Температура приведения, С: " VerticalAlignment="Center"/>
+					<TextBox x:Name="Tr_TBox" TextWrapping="Wrap" Text="170" Width="90" Height="25" Margin="5, 0, 0, 0" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+				</DockPanel>
 				<!-- Индекс течения материала -->
-				<TextBlock  TextWrapping="Wrap"  Text="Индекс течения материала: "/>
-				<TextBox x:Name="N_TBox" TextWrapping="Wrap" Margin="0, 3" Text="0.3" VerticalAlignment="Center"/>
+				<DockPanel Margin="0,0,0,5">
+					<TextBlock Width="240"  TextWrapping="Wrap" FontSize="14" Text="Индекс течения материала: " VerticalAlignment="Center"/>
+					<TextBox x:Name="N_TBox" TextWrapping="Wrap" Text="0.3" Width="90" Height="25" Margin="5, 0, 0, 0" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+				</DockPanel>
 				<!-- Коэффициент теплоотдачи от крышки к материалу -->
-				<TextBlock   TextWrapping="Wrap"  Text="Коэффициент теплоотдачи от крышки к материалу, Вт/(м^2 * C): "/>
-				<TextBox x:Name="Alpha_TBox" TextWrapping="Wrap" Margin="0, 3" Text="450" VerticalAlignment="Center"/>
+				<DockPanel Margin="0,0,0,5">
+					<TextBlock Width="240" TextWrapping="Wrap" FontSize="14" Text="Коэффициент теплоотдачи от крышки к материалу, Вт/(м^2 * C): " VerticalAlignment="Center"/>
+					<TextBox x:Name="Alpha_TBox" TextWrapping="Wrap" Text="450" Width="90" Height="25" Margin="5, 0, 0, 0" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+				</DockPanel>
 			</StackPanel>
 
 			<!-- Режимные параметры -->
-			<StackPanel HorizontalAlignment="Left" Margin="250,55,0,0" VerticalAlignment="Top" Width="250">
-				<TextBlock TextWrapping="Wrap" Text="Режимные параметры:" Margin="0,0,0,5" FontWeight="Bold"/>
+			<StackPanel HorizontalAlignment="Right" Margin="0,20,30,0" VerticalAlignment="Top" Width="340">
+				<TextBlock TextWrapping="Wrap" Text="Режимные параметры:" FontSize="16" Margin="0,0,0,10" VerticalAlignment="Center"/>
 				<!-- Скорость верхней крышки канала -->
-				<TextBlock  TextWrapping="Wrap"  Text="Скорость движения крышки, м/с: "/>
-				<TextBox x:Name="Vu_TBox" TextWrapping="Wrap" Margin="0, 3" Text="1.2" VerticalAlignment="Center"/>
+				<DockPanel Margin="0,0,0,5">
+					<TextBlock  TextWrapping="Wrap" FontSize="14" Text="Скорость движения крышки, м/с: " VerticalAlignment="Center"/>
+					<TextBox x:Name="Vu_TBox" TextWrapping="Wrap" Text="1.2" Width="90" Height="25" Margin="5, 0, 0, 0" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+				</DockPanel>
 				<!-- Температура верхней крышки -->
-				<TextBlock  TextWrapping="Wrap" Text="Температура крышки, C "/>
-				<TextBox x:Name="Tu_TBox" TextWrapping="Wrap" Margin="0, 3" Text="150" VerticalAlignment="Center"/>
+				<DockPanel Margin="0,0,0,5">
+					<TextBlock  TextWrapping="Wrap" FontSize="14" Text="Температура крышки, C: " VerticalAlignment="Center"/>
+					<TextBox x:Name="Tu_TBox" TextWrapping="Wrap" Text="150" Width="90" Height="25" Margin="5, 0, 0, 0" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+				</DockPanel>
 			</StackPanel>
 
 			<!-- Параметры решения модели -->
-			<StackPanel HorizontalAlignment="Left" Margin="250,175,0,0" VerticalAlignment="Top" Width="250">
-				<TextBlock TextWrapping="Wrap" Text="Параметры решения модели:" Margin="0,0,0,5" FontWeight="Bold"/>
+			<StackPanel HorizontalAlignment="Right" Margin="0,125,30,0" VerticalAlignment="Top" Width="340">
+				<TextBlock TextWrapping="Wrap" Text="Параметры решения модели:" Margin="0,0,0,5" FontSize="16" VerticalAlignment="Center"/>
 				<!-- Шаг движения по длине канала (длина промежутка) -->
-				<TextBlock  TextWrapping="Wrap"  Text="Шаг движения по длине канала, м: "/>
-				<TextBox x:Name="DeltaL_TBox" TextWrapping="Wrap" Margin="0, 3" Text="0.1" VerticalAlignment="Center"/>
+				<DockPanel Margin="0,0,0,5">
+					<TextBlock  TextWrapping="Wrap" FontSize="14" Text="Шаг движения по длине канала, м: " VerticalAlignment="Center"/>
+					<TextBox x:Name="DeltaL_TBox" TextWrapping="Wrap" Text="0.1" Width="90" Height="25" Margin="5, 0, 0, 0" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+				</DockPanel>
 			</StackPanel>
 
 			<!-- Кнопка РАССЧИТАТЬ -->
-			<Button x:Name="CalculateButton" Content="РАССЧИТАТЬ" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="250" Height="40" Margin="250, 15" Click="CalculateButton_Click"/>
+			<Button x:Name="CalculateButton" Style="{DynamicResource LoginButton}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="340" Height="40" Margin="0,0,30,45" Click="CalculateButton_Click" Foreground="{DynamicResource ForegroundColorBrush}">
+				<TextBlock Text="Рассчитать" FontSize="16"/>
+			</Button>
 		</Grid>
 
 		<!-- Results mode window grid ========================================================== -->
-		<Grid x:Name="ResultGrid" Margin="0,62,0,0" Visibility="Hidden">
+		<Grid x:Name="ResultGrid" Margin="0,82,0,0" Visibility="Hidden">
 			<!-- RESULTS DATA GRID -->
-			<DataGrid x:Name="ResultsGataGrid" Margin="0,0,0,0" VerticalAlignment="Top" Height="250" CanUserReorderColumns="False" CanUserSortColumns="False" CanUserResizeColumns="False" MinColumnWidth="150" MaxColumnWidth="200"/>
+			<DataGrid x:Name="ResultsGataGrid" Margin="20,20,20,105" CanUserReorderColumns="False" CanUserSortColumns="False" CanUserResizeColumns="False" MinColumnWidth="200" MaxColumnWidth="250"/>
 
 			<!-- RESULTS PARAMETERS -->
-			<StackPanel HorizontalAlignment="Left" Margin="25,10" VerticalAlignment="Bottom" Width="250">
+			<Grid Margin="25,40" VerticalAlignment="Bottom" Height="50">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="*" />
+					<ColumnDefinition Width="*" />
+					<ColumnDefinition Width="*" />
+				</Grid.ColumnDefinitions>
 				<!-- Температура продукта -->
-				<TextBlock TextWrapping="Wrap"  Text="Температура продукта, С: "/>
-				<TextBox x:Name="Tp_TBox" Margin="0, 3" Text="" VerticalAlignment="Center"/>
+				<StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Grid.Column="0">
+					<TextBlock TextWrapping="Wrap" Margin="0, 0, 5, 0" FontSize="14" Text="Температура продукта, С: " VerticalAlignment="Center"/>
+					<TextBox x:Name="Tp_TBox" Margin="0, 3" Width="70" Height="25" Text="" VerticalAlignment="Center"/>
+				</StackPanel>
 				<!-- Вязкость продукта -->
-				<TextBlock TextWrapping="Wrap"  Text="Вязкость продукта, Па*с: "/>
-				<TextBox x:Name="EtaP_TBox" Margin="0, 3" Text="" VerticalAlignment="Center"/>
-			</StackPanel>
-			<StackPanel HorizontalAlignment="Left" Margin="300,50" VerticalAlignment="Bottom" Width="250">
+				<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Column="1">
+					<TextBlock TextWrapping="Wrap" Margin="5, 0" FontSize="14" Text="Вязкость продукта, Па*с: " VerticalAlignment="Center"/>
+					<TextBox x:Name="EtaP_TBox" Margin="0, 3" Width="70" Height="25" Text="" VerticalAlignment="Center"/>
+				</StackPanel>
 				<!-- Производительность -->
-				<TextBlock TextWrapping="Wrap"  Text="Производительность, кг/ч: "/>
-				<TextBox x:Name="G_TBox" Margin="0, 3" Text="" VerticalAlignment="Center"/>
-			</StackPanel>
+				<StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Column="2">
+					<TextBlock TextWrapping="Wrap" Margin="5, 0" FontSize="14" Text="Производительность, кг/ч: " VerticalAlignment="Center"/>
+					<TextBox x:Name="G_TBox" Margin="0, 3" Width="70" Height="25" Text="" VerticalAlignment="Center"/>
+				</StackPanel>
+			</Grid>
 		</Grid>
 
+		<!-- Graphs mode window grid ========================================================== -->
+		<Grid x:Name="GraphGrid" Margin="0,82,0,0" Visibility="Hidden">
+			<Label Content="Put graphics here!" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="50, 50" FontSize="16" Foreground="{DynamicResource ForegroundColorBrush}"/>
+		</Grid>
+		
 	</Grid>
 </Window>
