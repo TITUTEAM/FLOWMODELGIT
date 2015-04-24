@@ -1,0 +1,90 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Color x:Key="WindowBackgroundColor">#FF2D2D30</Color>
+	<Color x:Key="HighlightColor">#FF3F3F41</Color>
+	<Color x:Key="BlueColorSelected">#FF227C19</Color>
+
+	<!-- Background colors-->
+	<Color x:Key="DarkBkgColor">#FF404040</Color>
+	<SolidColorBrush x:Key="DarkBkgColorBrush" Color="{DynamicResource DarkBkgColor}"/>
+	<Color x:Key="LightBkgColor">#FF5D5D5D</Color>
+	<SolidColorBrush x:Key="LightBkgColorBrush" Color="{DynamicResource LightBkgColor}"/>
+
+	<!-- Custom tab button colors-->
+	<Color x:Key="YellowTabButtonColor">#FF22A819</Color>
+	<SolidColorBrush x:Key="YellowTabButtonBrush" Color="{DynamicResource YellowTabButtonColor}"/>
+	<Color x:Key="DarkTabButtonColor">#FF333333</Color>
+	<SolidColorBrush x:Key="DarkTabButtonBrush" Color="{DynamicResource DarkTabButtonColor}"/>
+	<Color x:Key="WhiteTabButtonColor">#FFFFFFFF</Color>
+	<SolidColorBrush x:Key="WhiteTabButtonBrush" Color="{DynamicResource WhiteTabButtonColor}"/>
+	
+	<!-- Other colors-->
+	<SolidColorBrush x:Key="BlueColorBrush" Color="{DynamicResource YellowTabButtonColor}"/>
+	<Color x:Key="DarkColor">#FF202020</Color>
+	<SolidColorBrush x:Key="DarkColorBrush" Color="{DynamicResource DarkColor}"/>
+	<Color x:Key="ForegroundColor">#FFF4F4F5</Color>
+	<SolidColorBrush x:Key="ForegroundColorBrush" Color="{DynamicResource ForegroundColor}"/>
+
+	<SolidColorBrush x:Key="BackgroundSelected" Color="{DynamicResource YellowTabButtonColor}"/>
+    <SolidColorBrush x:Key="BorderBrushSelected" Color="{DynamicResource BlueColorSelected}"/>
+    
+    <Color x:Key="PlotBackgroundColor">#FFE5E5E5</Color>
+    <SolidColorBrush x:Key="PlotBackground" Color="{DynamicResource PlotBackgroundColor}"/>
+  
+  
+    <!--Background-->
+    <SolidColorBrush x:Key="Background" Color="#1C1C1C"/>
+    <SolidColorBrush x:Key="LightBackground" Color="#2D2D30"/>
+
+    <!--Foreground-->
+    <SolidColorBrush x:Key="Foreground" Color="#FFF4F4F5"/>
+
+    <!--General-->
+    <SolidColorBrush x:Key="BackgroundHighlighted" Color="#54545C" />
+    <SolidColorBrush x:Key="BorderBrushHighlighted" Color="#6A6A75"/>
+
+    <SolidColorBrush x:Key="WindowBackgroundColorBrush" Color="{DynamicResource WindowBackgroundColor}" />
+    <SolidColorBrush x:Key="HighlightColorBrush" Color="{DynamicResource HighlightColor}"/>
+    
+    <SolidColorBrush x:Key="BackgroundNormal" Color="#3F3F46"/>
+    <SolidColorBrush x:Key="BorderBrushNormal" Color="#54545C"/>
+   
+    <!--Text Box-->
+    <SolidColorBrush x:Key="TextBoxBackground" Color="#333337"/>
+    <SolidColorBrush x:Key="TextBoxBackgroundSelected" Color="#3F3F46"/>
+    
+    <!--Search Text Box-->
+    <SolidColorBrush x:Key="SearchTextForeground" Color="#999999"/>
+    
+    <!--Link Button-->
+    <SolidColorBrush x:Key="LinkButtonForeground" Color="#1297FB"/>
+    <SolidColorBrush x:Key="LinkButtonForegroundHighlighted" Color="#55AAFF"/>
+    
+    <!--Close Button-->
+    <SolidColorBrush x:Key="CloseButtonBackgroundHighlighted" Color="#39ADFB"/>
+    <SolidColorBrush x:Key="CloseButtonBackgroundPressed" Color="#084E7D"/>
+    <SolidColorBrush x:Key="CloseButtonStroke" Color="#AAFFFFFF"/>
+    <SolidColorBrush x:Key="CloseButtonStrokeHighlighted" Color="#FFFFFF"/>
+    
+    <!--Menu-->
+    <SolidColorBrush x:Key="MenuSeparatorBorderBrush" Color="#333337"/>
+    <SolidColorBrush x:Key="MenuItemHighlightedBackground" Color="#3E3E40"/>
+    <SolidColorBrush x:Key="SubmenuItemBackground" Color="#1B1B1C"/>
+    <SolidColorBrush x:Key="SubmenuItemBackgroundHighlighted" Color="#333334"/>
+    <SolidColorBrush x:Key="MenuDisabledForeground" Color="#656565"/>
+    
+    <!--Scroll Bar-->
+    <SolidColorBrush x:Key="ScrollBarPageButtonBackgroundHighlighted" Color="#05FFFFFF"/>
+
+	<!-- Set global font to Segoe UI -->
+	<Style TargetType="{x:Type TextBlock}">
+		<Setter Property="FontFamily" Value="Segoe UI" />
+	</Style>
+	<Style TargetType="{x:Type Control}" x:Key="fontStyling">
+		<Setter Property="FontFamily" Value="Segoe UI" />
+	</Style>
+	<Style BasedOn="{StaticResource fontStyling}" TargetType="{x:Type Label}"/>
+	<Style BasedOn="{StaticResource fontStyling}" TargetType="{x:Type TextBox}"/>
+	<Style BasedOn="{StaticResource fontStyling}" TargetType="{x:Type ListView}"/>
+</ResourceDictionary>
