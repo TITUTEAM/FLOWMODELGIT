@@ -14,11 +14,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Diagnostics;
+using OxyPlot;
 
 namespace FLOWMODEL
 {
 	public partial class MainWindow : Window
 	{
+		public string Title { get; private set; }
+		public IList<DataPoint> TemperaturePoints { get; set;}
+		public IList<DataPoint> ViscosityPoints { get; set; }
+
         private MathModel DefaultModel;
 		public MainWindow()
 		{
@@ -61,19 +66,20 @@ namespace FLOWMODEL
 		// Grid расчетов - скрыт, Grid результатов - скрыт, Grid графиков - показан
 		private void GraphButton_Click(object sender, RoutedEventArgs e)
 		{
+			var plotModel1 = new PlotModel();
 			CalcGrid.Visibility = Visibility.Hidden;
 			ResultGrid.Visibility = Visibility.Hidden;
 			GraphGrid.Visibility = Visibility.Visible;
+			ViscosityLine.ItemsSource = ViscosityPoints;
+			TemperatureLine.ItemsSource = TemperaturePoints;
 		}
 
 		// Нажата кнопка РАССЧИТАТЬ
         private void CalculateButton_Click(object sender, RoutedEventArgs e)
         {
-			String errorMessage;
 			double[] T, Eta;
 			Stopwatch AlgoritmTime;
 			String Time;
-			String Error = "sdfsdf";
 
 			// Инициализация мат. модели
 			DefaultModel = new MathModel(H_TBox.Text, W_TBox.Text, Vu_TBox.Text,Mu0_TBox.Text, N_TBox.Text, L_TBox.Text,
@@ -105,9 +111,15 @@ namespace FLOWMODEL
 					Eta = DefaultModel.GetEtaI();
 
 					List<DataGridItem> list = new List<DataGridItem>();
+					Title = "Title";
+					TemperaturePoints = new List<DataPoint>();
+					ViscosityPoints = new List<DataPoint>();
 
 					for (int i = 0; i < T.Length; i++)
 					{
+						TemperaturePoints.Add(new DataPoint(Convert.ToDouble(i) / 10, T[i]));
+						ViscosityPoints.Add(new DataPoint(Convert.ToDouble(i) / 10, Eta[i]));
+
 						list.Add(new DataGridItem() { id = Convert.ToDouble(i) / 10, T = T[i], Eta = Eta[i] });
 					}
 
