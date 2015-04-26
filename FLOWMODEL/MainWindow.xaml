@@ -196,13 +196,19 @@
 
 		<!-- Graphs mode window grid ========================================================== -->
 		<Grid x:Name="GraphGrid" Margin="0,82,0,0" Visibility="Hidden">
-			<Label Content="Put graphics here!" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="50, 50" FontSize="16" Foreground="{DynamicResource ForegroundColorBrush}"/>
-			<oxy:Plot Title="{Binding Title}" Name="MainGraph">
-				<oxy:Plot.Series>
-					<oxy:LineSeries Name="TemperatureLine"/>
-					<oxy:LineSeries Name="ViscosityLine"/>
-				</oxy:Plot.Series>
-			</oxy:Plot>
+			<StackPanel>
+				<oxy:Plot Title="Распределение температуры по длине канала" Name="TemperatureGraph" Height="200" Width="300">
+					<oxy:Plot.Series>
+						<oxy:LineSeries Name="TemperatureLine" Title="Температура"/>
+					</oxy:Plot.Series>
+				</oxy:Plot>
+
+				<oxy:Plot Title="Рапределение вязкости по длинне канала" Name="ViscosityGraph" Height="200" Width="300" >
+					<oxy:Plot.Series>
+						<oxy:LineSeries Name="ViscosityLine" Title="Вязкость"/>
+					</oxy:Plot.Series>
+				</oxy:Plot>
+			</StackPanel>
 		</Grid>
 		
 	</Grid>
