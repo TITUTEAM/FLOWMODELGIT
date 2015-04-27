@@ -47,7 +47,7 @@
 			</Button>
 		</Grid>
 
-		<!-- Calculation mode window grid  ===================================================== -->
+		<!-- Calculation mode window grid  ============================================================================== -->
 		<Grid x:Name="CalcGrid" Margin="0,82,0,0" Visibility="Visible">
 			<!-- CALCULATION PARAMETERS -->
 			<StackPanel Orientation="Horizontal" Margin="20,20,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" >
@@ -80,7 +80,7 @@
 				<StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Width="280" Margin="20,0">
 					<!-- Тип материала -->
 					<TextBlock TextWrapping="Wrap" Text="Тип материала: " Margin="0,0,0,10" FontSize="16"  VerticalAlignment="Center"/>
-					<ComboBox x:Name="MaterialTypeCombox" Margin="0,3,0,13" Height="25"/>
+					<ComboBox x:Name="MaterialTypeCombox" Margin="0,3,0,13" Height="25" SelectionChanged="MaterialTypeCombox_SelectionChanged"/>
 					
 					<TextBlock TextWrapping="Wrap" Text="Свойства материала:" Margin="0,0,0,5" FontSize="16" VerticalAlignment="Center"/>
 					<!-- Плотность -->
@@ -164,7 +164,7 @@
 			</Button>
 		</Grid>
 
-		<!-- Results mode window grid ========================================================== -->
+		<!-- Results mode window grid =================================================================================== -->
 		<Grid x:Name="ResultGrid" Margin="0,82,0,0" Visibility="Hidden">
 			<!-- RESULTS DATA GRID -->
 			<DataGrid x:Name="ResultsGataGrid" Margin="20,20,20,105" CanUserReorderColumns="False" CanUserSortColumns="False" CanUserResizeColumns="False" MinColumnWidth="200" MaxColumnWidth="250"/>
@@ -194,21 +194,23 @@
 			</Grid>
 		</Grid>
 
-		<!-- Graphs mode window grid ========================================================== -->
+		<!-- Graphs mode window grid ==================================================================================== -->
 		<Grid x:Name="GraphGrid" Margin="0,82,0,0" Visibility="Hidden">
-			<StackPanel>
-				<oxy:Plot Title="Распределение температуры по длине канала" Name="TemperatureGraph" Height="200" Width="300">
-					<oxy:Plot.Series>
-						<oxy:LineSeries Name="TemperatureLine" Title="Температура"/>
-					</oxy:Plot.Series>
-				</oxy:Plot>
+			<ScrollViewer VerticalScrollBarVisibility="Auto">
+				<StackPanel>
+					<!--<oxy:PlotView Title="Распределение температуры по длине канала" Name="TemperatureGraph" Height="200" Width="300">
+						<oxy:PlotView.Series>
+							<oxy:LineSeries Name="TemperatureLine" Title="Температура"/>
+						</oxy:PlotView.Series>
+					</oxy:PlotView>
 
-				<oxy:Plot Title="Рапределение вязкости по длинне канала" Name="ViscosityGraph" Height="200" Width="300" >
-					<oxy:Plot.Series>
-						<oxy:LineSeries Name="ViscosityLine" Title="Вязкость"/>
-					</oxy:Plot.Series>
-				</oxy:Plot>
-			</StackPanel>
+					<oxy:PlotView Title="Рапределение вязкости по длине канала" Name="ViscosityGraph" Height="200" Width="300" >
+						<oxy:PlotView.Series>
+							<oxy:LineSeries Name="ViscosityLine" Title="Вязкость"/>
+						</oxy:PlotView.Series>
+					</oxy:PlotView>-->
+				</StackPanel>
+			</ScrollViewer>
 		</Grid>
 		
 	</Grid>
