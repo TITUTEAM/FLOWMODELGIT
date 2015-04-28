@@ -47,7 +47,7 @@ namespace FLOWMODEL
 			var ChangeUserBinding = new CommandBinding(Commands.ChangeUserCommand, ChangeUser, CanChangeUser);
 			CommandManager.RegisterClassCommandBinding(typeof(Window), ChangeUserBinding);
 
-			Database._instance.Connect();
+			//Database._instance.Connect();
 			Database._instance.GetMaterials(MaterialTypeCombox);
 
 			// Вставка изначального текста в низу окна при его открытии
@@ -163,7 +163,7 @@ namespace FLOWMODEL
 					ViscosityGraph.InvalidatePlot();
 					ViscosityGraph.ResetAllAxes();
 
-					MessageBox.Show("Расчеты успешно произведены. \n Затраченное время: " + Time + " мс", "Готово", MessageBoxButton.OK, MessageBoxImage.Information);
+					MessageBox.Show("Расчеты успешно произведены", "Готово", MessageBoxButton.OK, MessageBoxImage.Information);
 					Footer.Text = "Готово. Время расчета: " + Time + " мс.";
 
 					// Активация кнопок с результатами и графиками

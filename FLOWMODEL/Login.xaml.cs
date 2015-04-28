@@ -57,24 +57,26 @@ namespace FLOWMODEL
 
 		private void AdminLoginButton_Click(object sender, RoutedEventArgs e)
 		{
-			if (!Database._instance.CheckPassword(AdminLoginPassword.Password))
+			// Проверяем на видимость кнопку перед кликом, т.к. ее можно и "нажать" клавишей Enter
+			if (AdminLoginButton.IsVisible == true)
 			{
-				MessageBox.Show("Неправильный пароль", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
-			}
-			else
-			{
-				OpenMainWindow(true);
+				if (!Database._instance.CheckPassword(AdminLoginPassword.Password))
+				{
+					MessageBox.Show("Неправильный пароль", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+				}
+				else
+				{
+					OpenMainWindow(true);
+				}
 			}
 		}
 
+		// Открытие главного окна с передачей параметра (режим администратора вкл-выкл)
 		private void OpenMainWindow(bool AsAdmin)
 		{
 			MainWindow ResearcherWindow = new MainWindow(AsAdmin);
 			ResearcherWindow.Show();
 			ResearcherWindow.Activate();
-			
-			//Console.WriteLine(asadmin);
-			//Console.WriteLine(ResearcherWindow.AdminMode);
 			this.Close();
 		}
 	}

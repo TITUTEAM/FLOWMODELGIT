@@ -12,6 +12,14 @@ namespace FLOWMODEL
 	{
 		public App()
 		{
+			// Подключаемся к базе при запуске программы
+			Database._instance.Connect();
+		}
+
+		private void Application_Exit(object sender, ExitEventArgs e)
+		{
+			// Закрываем подключение к базе при выходе из программы
+			Database._instance.Close();
 		}
 	}
 }

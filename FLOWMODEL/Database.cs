@@ -38,26 +38,31 @@ namespace FLOWMODEL
 		// Превращение класса в singleton-класс с помощью паттерна
 		public static readonly Database _instance = new Database();
 		Database() { }
-
+		
 		// Список структур материалов
 		List<Materials> MaterialsList = new List<Materials>();
 
+		
 		public void Connect()
 		{
-			dbConnection = new SQLiteConnection(@"DataSource=..\..\Database\FlowmodelDB.db3;Version=3;");
-			try
+			if (dbConnection == null)
 			{
-				dbConnection.Open();
-			}
-			catch (SQLiteException ex)
-			{
-				MessageBox.Show(ex.Message);
+				dbConnection = new SQLiteConnection(@"DataSource=..\..\Database\FlowmodelDB.db3;Version=3;");
+				try
+				{
+					dbConnection.Open();
+				}
+				catch (SQLiteException ex)
+				{
+					MessageBox.Show(ex.Message);
+				}
 			}
 		}
 
 		public void Close()
 		{
-			dbConnection.Close();
+			if(dbConnection != null && dbConnection.State == ConnectionState.Open)
+				dbConnection.Close();
 		}
 
 		public void GetMaterials(object TargetCombobox)
@@ -89,14 +94,48 @@ namespace FLOWMODEL
 
 		public bool CheckPassword(string pw)
 		{
-			this.Connect();
-			SQLiteCommand command = new SQLiteCommand("SELECT [Account].[Stored] FROM [Account] LIMIT 1", dbConnection);
-			SQLiteDataReader reader = command.ExecuteReader();
-			reader.Read();
-			string pw_check = reader["Stored"].ToString();
-			this.Close();
+			string pw_check;
+
+			using (SQLiteCommand command = new SQLiteCommand(dbConnection))
+			{
+				command.CommandText = "SELECT [Account].[Stored] FROM [Account] LIMIT 1";
+
+				using (SQLiteDataReader reader = command.ExecuteReader())
+				{
+					reader.Read();
+					pw_check = reader["Stored"].ToString();
+				}
+			}
 
 			return (pw_check == pw);
+		}
+
+		public bool SetAdminPassword(string pword)
+		{
+			int QueryReturn = 0;
+
+			// Сравниваем пароли, если введенный не совпадает с паролем в базе - обновляем запись о пароле
+			if (!CheckPassword(pword))
+			{
+				using (SQLiteCommand command = new SQLiteCommand(dbConnection))
+				{
+					command.CommandText = "UPDATE [Account] SET [Stored]=@SetPw";
+					command.Prepare();
+					command.Parameters.AddWithValue("@SetPw", pword);
+					QueryReturn = command.ExecuteNonQuery();
+				}
+				if (QueryReturn != 0)
+				{
+					MessageBox.Show("Пароль успешно изменен!", "", MessageBoxButton.OK, MessageBoxImage.Information);
+					return true;
+				}
+			}
+			else
+			{
+				MessageBox.Show("Вы ввели уже существующий пароль.", "", MessageBoxButton.OK, MessageBoxImage.Error);
+				return false;
+			}
+			return false;
 		}
 	}
 }

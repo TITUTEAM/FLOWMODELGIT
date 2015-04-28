@@ -22,5 +22,16 @@ namespace FLOWMODEL
 		{
 			InitializeComponent();
 		}
+
+		private void AdminPasswordCancel_Click(object sender, RoutedEventArgs e)
+		{
+			this.Close();
+		}
+
+		private void AdminPasswordSave_Click(object sender, RoutedEventArgs e)
+		{
+			// Если метод возвращает true - окно закрывается
+			if (Database._instance.SetAdminPassword(AdminLoginPassword.Password)) this.Close();
+		}
 	}
 }

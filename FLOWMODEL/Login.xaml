@@ -18,8 +18,8 @@
 					<TextBlock TextWrapping="Wrap" Text="Администратор" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="15, 10, 0, 0"/>
 					<Image Height="100" Width="100" Source="Content/AdminLoginIcon.png" Margin="150,10,0,0" Opacity="0.5"/>
 					<StackPanel x:Name="AdminLoginPanel" Margin="15,40,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Orientation="Horizontal" Visibility="Hidden" >
-						<PasswordBox x:Name="AdminLoginPassword" Width="190" Height="25" HorizontalAlignment="Left"/>
-						<Button x:Name="AdminLoginButton" Width="35" Style="{DynamicResource LoginButton}" Click="AdminLoginButton_Click">
+						<PasswordBox x:Name="AdminLoginPassword" Width="190" Height="25" HorizontalAlignment="Left" Panel.ZIndex="50"/>
+						<Button x:Name="AdminLoginButton" Width="35" Style="{DynamicResource LoginButton}" IsDefault="True" Click="AdminLoginButton_Click">
 							<Image Height="20" Width="20" Source="Content/AdminLoginAccept.png"/>
 						</Button>
 					</StackPanel>
