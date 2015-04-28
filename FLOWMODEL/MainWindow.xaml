@@ -198,7 +198,7 @@
 		<Grid x:Name="GraphGrid" Margin="0,82,0,0" Visibility="Hidden">
 			<ScrollViewer VerticalScrollBarVisibility="Auto">
 				<StackPanel>
-					<!--<oxy:PlotView Title="Распределение температуры по длине канала" Name="TemperatureGraph" Height="200" Width="300">
+					<oxy:PlotView Title="Распределение температуры по длине канала" Name="TemperatureGraph" Height="200" Width="300">
 						<oxy:PlotView.Series>
 							<oxy:LineSeries Name="TemperatureLine" Title="Температура"/>
 						</oxy:PlotView.Series>
@@ -208,7 +208,7 @@
 						<oxy:PlotView.Series>
 							<oxy:LineSeries Name="ViscosityLine" Title="Вязкость"/>
 						</oxy:PlotView.Series>
-					</oxy:PlotView>-->
+					</oxy:PlotView>
 				</StackPanel>
 			</ScrollViewer>
 		</Grid>

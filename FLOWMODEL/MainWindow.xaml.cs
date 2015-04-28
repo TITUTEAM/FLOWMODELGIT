@@ -79,8 +79,8 @@ namespace FLOWMODEL
 			GraphGrid.Visibility = Visibility.Visible;
 
 			var plotModel1 = new PlotModel();
-			//ViscosityLine.ItemsSource = ViscosityPoints;
-			//TemperatureLine.ItemsSource = TemperaturePoints;
+			ViscosityLine.ItemsSource = ViscosityPoints;
+			TemperatureLine.ItemsSource = TemperaturePoints;
 		}
 
 		// ----------------------------------------------------------------------------------------------------------
@@ -113,6 +113,7 @@ namespace FLOWMODEL
 					DefaultModel.Algorithm();
 					AlgoritmTime.Stop();
 					Time = Convert.ToString(AlgoritmTime.ElapsedMilliseconds);
+					AlgoritmTime = null;
  
 					// Получение массивов температур и вязкостей для таблицы и графиков
 					T = DefaultModel.GetTI();
