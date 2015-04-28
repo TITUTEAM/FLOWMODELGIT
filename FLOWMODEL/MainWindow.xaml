@@ -3,20 +3,130 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 		xmlns:FLOW="clr-namespace:FLOWMODEL"
 		xmlns:oxy="http://oxyplot.org/wpf"
-        Title="FLOWMODEL: Исследователь" Height="670" Width="850" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Background="{DynamicResource LightBkgColorBrush}" Foreground="#FFE2E2E2" Icon="Content/MainIcon.png" Closing="Window_Closing">
+        Title="FLOWMODEL" Height="670" Width="850" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Background="{DynamicResource LightBkgColorBrush}" Foreground="#FFE2E2E2" Icon="Content/MainIcon.png" Closing="Window_Closing">
 	<Grid>
 		<Rectangle HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="80" Fill="{DynamicResource DarkBkgColorBrush}"/>
 		<!-- Main menu bar   =================================================================== -->
-		<StackPanel Height="25" Margin="0, 7" VerticalAlignment="Top" Orientation="Horizontal" HorizontalAlignment="Left">
-			<Button x:Name="MenuFile" Content="ФАЙЛ" Width="75" Foreground="#FFE2E2E2" Background="{x:Null}" BorderBrush="{x:Null}"/>
-			<Button x:Name="MenuEdit" Content="ПРАВКА" Width="75" Foreground="#FFE2E2E2" Background="{x:Null}" BorderBrush="{x:Null}"/>
-			<Button x:Name="MenuService" Content="СЕРВИС" Width="75" Foreground="#FFE2E2E2" Background="{x:Null}" BorderBrush="{x:Null}"/>
-			<Button x:Name="MenuHelp" Content="ПОМОЩЬ" Width="75" Foreground="#FFE2E2E2" Background="{x:Null}" BorderBrush="{x:Null}"/>
-		</StackPanel>
+		<StackPanel Margin="0, 5" VerticalAlignment="Top" Orientation="Horizontal" HorizontalAlignment="Left">
+			<!--Content="{x:Static p:Resources.MenuFile}" -->
+			<!-- FILE MENU -->
+			<Menu HorizontalAlignment="Left" Height="29"  VerticalAlignment="Top" Background="Transparent">
+				<MenuItem Background="Transparent">
+					<MenuItem.Header>
+						<StackPanel Orientation="Horizontal">
+							<Image Width="16" Height="16" Source="Content/Menu/FileIcon.png" VerticalAlignment="Center"/>
+							<Label Height="29" Margin="5, 5, 0, 0" Content="ФАЙЛ" VerticalAlignment="Center" Foreground="White"/>
+						</StackPanel>
+					</MenuItem.Header>
+					<MenuItem Header="Сохранить в отчет..." Command="FLOW:Commands.SaveReportCommand">
+						<MenuItem.Icon>
+							<Image Width="16" Height="16" Source="Content/Menu/SaveIcon.png" />
+						</MenuItem.Icon>
+					</MenuItem>
+					<Separator />
+					<MenuItem Header="Выход из программы" Command="FLOW:Commands.AppExitCommand">
+						<MenuItem.Icon>
+							<Image Width="16" Height="16" Source="Content/Menu/CloseIcon.png" />
+						</MenuItem.Icon>
+					</MenuItem>
+				</MenuItem>
+			</Menu>
+			<!-- EDIT MENU -->
+			<Menu HorizontalAlignment="Left" Height="29"  VerticalAlignment="Top" Background="Transparent">
+				<MenuItem Background="Transparent">
+					<MenuItem.Header>
+						<StackPanel Orientation="Horizontal">
+							<Image Width="16" Height="16" Source="Content/Menu/EditIcon.png" VerticalAlignment="Center"/>
+							<Label Height="29" Margin="5, 5, 0, 0" Content="ПРАВКА" VerticalAlignment="Center" Foreground="White"/>
+						</StackPanel>
+					</MenuItem.Header>
 
-		<Rectangle Height="25" VerticalAlignment="Bottom" Fill="{DynamicResource DarkBkgColorBrush}"/>
-		<TextBlock Text="Готово" VerticalAlignment="Bottom" Margin="10, 5"/>
-		
+					<MenuItem Header="Отменить" Command="Undo">
+						<MenuItem.Icon>
+							<Image Width="16" Height="16" Source="Content/Menu/UndoIcon.png" />
+						</MenuItem.Icon>
+					</MenuItem>
+					<MenuItem Header="Повторить" Command="Redo">
+						<MenuItem.Icon>
+							<Image Width="16" Height="16" Source="Content/Menu/RedoIcon.png" />
+						</MenuItem.Icon>
+					</MenuItem>
+					<Separator/>
+					<MenuItem Header="Вырезать" Command="Cut">
+						<MenuItem.Icon>
+							<Image Width="16" Height="16" Source="Content/Menu/CutIcon.png" />
+						</MenuItem.Icon>
+					</MenuItem>
+					<MenuItem Header="Копировать" Command="Copy">
+						<MenuItem.Icon>
+							<Image Width="16" Height="16" Source="Content/Menu/CopyIcon.png" />
+						</MenuItem.Icon>
+					</MenuItem>
+					<MenuItem Header="Вставить" Command="Paste">
+						<MenuItem.Icon>
+							<Image Width="16" Height="16" Source="Content/Menu/PasteIcon.png" />
+						</MenuItem.Icon>
+					</MenuItem>
+				</MenuItem>
+			</Menu>
+			<!-- TOOLS MENU -->
+			<Menu HorizontalAlignment="Left" Height="29"  VerticalAlignment="Top" Background="Transparent">
+				<MenuItem Background="Transparent">
+					<MenuItem.Header>
+						<StackPanel Orientation="Horizontal">
+							<Image Width="16" Height="16" Source="Content/Menu/SettingsIcon.png" VerticalAlignment="Center"/>
+							<Label Height="29" Margin="5, 5, 0, 0" Content="СЕРВИС" VerticalAlignment="Center" Foreground="White"/>
+						</StackPanel>
+					</MenuItem.Header>
+					<MenuItem Header="Смена пользователя" Command="FLOW:Commands.ChangeUserCommand">
+						<MenuItem.Icon>
+							<Image Width="16" Height="16" Source="Content/Menu/UserIcon.png" />
+						</MenuItem.Icon>
+					</MenuItem>
+				</MenuItem>
+			</Menu>
+			<!-- HELP MENU -->
+			<Menu HorizontalAlignment="Left" Height="29"  VerticalAlignment="Top" Background="Transparent">
+				<MenuItem Background="Transparent">
+					<MenuItem.Header>
+						<StackPanel Orientation="Horizontal">
+							<Image Width="16" Height="16" Source="Content/Menu/HelpIcon.png" VerticalAlignment="Center"/>
+							<Label Height="29" Margin="5, 5, 0, 0" Content="ПОМОЩЬ" VerticalAlignment="Center" Foreground="White"/>
+						</StackPanel>
+					</MenuItem.Header>
+					<MenuItem Header="Справка">
+						<MenuItem.Icon>
+							<Image Width="16" Height="16" Source="Content/Menu/BookIcon.png" />
+						</MenuItem.Icon>
+					</MenuItem>
+					<Separator />
+					<MenuItem x:Name="MenuAbout" Header="О программе" Click="MenuAbout_Click">
+						<MenuItem.Icon>
+							<Image Width="16" Height="16" Source="Content/Menu/InfoIcon.png" />
+						</MenuItem.Icon>
+					</MenuItem>
+				</MenuItem>
+			</Menu>
+			<!-- ADMIN MENU -->
+			<Menu x:Name="AdminMenu" HorizontalAlignment="Left" Height="29"  VerticalAlignment="Top" Background="Transparent">
+				<MenuItem Background="Transparent">
+					<MenuItem.Header>
+						<StackPanel Orientation="Horizontal">
+							<Image Width="16" Height="16" Source="Content/Menu/UserIcon.png" VerticalAlignment="Center"/>
+							<Label Height="29" Margin="5, 5, 0, 0" Content="АДМИНИСТРАТОР" VerticalAlignment="Center" Foreground="White"/>
+						</StackPanel>
+					</MenuItem.Header>
+					<MenuItem x:Name="AdminEditDBMenu" Header="Редактировать базу данных..." Click="AdminEditDBMenu_Click">
+						<MenuItem.Icon>
+							<Image Width="16" Height="16" Source="Content/Menu/BookIcon.png" />
+						</MenuItem.Icon>
+					</MenuItem>
+					<Separator/>
+					<MenuItem x:Name="AdminChangePWMenu" Header="Сменить пароль..." Click="AdminChangePWMenu_Click"/>
+				</MenuItem>
+			</Menu>
+
+		</StackPanel>		
 		<!-- Mode switch bar grid  ============================================================= -->
 		<Grid VerticalAlignment="Top" Margin="0,41,0,0" Height="40">
 			<Grid.ColumnDefinitions>
@@ -32,7 +142,7 @@
 
 			<!--Results button-->
 			<Rectangle Grid.Column="1" Visibility="{Binding Visibility, ElementName=ResultGrid}" Fill="{DynamicResource DarkTabButtonBrush}" Opacity="0.9"/>
-			<Button x:Name="ResultsButton" Grid.Column="1" Style="{DynamicResource BigTabButton}" BorderBrush="{DynamicResource ForegroundColorBrush}" Background="{DynamicResource DarkTabButtonBrush}"  Click="ResultsButton_Click">
+			<Button x:Name="ResultsButton" Grid.Column="1" IsEnabled="False" Style="{DynamicResource BigTabButton}" BorderBrush="{DynamicResource ForegroundColorBrush}" Background="{DynamicResource DarkTabButtonBrush}"  Click="ResultsButton_Click">
 				<StackPanel>
 					<TextBlock TextWrapping="Wrap" Text="Результаты" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,7" />
 
@@ -40,7 +150,7 @@
 			</Button>
 			<!--Graphics button-->
 			<Rectangle Grid.Column="2" Visibility="{Binding Visibility, ElementName=GraphGrid}" Fill="{DynamicResource WhiteTabButtonBrush}" Opacity="0.8"/>
-			<Button x:Name="GraphButton" Grid.Column="2" Style="{DynamicResource BigTabButton}" Background="{DynamicResource WhiteTabButtonBrush}" Click="GraphButton_Click">
+			<Button x:Name="GraphButton" Grid.Column="2" IsEnabled="False" Style="{DynamicResource BigTabButton}" Background="{DynamicResource WhiteTabButtonBrush}" Click="GraphButton_Click">
 				<StackPanel>
 					<TextBlock TextWrapping="Wrap" Text="Графики" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,7" />
 				</StackPanel>
@@ -50,16 +160,11 @@
 		<!-- Calculation mode window grid  ============================================================================== -->
 		<Grid x:Name="CalcGrid" Margin="0,82,0,0" Visibility="Visible">
 			<!-- CALCULATION PARAMETERS -->
-			<StackPanel Orientation="Horizontal" Margin="20,20,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" >
-				<Image HorizontalAlignment="Center" Height="100" VerticalAlignment="Top" Margin="0,15" Width="100" Source="Content/PlaceholderIcon.png"/>
-				<StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Width="280" Margin="20,0">
+			<StackPanel Orientation="Horizontal" Margin="15,20,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" >
+				<Image HorizontalAlignment="Center" Height="128" VerticalAlignment="Top" Margin="0,15" Width="128" Source="Content/GeomImage.png"/>
+				<StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Width="280" Margin="5,0">
 					<!-- Геометрические параметры -->
 					<TextBlock TextWrapping="Wrap" Text="Геометрические параметры:" Margin="0,0,0,10" FontSize="16" VerticalAlignment="Center"/>
-					<!-- Длина -->
-					<DockPanel Margin="0,0,0,5">
-						<TextBlock  Width="150" TextWrapping="Wrap" FontSize="14" Text="Длина канала, м: " VerticalAlignment="Center"/>
-						<TextBox x:Name="L_TBox" TextWrapping="Wrap" Margin="5, 0, 0, 0" Text="8.2" Width="90" Height="25" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-					</DockPanel>
 					<!-- Ширина -->
 					<DockPanel Margin="0,0,0,5">
 						<TextBlock  Width="150" TextWrapping="Wrap" FontSize="14" Text="Ширина канала, м: " VerticalAlignment="Center"/>
@@ -70,17 +175,22 @@
 						<TextBlock  Width="150" TextWrapping="Wrap" FontSize="14" Text="Глубина канала, м: " VerticalAlignment="Center"/>
 						<TextBox x:Name="H_TBox" TextWrapping="Wrap" Margin="5, 0, 0, 0" Text="0.04" Width="90" Height="25" HorizontalAlignment="Right" VerticalAlignment="Center"/>
 					</DockPanel>
+					<!-- Длина -->
+					<DockPanel Margin="0,0,0,5">
+						<TextBlock  Width="150" TextWrapping="Wrap" FontSize="14" Text="Длина канала, м: " VerticalAlignment="Center"/>
+						<TextBox x:Name="L_TBox" TextWrapping="Wrap" Margin="5, 0, 0, 0" Text="8.2" Width="90" Height="25" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+					</DockPanel>
 				</StackPanel>
 			</StackPanel>
 			
 
 			<!-- Свойства материала -->
-			<StackPanel Orientation="Horizontal" Margin="20,220,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" >
-				<Image HorizontalAlignment="Center" Height="100" VerticalAlignment="Top" Margin="0, 23" Width="100" Source="Content/PlaceholderIcon.png"/>
-				<StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Width="280" Margin="20,0">
+			<StackPanel Orientation="Horizontal" Margin="15,220,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" >
+				<Image HorizontalAlignment="Center" Height="128" VerticalAlignment="Top" Margin="0, 23" Width="128" Source="Content/MaterialImage.png"/>
+				<StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Width="280" Margin="5,0">
 					<!-- Тип материала -->
 					<TextBlock TextWrapping="Wrap" Text="Тип материала: " Margin="0,0,0,10" FontSize="16"  VerticalAlignment="Center"/>
-					<ComboBox x:Name="MaterialTypeCombox" Margin="0,3,0,13" Height="25" SelectionChanged="MaterialTypeCombox_SelectionChanged"/>
+					<ComboBox x:Name="MaterialTypeCombox" Margin="0,1,0,13" Height="27" SelectionChanged="MaterialTypeCombox_SelectionChanged"/>
 					
 					<TextBlock TextWrapping="Wrap" Text="Свойства материала:" Margin="0,0,0,5" FontSize="16" VerticalAlignment="Center"/>
 					<!-- Плотность -->
@@ -195,23 +305,35 @@
 		</Grid>
 
 		<!-- Graphs mode window grid ==================================================================================== -->
-		<Grid x:Name="GraphGrid" Margin="0,82,0,0" Visibility="Hidden">
+		<Grid x:Name="GraphGrid" Margin="0,82,0,25" Visibility="Hidden">
 			<ScrollViewer VerticalScrollBarVisibility="Auto">
 				<StackPanel>
-					<oxy:PlotView Title="Распределение температуры по длине канала" Name="TemperatureGraph" Height="200" Width="300">
+					<oxy:PlotView Title="Распределение температуры по длине канала" Name="TemperatureGraph" Height="400" Margin="15, 15, 15, 0" TitleFontSize="16" PlotMargins="60, 5, 15, 55" Background="{DynamicResource PlotBackground}" Foreground="{DynamicResource DarkColorBrush}">
+						<oxy:PlotView.Axes>
+							<oxy:LinearAxis Name="TemperatureAxis" Title="Температура, С" Position="Left" FontSize="13" MajorGridlineStyle="Solid" MinorGridlineStyle="Solid" MinorGridlineColor="LightGray"/>
+							<oxy:LinearAxis Name="TemLengthAxis" Title="Длина канала, м" Position="Bottom" FontSize="13" MajorGridlineStyle="Solid" MinorGridlineStyle="Solid" MinorGridlineColor="LightGray"/>
+						</oxy:PlotView.Axes>
 						<oxy:PlotView.Series>
-							<oxy:LineSeries Name="TemperatureLine" Title="Температура"/>
+							<oxy:LineSeries Name="TemperatureLine"/>
 						</oxy:PlotView.Series>
 					</oxy:PlotView>
 
-					<oxy:PlotView Title="Рапределение вязкости по длине канала" Name="ViscosityGraph" Height="200" Width="300" >
+					<oxy:PlotView Title="Рапределение вязкости по длине канала" Name="ViscosityGraph"  Height="400" Margin="15, -1, 15, 15" TitleFontSize="16" PlotMargins="60, 5, 15, 55" Background="{DynamicResource PlotBackground}" Foreground="{DynamicResource DarkColorBrush}">
+						<oxy:PlotView.Axes>
+							<oxy:LinearAxis Name="ViscosityAxis" Title="Вязкость, Па*с" Position="Left" FontSize="13" MajorGridlineStyle="Solid" MinorGridlineStyle="Solid" MinorGridlineColor="LightGray"/>
+							<oxy:LinearAxis Name="VisLengthAxis" Title="Длина канала, м" Position="Bottom" FontSize="13" MajorGridlineStyle="Solid" MinorGridlineStyle="Solid" MinorGridlineColor="LightGray"/>
+						</oxy:PlotView.Axes>
 						<oxy:PlotView.Series>
-							<oxy:LineSeries Name="ViscosityLine" Title="Вязкость"/>
+							<oxy:LineSeries Name="ViscosityLine"/>
 						</oxy:PlotView.Series>
 					</oxy:PlotView>
 				</StackPanel>
 			</ScrollViewer>
 		</Grid>
-		
+
+		<!-- Footer area -->
+		<Rectangle Height="25" VerticalAlignment="Bottom" Fill="{DynamicResource DarkBkgColorBrush}"/>
+		<TextBlock x:Name="Footer" Text="Готово" VerticalAlignment="Bottom" Margin="10, 5"/>
+
 	</Grid>
 </Window>

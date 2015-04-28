@@ -86,5 +86,17 @@ namespace FLOWMODEL
 			SQLiteCommand command = new SQLiteCommand("SELECT * FROM [Parameters] WHERE [Parameters].[MaterialID] = " + materialID, dbConnection);
 			return command.ExecuteReader();
 		}
+
+		public bool CheckPassword(string pw)
+		{
+			this.Connect();
+			SQLiteCommand command = new SQLiteCommand("SELECT [Account].[Stored] FROM [Account] LIMIT 1", dbConnection);
+			SQLiteDataReader reader = command.ExecuteReader();
+			reader.Read();
+			string pw_check = reader["Stored"].ToString();
+			this.Close();
+
+			return (pw_check == pw);
+		}
 	}
 }

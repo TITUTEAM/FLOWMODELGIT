@@ -8,12 +8,10 @@ using System.Windows;
 
 namespace FLOWMODEL
 {
-	/// <summary>
-	/// Interaction logic for App.xaml
-	/// </summary>
 	public partial class App : Application
 	{
-        //Test dick
-		// More test
+		public App()
+		{
+		}
 	}
 }

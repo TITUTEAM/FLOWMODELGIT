@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -16,8 +17,8 @@ namespace FLOWMODEL
 		private double[] K, T, Eta;
 		private string Error = "Некорректные значения: ";
 
-
-		// Конструктор
+		// Конструкторы
+		public MathModel() { }
 		public MathModel(string H, string W, string Vu, string Mu0, string N, string L, 
 						string DeltaL, string B, string Tr, string Tu, string Alpha,
 						string Ro, string C, string T0)
@@ -232,13 +233,12 @@ namespace FLOWMODEL
 			return Mu0 * System.Math.Exp(-B * (Ti - Tr)) * System.Math.Pow(Gamma, N - 1);
 		}
 
-		// Прозводительность канала
+		// Прозводительность канала в час
 		// Ro -- плотность
 		// Q -- удельный расход -- VolumetricFlowRateQ
 		private double ChannelOutputG(double Q, double Ro)
 		{
 			return Q * Ro * 3600;
 		}
-
 	}
 }

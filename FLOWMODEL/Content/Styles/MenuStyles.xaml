@@ -11,7 +11,7 @@
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="Separator">
-                            <Border BorderBrush="{DynamicResource MenuSeparatorBorderBrush}" BorderThickness="1" Margin="25,0,0,0"/>
+							<Border BorderBrush="{DynamicResource TextBoxBackgroundSelected}" BorderThickness="1" Margin="25,0,5,0"/>
                         </ControlTemplate>
                     </Setter.Value>
                 </Setter>
@@ -22,8 +22,7 @@
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type MenuItem}">
                             <!--Border 1-->
-                            <Border x:Name="Border" Background="Transparent" BorderBrush="Transparent" 
-                                    BorderThickness="1" SnapsToDevicePixels="False">
+                            <Border x:Name="Border" Background="Transparent" BorderBrush="Transparent" BorderThickness="1" SnapsToDevicePixels="False">
                                 <Grid x:Name="Grid">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition x:Name="Col0" MinWidth="17" Width="Auto" 
@@ -50,8 +49,8 @@
                                         <Grid Margin="0,0,5,5">
                                             <!--Border 2-->
                                             <Border x:Name="SubMenuBorder" 
-                                                    BorderBrush="{DynamicResource MenuSeparatorBorderBrush}"
-                                                    BorderThickness="1" Background="{StaticResource SubmenuItemBackground}" 
+                                                    BorderBrush="{DynamicResource MenuBorderBrush}"
+                                                    BorderThickness="1" Background="{StaticResource TextBoxBackground}" 
                                                     SnapsToDevicePixels="True">
                                                 <Grid x:Name="SubMenu" Grid.IsSharedSizeScope="True" Margin="2">
                                                     <StackPanel IsItemsHost="True" 
@@ -62,8 +61,8 @@
                                             <!--Border 3-->
                                             <Border Margin="1,0,0,0" x:Name="TransitionBorder" Width="0" Height="2" 
                                                     VerticalAlignment="Top" HorizontalAlignment="Left" 
-                                                    Background="{DynamicResource SubmenuItemBackground}" SnapsToDevicePixels="False"
-                                                    BorderThickness="1" BorderBrush="{StaticResource SubmenuItemBackground}"/>
+                                                    Background="{DynamicResource TextBoxBackground}" SnapsToDevicePixels="False"
+                                                    BorderThickness="1" BorderBrush="{StaticResource TextBoxBackground}"/>
                                         </Grid>
                                     </Popup>
                                 </Grid>
@@ -98,7 +97,7 @@
                                     <Setter Property="Padding" Value="10,3,0,3"/>
                                     
                                     <Setter TargetName="Border" Property="MinHeight" Value="22"/>
-                                    <Setter TargetName="Border" Property="Background" Value="{DynamicResource SubmenuItemBackground}"/>
+									<Setter TargetName="Border" Property="Background" Value="{DynamicResource TextBoxBackground}"/>
                                 </Trigger>
                                 <Trigger Property="Role" Value="SubmenuItem">
                                     <Setter Property="DockPanel.Dock" Value="Top"/>
@@ -106,43 +105,43 @@
                                     
                                     <Setter TargetName="Border" Property="MinHeight" Value="22"/>
                                     <Setter TargetName="ArrowPanel" Property="Visibility" Value="Collapsed"/>
-                                    <Setter TargetName="Border" Property="Background" Value="{DynamicResource SubmenuItemBackground}"/>
+									<Setter TargetName="Border" Property="Background" Value="{DynamicResource TextBoxBackground}"/>
                                 </Trigger>
                                 <MultiTrigger>
                                     <MultiTrigger.Conditions>
                                         <Condition Property="IsHighlighted" Value="true"/>
                                         <Condition Property="Role" Value="TopLevelHeader"/>
                                     </MultiTrigger.Conditions>
-                                    <Setter TargetName="Border" Property="Background" Value="{DynamicResource MenuItemHighlightedBackground}"/>
+									<Setter TargetName="Border" Property="Background" Value="{DynamicResource TextBoxBackgroundSelected}"/>
                                 </MultiTrigger>
                                 <MultiTrigger>
                                     <MultiTrigger.Conditions>
                                         <Condition Property="IsHighlighted" Value="true"/>
                                         <Condition Property="Role" Value="TopLevelItem"/>
                                     </MultiTrigger.Conditions>
-                                    <Setter TargetName="Border" Property="Background" Value="{DynamicResource MenuItemHighlightedBackground}"/>
+									<Setter TargetName="Border" Property="Background" Value="{DynamicResource TextBoxBackgroundSelected}"/>
                                 </MultiTrigger>
                                 <MultiTrigger>
                                     <MultiTrigger.Conditions>
                                         <Condition Property="IsHighlighted" Value="true"/>
                                         <Condition Property="Role" Value="SubmenuHeader"/>
                                     </MultiTrigger.Conditions>
-                                    <Setter TargetName="Border" Property="Background" Value="{DynamicResource SubmenuItemBackgroundHighlighted}"/>
+									<Setter TargetName="Border" Property="Background" Value="{DynamicResource TextBoxBackgroundSelected}"/>
                                 </MultiTrigger>
                                 <MultiTrigger>
                                     <MultiTrigger.Conditions>
                                         <Condition Property="IsHighlighted" Value="true"/>
                                         <Condition Property="Role" Value="SubmenuItem"/>
                                     </MultiTrigger.Conditions>
-                                    <Setter TargetName="Border" Property="Background" Value="{DynamicResource SubmenuItemBackgroundHighlighted}"/>
+									<Setter TargetName="Border" Property="Background" Value="{DynamicResource TextBoxBackgroundSelected}"/>
                                 </MultiTrigger>
                                 <MultiTrigger>
                                     <MultiTrigger.Conditions>
                                         <Condition Property="IsSubmenuOpen" Value="true"/>
                                         <Condition Property="Role" Value="TopLevelHeader"/>
                                     </MultiTrigger.Conditions>
-                                    <Setter TargetName="Border" Property="Background" Value="{DynamicResource SubmenuItemBackground}"/>
-                                    <Setter TargetName="Border" Property="BorderBrush" Value="{DynamicResource MenuSeparatorBorderBrush}"/>
+									<Setter TargetName="Border" Property="Background" Value="{DynamicResource TextBoxBackground}"/>
+                                    <Setter TargetName="Border" Property="BorderBrush" Value="{DynamicResource MenuBorderBrush}"/>
                                     <Setter TargetName="Border" Property="BorderThickness" Value="1,1,1,0"/>
                                 </MultiTrigger>
                                 <Trigger Property="IsSubmenuOpen" Value="true">
