@@ -15,7 +15,7 @@ namespace FLOWMODEL
 		private double F, Q, Gamma, qGamma, qAlpha, Li, G, Tp, EtaP;
 		private int m;
 		private double[] K, T, Eta;
-		private string Error = "Некорректные значения: ";
+		private string Error = "";
 
 		// Конструкторы
 		public MathModel() { }
@@ -23,41 +23,47 @@ namespace FLOWMODEL
 						string DeltaL, string B, string Tr, string Tu, string Alpha,
 						string Ro, string C, string T0)
 		{
-			this.H = TryToParse(H, "\n Глубина");
-			this.W = TryToParse(W, "\n Ширина");
-			this.Vu = TryToParse(Vu, "\n Скорость крышки");
-			this.Mu0 = TryToParse(Mu0, "\n Коэффициент консистенции");
-			this.N = TryToParse(N, "\n Индекс течения материала");
-			this.L = TryToParse(L, "\n Длина");
-			this.DeltaL = TryToParse(DeltaL, "\n Шаг движения по длине канала");
-			this.B = TryToParse(B, "\n Коэффициент вязкости");
-			this.Tr = TryToParse(Tr, "\n Температура приведения");
-			this.Tu = TryToParse(Tu, "\n Температура крышки");
-			this.Alpha = TryToParse(Alpha, "\n Коэффициент теплоотдачи");
-			this.Ro = TryToParse(Ro, "\n Плотность");
-			this.C = TryToParse(C, "\n Удельная теплоемкость");
-			this.T0 = TryToParse(T0, "\n Температура плавления");
+			this.H = TryToParse(H, App.Current.Resources["ModelGeomParamsDepth"].ToString());
+			this.W = TryToParse(W, App.Current.Resources["ModelGeomParamsWidth"].ToString());
+			this.Vu = TryToParse(Vu, App.Current.Resources["ModelProcessParamsSpeed"].ToString());
+			this.Mu0 = TryToParse(Mu0, App.Current.Resources["ModelConsistenceCoef"].ToString());
+			this.N = TryToParse(N, App.Current.Resources["ModelFluidIndex"].ToString());
+			this.L = TryToParse(L, App.Current.Resources["ModelGeomParamsLength"].ToString());
+			this.DeltaL = TryToParse(DeltaL, App.Current.Resources["ModelProcessSolutionParamsLength"].ToString());
+			this.B = TryToParse(B, App.Current.Resources["ModelTemperatureCoef"].ToString());
+			this.Tr = TryToParse(Tr, App.Current.Resources["ModelTemperatureReduction"].ToString());
+			this.Tu = TryToParse(Tu, App.Current.Resources["ModelProcessParamsCoverTemp"].ToString());
+			this.Alpha = TryToParse(Alpha, App.Current.Resources["ModelHeatIrradiance"].ToString());
+			this.Ro = TryToParse(Ro, App.Current.Resources["ModelMaterialDensity"].ToString());
+			this.C = TryToParse(C, App.Current.Resources["ModelMaterialHeatCapacity"].ToString());
+			this.T0 = TryToParse(T0, App.Current.Resources["ModelMaterialTemperatureMelting"].ToString());
 		}
 
-		public double TryToParse(string Var, string ErrorMsg)
+		public double TryToParse(string Var, string ParamName)
 		{
 			double ResultVar;
 			try
 			{
-				ResultVar = Double.Parse(Var, CultureInfo.InvariantCulture);
+				// Пробуем преобразовать строку, если пользователь ввел ее в своем локальном числовом формате
+				// Если преобразование не удалось - преобразуем в стандартном инвариантном формате
+				if (!double.TryParse(Var, NumberStyles.Any, CultureInfo.CurrentCulture, out ResultVar))
+				{
+					ResultVar = Double.Parse(Var, CultureInfo.InvariantCulture);
+				}
+				
 				if (ResultVar >= 0.001)
 				{
 					return ResultVar;
 				}
 				else
 				{
-					Error += ErrorMsg;
+					Error += "\n " + ParamName;
 					return -1;
 				}
 			}
 			catch
 			{
-				Error += ErrorMsg;
+				Error += "\n " + ParamName;
 				return -1;
 			}
 		}
@@ -90,13 +96,13 @@ namespace FLOWMODEL
 			G = ChannelOutputG(Q, Ro);
 		}
 
-		// Распределение температуры по длинне канала
+		// Распределение температуры по длине канала
 		public double[] GetTI()
 		{
 			return T;
 		}
 
-		// Распределение вязкости по длинне канала
+		// Распределение вязкости по длине канала
 		public double[] GetEtaI()
 		{
 			return Eta;
@@ -119,6 +125,8 @@ namespace FLOWMODEL
 		{
 			return Math.Round(G, 1);
 		}
+
+		// Вывод строки с ошибкой
 		public string GetError()
 		{
 			return Error;
@@ -126,7 +134,7 @@ namespace FLOWMODEL
 		
 		// Поправочный коэффициент F
 		// H -- ширина
-		// W -- длинна
+		// W -- длина
 		private double CorrectionCoefficientF(double H, double W)
 		{
 			return 0.125 * System.Math.Pow((H / W), 2) - 0.625 * (H / W) + 1;
@@ -134,7 +142,7 @@ namespace FLOWMODEL
 
 		// Объемный расход Q
 		// H -- ширина
-		// W -- длинна
+		// W -- длина
 		// Vu -- скорость верней крышки канала
 		// F -- поравочный коэффициент -- CorrectionCoefficientF
 		private double VolumetricFlowRateQ(double H, double W, double Vu, double F)
@@ -152,7 +160,7 @@ namespace FLOWMODEL
 
 		// Удельный тепловой поток qGamma
 		// H -- ширина
-		// W -- длинна
+		// W -- длина
 		// Mu0 -- коэффициент консистенции при температуре приведения
 		// N -- индекс течения материала
 		// Gamma -- скорость деформации сдвига -- ShearStainRateGamma 
@@ -163,7 +171,7 @@ namespace FLOWMODEL
 
 
 		// Удельный тепловой поток qAlpha
-		// W -- длинна
+		// W -- длина
 		// Tu -- температура верхней крышки
 		// B -- темепературный коэффициент вязкости
 		// Tr -- температура приведения
@@ -175,8 +183,8 @@ namespace FLOWMODEL
 
 
 		// Число шагов вычисления модели m
-		// L -- длинна канала
-		// DeltaL -- длинна промежутка?????
+		// L -- длина канала
+		// DeltaL -- длина промежутка?????
 		private int NumberOfStepsM(double L, double DeltaL)
 		{
 			double m = L / DeltaL;
@@ -192,10 +200,10 @@ namespace FLOWMODEL
 
 
 		// Уравнение теплового баланса Кi
-		// При вызове функции надо проверить, чтобы 0 < L -- текущая координата по длинне канала < L -- Длинна канала
+		// При вызове функции надо проверить, чтобы 0 < L -- текущая координата по длине канала < L -- Длина канала
 		// B -- темепературный коэффициент вязкости
 		// QGamma -- удельный тепловой поток qGamma
-		// W -- длинна
+		// W -- длина
 		// Alpha -- коэффициент теплоотдачи??????
 		// QAlpha -- удельный тепловой поток qAlpha
 		// L -- длинна канала

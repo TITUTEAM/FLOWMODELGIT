@@ -1,0 +1,77 @@
+﻿<UserControl x:Name="MaterialSettingsControl" x:Class="FLOWMODEL.MaterialSettings"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="400" d:DesignWidth="790" Foreground="#FFE2E2E2" Loaded="MaterialSettingsControl_Loaded">
+	<Grid x:Name="LayoutRoot" Width="790">
+		<!-- Свойства материала -->
+		<StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" >
+			<Image HorizontalAlignment="Center" Height="128" VerticalAlignment="Top" Margin="0, 23" Width="128" Source="Content/MaterialImage.png"/>
+			<StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Width="280" Margin="5,0">
+				<!-- Тип материала -->
+				<TextBlock x:Name="MatNameHeader" TextWrapping="Wrap" Text="{DynamicResource ModelMaterialName}" Margin="0,0,0,10" FontSize="16"  VerticalAlignment="Center"/>
+				<TextBlock x:Name="MatTypeHeader" TextWrapping="Wrap" Text="{DynamicResource ModelMaterialType}" Margin="0,0,0,10" FontSize="16"  VerticalAlignment="Center"/>
+				<TextBox x:Name="MatName" TextWrapping="Wrap" Margin="0,1,0,15" Text="{DynamicResource ModelMaterialNameTextbox}" Height="25" VerticalAlignment="Center"/>
+				<ComboBox x:Name="MaterialTypeCombox" Margin="0,1,0,13" Height="27" SelectionChanged="MaterialTypeCombox_SelectionChanged">
+					<ComboBox.ToolTip>
+						<ToolTip>
+							<TextBlock MaxWidth="300" TextWrapping="Wrap" Text="{Binding Path=MatDescr}" />
+						</ToolTip>
+					</ComboBox.ToolTip>
+				</ComboBox>
+
+				<TextBlock TextWrapping="Wrap" Text="{DynamicResource ModelMaterialParams}" Margin="0,0,0,5" FontSize="16" VerticalAlignment="Center"/>
+				<!-- Плотность -->
+				<DockPanel Margin="0,0,0,5">
+					<TextBlock  Width="180" TextWrapping="Wrap" FontSize="14" Text="{DynamicResource ModelMaterialDensity}" VerticalAlignment="Center"/>
+					<TextBox x:Name="Ro_TBox" TextWrapping="Wrap" Margin="5, 0, 0, 0" Text="1200" Width="90" Height="25" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+				</DockPanel>
+				<!-- Удельная теплоемкость -->
+				<DockPanel Margin="0,0,0,5">
+					<TextBlock  Width="180" TextWrapping="Wrap" FontSize="14" Text="{DynamicResource ModelMaterialHeatCapacity}" VerticalAlignment="Center"/>
+					<TextBox x:Name="C_TBox" TextWrapping="Wrap" Margin="5, 0, 0, 0" Text="2100" Width="90" Height="25" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+				</DockPanel>
+				<!-- Температура плавления -->
+				<DockPanel Margin="0,0,0,5">
+					<TextBlock  Width="180" TextWrapping="Wrap" FontSize="14" Text="{DynamicResource ModelMaterialTemperatureMelting}" VerticalAlignment="Center"/>
+					<TextBox x:Name="Tm_TBox" TextWrapping="Wrap" Margin="5, 0, 0, 0" Text="180" Width="90" Height="25" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+				</DockPanel>
+				<!-- Описание материала -->
+				<TextBlock x:Name="MatDescrHeader" TextWrapping="Wrap" Text="{DynamicResource ModelMaterialDescr}" Margin="0,20,0,10" FontSize="16"  VerticalAlignment="Center"/>
+				<TextBox x:Name="MatDescr" TextWrapping="Wrap" Margin="0,1" Height="75" MaxLength="250" VerticalAlignment="Center"/>
+			</StackPanel>
+		</StackPanel>
+		
+		<!-- Эмпирические коэффициенты -->
+		<StackPanel HorizontalAlignment="Right" VerticalAlignment="Top" Width="340">
+			<TextBlock TextWrapping="Wrap" Text="{DynamicResource ModelEmpiricalCoef}" Margin="0,0,0,10" FontSize="16" VerticalAlignment="Center"/>
+			<!-- Коэффициент консистенции при температуре приведения -->
+			<DockPanel Margin="0,0,0,5">
+				<TextBlock Width="240"  TextWrapping="Wrap" FontSize="14" Text="{DynamicResource ModelConsistenceCoef}" VerticalAlignment="Center"/>
+				<TextBox x:Name="Mu0_TBox" TextWrapping="Wrap" Text="10000" Width="90" Height="25" Margin="5, 0, 0, 0" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+			</DockPanel>
+			<!-- Температурный коэффициент вязкости -->
+			<DockPanel Margin="0,0,0,5">
+				<TextBlock Width="240"  TextWrapping="Wrap" FontSize="14" Text="{DynamicResource ModelTemperatureCoef}" VerticalAlignment="Center"/>
+				<TextBox x:Name="B_TBox" TextWrapping="Wrap" Text="0.04" Width="90" Height="25" Margin="5, 0, 0, 0" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+			</DockPanel>
+			<!-- Температура приведения -->
+			<DockPanel Margin="0,0,0,5">
+				<TextBlock Width="240"  TextWrapping="Wrap" FontSize="14" Text="{DynamicResource ModelTemperatureReduction}" VerticalAlignment="Center"/>
+				<TextBox x:Name="Tr_TBox" TextWrapping="Wrap" Text="170" Width="90" Height="25" Margin="5, 0, 0, 0" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+			</DockPanel>
+			<!-- Индекс течения материала -->
+			<DockPanel Margin="0,5,0,5">
+				<TextBlock Width="240"  TextWrapping="Wrap" FontSize="14" Text="{DynamicResource ModelFluidIndex}" VerticalAlignment="Center"/>
+				<TextBox x:Name="N_TBox" TextWrapping="Wrap" Text="0.3" Width="90" Height="25" Margin="5, 0, 0, 0" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+			</DockPanel>
+			<!-- Коэффициент теплоотдачи от крышки к материалу -->
+			<DockPanel Margin="0,0,0,5">
+				<TextBlock Width="240" TextWrapping="Wrap" FontSize="14" Text="{DynamicResource ModelHeatIrradiance}" VerticalAlignment="Center"/>
+				<TextBox x:Name="Alpha_TBox" TextWrapping="Wrap" Text="450" Width="90" Height="25" Margin="5, 0, 0, 0" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+			</DockPanel>
+		</StackPanel>
+	</Grid>
+</UserControl>

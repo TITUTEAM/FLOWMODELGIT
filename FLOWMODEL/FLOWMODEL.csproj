@@ -94,11 +94,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="AdminDatabase.xaml">
+    <Page Include="AdminPassword.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="AdminPassword.xaml">
+    <Page Include="Content\Language\StringResources.ru-RU.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Content\Language\StringResources.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -158,9 +162,6 @@
       <DependentUpon>AboutWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Actions\CloseTabItemAction.cs" />
-    <Compile Include="AdminDatabase.xaml.cs">
-      <DependentUpon>AdminDatabase.xaml</DependentUpon>
-    </Compile>
     <Compile Include="AdminPassword.xaml.cs">
       <DependentUpon>AdminPassword.xaml</DependentUpon>
     </Compile>
@@ -178,8 +179,15 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="MaterialSettings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MaterialSettings.xaml.cs">
+      <DependentUpon>MaterialSettings.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MathModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

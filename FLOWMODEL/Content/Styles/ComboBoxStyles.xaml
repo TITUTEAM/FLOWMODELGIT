@@ -3,6 +3,7 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="Resources.xaml"/>
     </ResourceDictionary.MergedDictionaries>
+	
     <ControlTemplate x:Key="ComboBoxToggleButton" TargetType="ToggleButton">
         <Grid>
             <Grid.ColumnDefinitions>
@@ -28,7 +29,11 @@
         <Border x:Name="PART_ContentHost" Focusable="False" Background="{TemplateBinding Background}" />
     </ControlTemplate>
 
-    <Style x:Key="StandardComboBox" TargetType="ComboBox">
+	<ControlTemplate x:Key="ComboBoxTooltip" TargetType="ToolTip">
+		<TextBlock Text="{TemplateBinding Content}" MaxWidth="400" TextWrapping="Wrap"/>
+	</ControlTemplate>
+
+	<Style x:Key="StandardComboBox" TargetType="ComboBox">
         <Setter Property="Foreground" Value="{DynamicResource Foreground}"/>
         <Setter Property="SnapsToDevicePixels" Value="true"/>
         <Setter Property="OverridesDefaultStyle" Value="true"/>

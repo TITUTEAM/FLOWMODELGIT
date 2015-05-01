@@ -1,0 +1,111 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:system="clr-namespace:System;assembly=mscorlib">
+
+	<system:String x:Key="LoginWelcome">Добро пожаловать, выберите режим работы</system:String>
+	<system:String x:Key="LoginOperator">Исследователь</system:String>
+	<system:String x:Key="LoginAdmin">Администратор</system:String>
+	
+	<system:String x:Key="MenuFile">ФАЙЛ</system:String>
+		<system:String x:Key="MenuFileSaveReport">Сохранить в отчет...</system:String>
+		<system:String x:Key="MenuFileExit">Выход из программы</system:String>
+	<system:String x:Key="MenuEdit">ПРАВКА</system:String>
+		<system:String x:Key="MenuEditUndo">Отменить</system:String>
+		<system:String x:Key="MenuEditRedo">Повторить</system:String>
+		<system:String x:Key="MenuEditCut">Вырезать</system:String>
+		<system:String x:Key="MenuEditCopy">Копировать</system:String>
+		<system:String x:Key="MenuEditPaste">Вставить</system:String>
+	<system:String x:Key="MenuTools">СЕРВИС</system:String>
+		<system:String x:Key="MenuToolsChangeUser">Смена пользователя</system:String>
+		<system:String x:Key="MenuToolsChangeLang">Сменить язык</system:String>
+	<system:String x:Key="MenuHelp">ПОМОЩЬ</system:String>
+		<system:String x:Key="MenuHelpShow">Справка</system:String>
+		<system:String x:Key="MenuHelpAbout">О программе...</system:String>
+	<system:String x:Key="MenuAdministrator">АДМИНИСТРАТОР</system:String>
+	<system:String x:Key="MenuAdministratorPassword">Сменить пароль...</system:String>
+
+	<system:String x:Key="OperatorTabCalc">Расчет</system:String>
+	<system:String x:Key="OperatorTabResult">Результаты</system:String>
+	<system:String x:Key="OperatorTabPlots">Графики</system:String>
+
+	<system:String x:Key="ModelGeomParams">Геометрические параметры:</system:String>
+		<system:String x:Key="ModelGeomParamsWidth">Ширина канала, м: </system:String>
+		<system:String x:Key="ModelGeomParamsDepth">Глубина канала, м:</system:String>
+		<system:String x:Key="ModelGeomParamsLength">Длина канала, м:</system:String>
+
+	<system:String x:Key="ModelProcessParams">Режимные параметры:</system:String>
+		<system:String x:Key="ModelProcessParamsSpeed">Скорость движения крышки, м/с:</system:String>
+		<system:String x:Key="ModelProcessParamsCoverTemp">Температура крышки, С:</system:String>
+	<system:String x:Key="ModelProcessSolutionParams">Параметры решения модели:</system:String>
+		<system:String x:Key="ModelProcessSolutionParamsLength">Шаг движения по длине канала, м:</system:String>
+
+	<system:String x:Key="ModelMaterialName">Название материала:</system:String>
+		<system:String x:Key="ModelMaterialNameTextbox">Имя материала</system:String>
+	<system:String x:Key="ModelMaterialDescr">Описание материала:</system:String>
+
+	<system:String x:Key="ModelMaterialType">Тип материала:</system:String>
+	<system:String x:Key="ModelMaterialParams">Свойства материала:</system:String>
+		<system:String x:Key="ModelMaterialDensity">Плотность, кг/м^3:</system:String>
+		<system:String x:Key="ModelMaterialHeatCapacity">Удельная теплоемкость, Дж/(кг*С):</system:String>
+		<system:String x:Key="ModelMaterialTemperatureMelting">Температура плавления, С:</system:String>
+
+	<system:String x:Key="ModelEmpiricalCoef">Эмпирические коэффициенты:</system:String>
+		<system:String x:Key="ModelConsistenceCoef">Коэффициент консистенции, Па*с^n:</system:String>
+		<system:String x:Key="ModelTemperatureCoef">Температурный коэффициент вязкости, 1/С:</system:String>
+		<system:String x:Key="ModelTemperatureReduction">Температура приведения, С:</system:String>
+		<system:String x:Key="ModelFluidIndex">Индекс течения материала:</system:String>
+		<system:String x:Key="ModelHeatIrradiance">Коэффициент теплоотдачи от крышки к материалу, Вт/(м^2*C):</system:String>
+
+	<system:String x:Key="ModelCalculateButton">Рассчитать</system:String>
+
+	<system:String x:Key="MessageExitConfirm">Вы действительно хотите выйти?</system:String>
+	<system:String x:Key="MessageWrongPassword">Неправильный пароль</system:String>
+	<system:String x:Key="MessagePasswordSuccess">Пароль успешно изменен!</system:String>
+	<system:String x:Key="MessagePasswordExists">Вы ввели уже существующий пароль</system:String>
+	<system:String x:Key="MessageWrongParameters">Некорректные значения</system:String>
+	<system:String x:Key="MessageMaterialSaved">Материал успешно сохранен!</system:String>
+	<system:String x:Key="MessageMaterialDeleteSuccess">Материал успешно удален</system:String>
+	<system:String x:Key="MessageMaterialDeleteError">Не удалось удалить материал</system:String>
+	<system:String x:Key="MessageMaterialAddSuccess">Материал успешно добавлен!</system:String>
+	<system:String x:Key="MessageMaterialErrorExists">Материал с таким названием уже существует</system:String>
+	<system:String x:Key="MessageMaterialErrorName">Необходимо указать название материала</system:String>
+	<system:String x:Key="MessageCalculationSuccess">Расчеты успешно произведены</system:String>
+	<system:String x:Key="MessageCalculationError">Ошибка при выполнении алгоритма</system:String>
+	<system:String x:Key="MessageReportSaved">Отчет был успешно сохранен!</system:String>
+	
+	<system:String x:Key="TableLength">Длина, м</system:String>
+	<system:String x:Key="TableTemperature">Температура, С</system:String>
+	<system:String x:Key="TableViscosity">Вязкость, Па*с</system:String>
+
+	<system:String x:Key="ProductTemperature">Температура продукта, С: </system:String>
+	<system:String x:Key="ProductViscosity">Вязкость продукта, Па*с: </system:String>
+	<system:String x:Key="ProductPerformance">Производительность, кг/ч: </system:String>
+
+	<system:String x:Key="GraphTemperatureLength">Распределение температуры по длине канала</system:String>
+	<system:String x:Key="GraphViscosityLength">Распределение вязкости по длине канала</system:String>
+	<system:String x:Key="GraphLength">Длина канала, м</system:String>
+	
+	<system:String x:Key="AdminTabAddMaterial">Добавить материал</system:String>
+	<system:String x:Key="AdminTabEditMaterial">Редактировать материалы</system:String>
+	<system:String x:Key="AdminButtonAddMaterial">Добавить</system:String>
+	<system:String x:Key="AdminButtonSaveMaterial">Сохранить</system:String>
+	<system:String x:Key="AdminButtonDeleteMaterial">Удалить</system:String>
+	
+	<system:String x:Key="AdminHeaderChangePassword">Смена пароля</system:String>
+		<system:String x:Key="AdminChangePassword">Введите новый пароль администратора:</system:String>
+		<system:String x:Key="AdminChangePasswordCancel">Отмена</system:String>
+		<system:String x:Key="AdminChangePasswordSave">Сохранить</system:String>
+
+	<system:String x:Key="AboutVersionNumber">Версия программы:</system:String>
+	<system:String x:Key="AboutGroup424">Группа 424</system:String>
+	<system:String x:Key="AboutUniversity">СПбГТИ(ТУ), 2015</system:String>
+
+	<system:String x:Key="FooterAdminWelcome">Добро пожаловать. Для редактирования материалов перейдите на вторую вкладку и выберите из списка нужный.</system:String>
+	<system:String x:Key="FooterOperatorWelcome">Добро пожаловать. Для расчета выходных параметров модели введите все необходимые начальные значения и параметры.</system:String>
+	<system:String x:Key="FooterCalcTabSelected">Ввод начальных данных для расчета.</system:String>
+	<system:String x:Key="FooterResultsTabSelected">Выходные параметры, полученные из данных для расчета.</system:String>
+	<system:String x:Key="FooterGraphTabSelected">Графики выходных параметров.</system:String>
+	<system:String x:Key="FooterNewMatTabSelected">Добавление нового материала.</system:String>
+	<system:String x:Key="FooterEditMatTabSelected">Изменение и удаление материалов в базе данных.</system:String>
+	<system:String x:Key="FooterCalcSuccess">Готово. Время расчета, мс: </system:String>
+</ResourceDictionary>

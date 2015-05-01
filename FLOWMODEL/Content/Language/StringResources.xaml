@@ -1,0 +1,111 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:system="clr-namespace:System;assembly=mscorlib">
+
+	<system:String x:Key="LoginWelcome">Welcome, choose your account</system:String>
+	<system:String x:Key="LoginOperator">Operator</system:String>
+	<system:String x:Key="LoginAdmin">Administrator</system:String>
+
+	<system:String x:Key="MenuFile">FILE</system:String>
+		<system:String x:Key="MenuFileSaveReport">Save report file...</system:String>
+		<system:String x:Key="MenuFileExit">Exit from application</system:String>
+	<system:String x:Key="MenuEdit">EDIT</system:String>
+		<system:String x:Key="MenuEditUndo">Undo</system:String>
+		<system:String x:Key="MenuEditRedo">Redo</system:String>
+		<system:String x:Key="MenuEditCut">Cut</system:String>
+		<system:String x:Key="MenuEditCopy">Copy</system:String>
+		<system:String x:Key="MenuEditPaste">Paste</system:String>
+	<system:String x:Key="MenuTools">TOOLS</system:String>
+		<system:String x:Key="MenuToolsChangeUser">Change user</system:String>
+		<system:String x:Key="MenuToolsChangeLang">Change language</system:String>
+	<system:String x:Key="MenuHelp">HELP</system:String>
+		<system:String x:Key="MenuHelpShow">Show help</system:String>
+		<system:String x:Key="MenuHelpAbout">About...</system:String>
+	<system:String x:Key="MenuAdministrator">ADMINISTRATOR</system:String>
+		<system:String x:Key="MenuAdministratorPassword">Change password...</system:String>
+
+	<system:String x:Key="OperatorTabCalc">Parameters</system:String>
+	<system:String x:Key="OperatorTabResult">Results</system:String>
+	<system:String x:Key="OperatorTabPlots">Graphics</system:String>
+
+	<system:String x:Key="ModelGeomParams">Geometric parameters:</system:String>
+		<system:String x:Key="ModelGeomParamsWidth">Channel width, m:</system:String>
+		<system:String x:Key="ModelGeomParamsDepth">Channel depth, m:</system:String>
+		<system:String x:Key="ModelGeomParamsLength">Channel length, m:</system:String>
+
+	<system:String x:Key="ModelProcessParams">Process parameters:</system:String>
+		<system:String x:Key="ModelProcessParamsSpeed">Cover movement speed, m/s:</system:String>
+		<system:String x:Key="ModelProcessParamsCoverTemp">Cover temperature, C:</system:String>
+	<system:String x:Key="ModelProcessSolutionParams">Model calculation parameters:</system:String>
+		<system:String x:Key="ModelProcessSolutionParamsLength">Movement step along channel, m:</system:String>
+
+	<system:String x:Key="ModelMaterialName">Material name:</system:String>
+	<system:String x:Key="ModelMaterialNameTextbox">New material</system:String>
+	<system:String x:Key="ModelMaterialDescr">Material description:</system:String>
+
+	<system:String x:Key="ModelMaterialType">Material type:</system:String>
+	<system:String x:Key="ModelMaterialParams">Material parameters:</system:String>
+		<system:String x:Key="ModelMaterialDensity">Density, kg/m^3:</system:String>
+		<system:String x:Key="ModelMaterialHeatCapacity">Heat capacity, J/(kg*C):</system:String>
+		<system:String x:Key="ModelMaterialTemperatureMelting">Melting temperature, C:</system:String>
+
+	<system:String x:Key="ModelEmpiricalCoef">Empirical coefficients:</system:String>
+		<system:String x:Key="ModelConsistenceCoef">Consistence coef, Pa*s^n:</system:String>
+		<system:String x:Key="ModelTemperatureCoef">Viscosity temperature, 1/C:</system:String>
+		<system:String x:Key="ModelTemperatureReduction">Temperature reduction, С:</system:String>
+		<system:String x:Key="ModelFluidIndex">Material flow index:</system:String>
+		<system:String x:Key="ModelHeatIrradiance">Heat irradiance coefficient, W/(m^2*C):</system:String>
+
+	<system:String x:Key="ModelCalculateButton">Calculate</system:String>
+
+	<system:String x:Key="MessageExitConfirm">Are you sure you want to exit?</system:String>
+	<system:String x:Key="MessageWrongPassword">Wrong password</system:String>
+	<system:String x:Key="MessagePasswordSuccess">Password changed successfully!</system:String>
+	<system:String x:Key="MessagePasswordExists">You entered the existing password</system:String>
+	<system:String x:Key="MessageWrongParameters">Wrong parameters</system:String>
+	<system:String x:Key="MessageMaterialSaved">Material saved successfully!</system:String>
+	<system:String x:Key="MessageMaterialDeleteSuccess">Material deleted successfully</system:String>
+	<system:String x:Key="MessageMaterialDeleteError">Cannot delete material</system:String>
+	<system:String x:Key="MessageMaterialAddSuccess">Material added successfully!</system:String>
+	<system:String x:Key="MessageMaterialErrorExists">The material with the name you've entered already exists</system:String>
+	<system:String x:Key="MessageMaterialErrorName">You need to enter material name</system:String>
+	<system:String x:Key="MessageCalculationSuccess">Calculations finished successfully</system:String>
+	<system:String x:Key="MessageCalculationError">An error occured during the calculation</system:String>
+	<system:String x:Key="MessageReportSaved">Report file successfully saved!</system:String>
+
+	<system:String x:Key="TableLength">Length, m</system:String>
+	<system:String x:Key="TableTemperature">Temperature, C</system:String>
+	<system:String x:Key="TableViscosity">Viscosity, Pa*sec</system:String>
+
+	<system:String x:Key="ProductTemperature">Product temperature, C: </system:String>
+	<system:String x:Key="ProductViscosity">Product viscosity, Pa*sec: </system:String>
+	<system:String x:Key="ProductPerformance">Performance, kg/h: </system:String>
+
+	<system:String x:Key="GraphTemperatureLength">Temperature and channel length relation</system:String>
+	<system:String x:Key="GraphViscosityLength">Viscosity and channel length relation</system:String>
+	<system:String x:Key="GraphLength">Channel length, m</system:String>
+
+	<system:String x:Key="AdminTabAddMaterial">Add material</system:String>
+	<system:String x:Key="AdminTabEditMaterial">Edit materials</system:String>
+	<system:String x:Key="AdminButtonAddMaterial">Add new</system:String>
+	<system:String x:Key="AdminButtonSaveMaterial">Save</system:String>
+	<system:String x:Key="AdminButtonDeleteMaterial">Delete</system:String>
+
+	<system:String x:Key="AdminHeaderChangePassword">Change password</system:String>
+		<system:String x:Key="AdminChangePassword">Please enter the new password:</system:String>
+		<system:String x:Key="AdminChangePasswordCancel">Cancel</system:String>
+		<system:String x:Key="AdminChangePasswordSave">Save</system:String>
+
+	<system:String x:Key="AboutVersionNumber">Application version:</system:String>
+	<system:String x:Key="AboutGroup424">Group 424</system:String>
+	<system:String x:Key="AboutUniversity">SPbSIT, 2015</system:String>
+
+	<system:String x:Key="FooterAdminWelcome">Welcome. To edit materials please go to second tab and select the one you need.</system:String>
+	<system:String x:Key="FooterOperatorWelcome">Welcome. To calculate output model parameters enter all the material and math.model values first.</system:String>
+	<system:String x:Key="FooterCalcTabSelected">Input calculation values enter.</system:String>
+	<system:String x:Key="FooterResultsTabSelected">Output parameters, calculated from input values.</system:String>
+	<system:String x:Key="FooterGraphTabSelected">Output parameters dependency graphics.</system:String>
+	<system:String x:Key="FooterNewMatTabSelected">Add new material to the database.</system:String>
+	<system:String x:Key="FooterEditMatTabSelected">Change or delete the materials that already exist.</system:String>
+	<system:String x:Key="FooterCalcSuccess">Ready. Calculation time, ms: </system:String>
+</ResourceDictionary>

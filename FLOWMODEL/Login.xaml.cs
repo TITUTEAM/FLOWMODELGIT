@@ -27,7 +27,7 @@ namespace FLOWMODEL
 		{
 			if (this.IsActive == true)
 			{
-				MessageBoxResult ExitResult = MessageBox.Show("Вы действительно хотите выйти?", "", MessageBoxButton.YesNo, MessageBoxImage.Question);
+				MessageBoxResult ExitResult = MessageBox.Show(App.Current.Resources["MessageExitConfirm"].ToString(), "", MessageBoxButton.YesNo, MessageBoxImage.Question);
 				if (ExitResult == MessageBoxResult.Yes)
 				{
 					Application.Current.Shutdown();
@@ -62,7 +62,7 @@ namespace FLOWMODEL
 			{
 				if (!Database._instance.CheckPassword(AdminLoginPassword.Password))
 				{
-					MessageBox.Show("Неправильный пароль", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+					MessageBox.Show(App.Current.Resources["MessageWrongPassword"].ToString(), "", MessageBoxButton.OK, MessageBoxImage.Warning);
 				}
 				else
 				{

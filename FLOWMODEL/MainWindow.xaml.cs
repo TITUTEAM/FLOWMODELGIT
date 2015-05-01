@@ -29,6 +29,7 @@ namespace FLOWMODEL
 
         private MathModel DefaultModel;
 		bool AlgorithmLaunched = false;
+		string FooterLastUsedResourceKey, FooterLastAdditionalString;
 		
 		public MainWindow(bool AdminMode = false)
 		{
@@ -46,24 +47,66 @@ namespace FLOWMODEL
 			// TOOLS MENU ///////////////////////////////////////////////////////////////////////////////////////
 			var ChangeUserBinding = new CommandBinding(Commands.ChangeUserCommand, ChangeUser, CanChangeUser);
 			CommandManager.RegisterClassCommandBinding(typeof(Window), ChangeUserBinding);
+			// --------------------------------------------------------------------------------------------------
 
-			//Database._instance.Connect();
-			Database._instance.GetMaterials(MaterialTypeCombox);
-
-			// Вставка изначального текста в низу окна при его открытии
-			Footer.Text = "Добро пожаловать. Для расчета выходных параметров модели введите все необходимые начальные значения и параметры.";
+			// Обновление списка материалов из базы для Combobox
+			Database._instance.GetMaterials(MatSettingsControl.MaterialTypeCombox);
 
 			// Скрытие\показ пункта меню администратора в зависимости от режима
-			if (AdminMode == true) AdminMenu.Visibility = Visibility.Visible; else AdminMenu.Visibility = Visibility.Hidden;
+			if (AdminMode == true)
+			{
+				// Показываем меню администратора
+				AdminMenu.Visibility = Visibility.Visible;
+				// Показываем вкладки администратора
+				AdminMenuGrid.Visibility = Visibility.Visible;
+				// Сворачиваем все вкладки оператора
+				OperatorMenuGrid.Visibility = Visibility.Collapsed;
+
+				// Сворачиваем все режимные и геометрические параметры
+				OperatorCalcParametersGrid.Visibility = Visibility.Collapsed;
+
+				// Показываем кнопки администратора (Добавить, Удалить, Сохранить)
+				AdminButtons.Visibility = Visibility.Visible;
+				// Скрываем кнопки Удалить и Сохранить и показываем кнопку Добавить
+				MatDeleteButton.Visibility = Visibility.Hidden;
+				MatSaveButton.Visibility = Visibility.Hidden;
+				MatAddButton.Visibility = Visibility.Visible;
+				// Скрываем кнопку расчета
+				CalculateButton.Visibility = Visibility.Collapsed;
+
+				// Показываем контрол добавления материала
+				AddMaterialControl.Visibility = Visibility.Visible;
+				// Скрываем контрол редактирования материала
+				MatSettingsControl.Visibility = Visibility.Collapsed;
+
+				// Вставка изначального текста внизу окна при его открытии
+				FooterSetLocalizedText("FooterAdminWelcome");
+			}
+			else
+			{
+				// Скрываем меню администратора
+				AdminMenu.Visibility = Visibility.Hidden;
+				// Сворачиваем все вкладки администратора
+				AdminMenuGrid.Visibility = Visibility.Collapsed;
+				// Показываем вкладки оператора
+				OperatorMenuGrid.Visibility = Visibility.Visible;
+				// Скрываем контрол добавления материала
+				AddMaterialControl.Visibility = Visibility.Hidden;
+				// Скрываем кнопки администратора (Добавить, Удалить, Сохранить)
+				AdminButtons.Visibility = Visibility.Hidden;
+				// Вставка изначального текста внизу окна при его открытии
+				FooterSetLocalizedText("FooterOperatorWelcome");
+			}
 		}
+
 		// ----------------------------------------------------------------------------------------------------------
-		// РАБОТА С ВКЛАДКАМИ
+		// ВКЛАДКИ ОПЕРАТОРА
 		// ----------------------------------------------------------------------------------------------------------
 		// Переключение видимости WPF Grid'ов при выборе вкладки "Расчет"
 		// Grid расчетов - показан, Grid результатов - скрыт, Grid графиков - скрыт
 		private void CalculationsButton_Click(object sender, RoutedEventArgs e)
 		{
-			Footer.Text = "Ввод начальных данных для расчета.";
+			FooterSetLocalizedText("FooterCalcTabSelected");
 			CalcGrid.Visibility = Visibility.Visible;
 			ResultGrid.Visibility = Visibility.Hidden;
 			GraphGrid.Visibility = Visibility.Hidden;
@@ -73,7 +116,7 @@ namespace FLOWMODEL
 		// Grid расчетов - скрыт, Grid результатов - показан, Grid графиков - скрыт
 		private void ResultsButton_Click(object sender, RoutedEventArgs e)
 		{
-			Footer.Text = "Выходные параметры, полученные из данных для расчета.";
+			FooterSetLocalizedText("FooterResultsTabSelected");
 			CalcGrid.Visibility = Visibility.Hidden;
 			ResultGrid.Visibility = Visibility.Visible;
 			GraphGrid.Visibility = Visibility.Hidden;
@@ -83,10 +126,42 @@ namespace FLOWMODEL
 		// Grid расчетов - скрыт, Grid результатов - скрыт, Grid графиков - показан
 		private void GraphButton_Click(object sender, RoutedEventArgs e)
 		{
-			Footer.Text = "Графики выходных параметров.";
+			FooterSetLocalizedText("FooterGraphTabSelected");
 			CalcGrid.Visibility = Visibility.Hidden;
 			ResultGrid.Visibility = Visibility.Hidden;
 			GraphGrid.Visibility = Visibility.Visible;
+		}
+
+		// ----------------------------------------------------------------------------------------------------------
+		// ВКЛАДКИ АДМИНИСТРАТОРА
+		// ----------------------------------------------------------------------------------------------------------
+		// Переключение видимости CustomControl'ов при выборе вкладки "Добавить материал"
+		// CustomControl нового материала - показан, CustomControl редактирования - скрыт
+		private void NewMaterialButton_Click(object sender, RoutedEventArgs e)
+		{
+			FooterSetLocalizedText("FooterNewMatTabSelected");
+			// Показываем контрол добавления материала
+			AddMaterialControl.Visibility = Visibility.Visible;
+			// Скрываем контрол редактирования материала
+			MatSettingsControl.Visibility = Visibility.Collapsed;
+			// Скрываем кнопки Удалить и Сохранить и показываем кнопку Добавить
+			MatDeleteButton.Visibility = Visibility.Hidden;
+			MatSaveButton.Visibility = Visibility.Hidden;
+			MatAddButton.Visibility = Visibility.Visible;
+		}
+		// Переключение видимости CustomControl'ов при выборе вкладки "Редактировать материалы"
+		// CustomControl нового материала - скрыт, CustomControl редактирования - показан
+		private void EditMaterialButton_Click(object sender, RoutedEventArgs e)
+		{
+			FooterSetLocalizedText("FooterEditMatTabSelected");
+			// Показываем контрол добавления материала
+			AddMaterialControl.Visibility = Visibility.Collapsed;
+			// Скрываем контрол редактирования материала
+			MatSettingsControl.Visibility = Visibility.Visible;
+			// Показываем кнопки Удалить и Сохранить и скрываем кнопку Добавить
+			MatDeleteButton.Visibility = Visibility.Visible;
+			MatSaveButton.Visibility = Visibility.Visible;
+			MatAddButton.Visibility = Visibility.Hidden;
 		}
 
 		// ----------------------------------------------------------------------------------------------------------
@@ -100,15 +175,30 @@ namespace FLOWMODEL
 			String Time;
 
 			// Инициализация мат. модели
-			DefaultModel = new MathModel(H_TBox.Text, W_TBox.Text, Vu_TBox.Text,Mu0_TBox.Text, N_TBox.Text, L_TBox.Text,
-				DeltaL_TBox.Text, B_TBox.Text, Tr_TBox.Text, Tu_TBox.Text, Alpha_TBox.Text, Ro_TBox.Text, C_TBox.Text, Tm_TBox.Text);
+			DefaultModel = new MathModel
+				(
+				H_TBox.Text,
+				W_TBox.Text,
+				Vu_TBox.Text,
+				MatSettingsControl.Mu0_TBox.Text,
+				MatSettingsControl.N_TBox.Text,
+				L_TBox.Text,
+				DeltaL_TBox.Text,
+				MatSettingsControl.B_TBox.Text,
+				MatSettingsControl.Tr_TBox.Text,
+				Tu_TBox.Text,
+				MatSettingsControl.Alpha_TBox.Text,
+				MatSettingsControl.Ro_TBox.Text,
+				MatSettingsControl.C_TBox.Text,
+				MatSettingsControl.Tm_TBox.Text
+				);
 
-			// Если исходная строка ошибки изменялась (к ней прибавлялись перечисления ошибочных параметров)
-			if (!DefaultModel.GetError().Equals("Некорректные значения: "))
+			// Если строка ошибки не пустая (ее длина > 0)
+			if (DefaultModel.GetError().Length > 0)
 			{
-				MessageBox.Show(DefaultModel.GetError(), "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+				MessageBox.Show(App.Current.Resources["MessageWrongParameters"].ToString() + DefaultModel.GetError(), "", MessageBoxButton.OK, MessageBoxImage.Error);
 			}
-			// В ином случае (строка ошибки не менялась от исходной) мы запускаем алгоритм
+			// В ином случае (длина строки с текстом ошибки = 0) мы запускаем алгоритм
 			else
 			{
 				try
@@ -146,10 +236,6 @@ namespace FLOWMODEL
 
 					// Привязка рассчитанных значений к таблице результатов
 					ResultsGataGrid.ItemsSource = DataGridItemsList;
-					// Название столбцов таблицы
-					ResultsGataGrid.Columns[0].Header = "Длина, м";
-					ResultsGataGrid.Columns[1].Header = "Температура, С";
-					ResultsGataGrid.Columns[2].Header = "Вязкость, Па*с";
 
 					// Вывод значений на графики
 					var plotModel1 = new PlotModel();
@@ -163,8 +249,8 @@ namespace FLOWMODEL
 					ViscosityGraph.InvalidatePlot();
 					ViscosityGraph.ResetAllAxes();
 
-					MessageBox.Show("Расчеты успешно произведены", "Готово", MessageBoxButton.OK, MessageBoxImage.Information);
-					Footer.Text = "Готово. Время расчета: " + Time + " мс.";
+					MessageBox.Show(App.Current.Resources["MessageCalculationSuccess"].ToString(), "", MessageBoxButton.OK, MessageBoxImage.Information);
+					FooterSetLocalizedText("FooterCalcSuccess", ""+Time);
 
 					// Активация кнопок с результатами и графиками
 					ResultsButton.IsEnabled = true;
@@ -179,7 +265,7 @@ namespace FLOWMODEL
 				}
 				catch
 				{
-					MessageBox.Show("Ошибка при выполнении алгоритма", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+					MessageBox.Show(App.Current.Resources["MessageCalculationError"].ToString(), "", MessageBoxButton.OK, MessageBoxImage.Error);
 					DefaultModel = null;
 				}
 			}
@@ -187,35 +273,60 @@ namespace FLOWMODEL
         }
 
 		// ----------------------------------------------------------------------------------------------------------
-		// ПОЛЕ ВЫБОРА МАТЕРИАЛА
+		// КНОПКА "Добавить"
 		// ----------------------------------------------------------------------------------------------------------
-		// Запрос информации о выбранном материале из базы данных
-		private void MaterialTypeCombox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+		private void MatAddButton_Click(object sender, RoutedEventArgs e)
 		{
-			SQLiteDataReader rd = Database._instance.GetMaterialSettings(Convert.ToInt32(MaterialTypeCombox.SelectedValue));
-			rd.Read();
-			// Плотность
-			Ro_TBox.Text = rd["Density"].ToString();
-			// Теплоемкость
-			C_TBox.Text = rd["HeatCapacity"].ToString();
-			// Температура плавления
-			Tm_TBox.Text = rd["TemperatureMelting"].ToString();
+			// Добавляем новый материал в базу
+			if (Database._instance.AddNewMaterial(AddMaterialControl))
+			{
+				// Если материал успешно удален:
+				// Обновляем список материалов из базы для Combobox
+				Database._instance.GetMaterials(MatSettingsControl.MaterialTypeCombox);
+				MatSettingsControl.MaterialTypeCombox.SelectedIndex = 0;
+			}
 		}
 
 		// ----------------------------------------------------------------------------------------------------------
-		// 
+		// КНОПКА "Удалить"
+		// ----------------------------------------------------------------------------------------------------------
+		private void MatDeleteButton_Click(object sender, RoutedEventArgs e)
+		{
+			// Удаляем выбранный в Combobox материал из базы
+			if (Database._instance.DeleteMaterial(MatSettingsControl))
+			{
+				// Если материал успешно удален:
+				// Обновляем список материалов из базы для Combobox
+				Database._instance.GetMaterials(MatSettingsControl.MaterialTypeCombox);
+				MatSettingsControl.MaterialTypeCombox.SelectedIndex = 0;
+			}
+		}
+
+		// ----------------------------------------------------------------------------------------------------------
+		// КНОПКА "Сохранить"
+		// ----------------------------------------------------------------------------------------------------------
+		private void MatSaveButton_Click(object sender, RoutedEventArgs e)
+		{
+			// Сохраняем измененные параметры для выбранного в Combobox материала
+			Database._instance.EditMaterial(MatSettingsControl);
+		}
+
+		// ----------------------------------------------------------------------------------------------------------
+		// ОСТАЛЬНЫЕ КОНТРОЛЫ
 		// ----------------------------------------------------------------------------------------------------------
 		// FILE MENU ////////////////////////////////////////////////////////////////////////////////////////
-		// Save report
+		// Сохранение отчета
 		private void SaveReport(object sender, ExecutedRoutedEventArgs e)
 		{
 			// \/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
 			// \/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
 			// \/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
-			MessageBox.Show("Insert report saving routines here");
-			// \/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
-			// \/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
-			// \/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
+			MessageBox.Show("Здесь должен быть функционал с сохранением результатов в отчет");
+
+			MessageBox.Show(App.Current.Resources["MessageReportSaved"].ToString(), "", MessageBoxButton.OK, MessageBoxImage.Information);
+			// /\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\
+			// /\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\
+			// /\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\
 		}
 		private void CanSaveReport(object sender, CanExecuteRoutedEventArgs e)
 		{
@@ -266,19 +377,13 @@ namespace FLOWMODEL
 			AdminPassword AdmPWWindow = new AdminPassword();
 			AdmPWWindow.ShowDialog();
 		}
-		// Открытие окна редактирования базы данных
-		private void AdminEditDBMenu_Click(object sender, RoutedEventArgs e)
-		{
-			AdminDatabase AdmDBWIndow = new AdminDatabase();
-			AdmDBWIndow.ShowDialog();
-		}
 
 		// Вывод диалогового окна с подтверждением при закрытии программы
 		private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
 		{
 			if (this.IsActive == true)
 			{
-				MessageBoxResult ExitResult = MessageBox.Show("Вы действительно хотите выйти?", "", MessageBoxButton.YesNo, MessageBoxImage.Question);
+				MessageBoxResult ExitResult = MessageBox.Show(App.Current.Resources["MessageExitConfirm"].ToString(), "", MessageBoxButton.YesNo, MessageBoxImage.Question);
 				if (ExitResult == MessageBoxResult.Yes)
 				{
 					Application.Current.Shutdown();
@@ -288,6 +393,40 @@ namespace FLOWMODEL
 					e.Cancel = true;
 				}
 			}
+		}
+
+		// Изменить язык интерфейса на русский
+		private void SwitchToRussianMenuButton_Click(object sender, RoutedEventArgs e)
+		{
+			App.SelectCulture("ru-RU");
+			UpdateFooterText();
+			App.SaveSelectedLanguage("ru-RU");
+		}
+
+		// Изменить язык интерфейса на английский
+		private void SwitchToEnglishMenuButton_Click(object sender, RoutedEventArgs e)
+		{
+			App.SelectCulture("en-US");
+			UpdateFooterText();
+			App.SaveSelectedLanguage("en-US");
+		}
+
+		// Применяем локализованный текст к подсказкам внизу окна
+		private void FooterSetLocalizedText(string ResKey, string Additional = "")
+		{
+			FooterLastUsedResourceKey = ResKey;
+			FooterLastAdditionalString = Additional;
+			Footer.Text = App.Current.Resources[ResKey].ToString() + Additional;
+		}
+		// Обновляем текст подсказки по указанному ключу ресурса при смене языка
+		private void UpdateFooterText()
+		{
+			Footer.Text = App.Current.Resources[FooterLastUsedResourceKey].ToString() + FooterLastAdditionalString;
+		}
+
+		private void MenuHelpShow_Click(object sender, RoutedEventArgs e)
+		{
+			System.Diagnostics.Process.Start(@"..\..\Help\Documentation.chm");
 		}
 	}
 }
