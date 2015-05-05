@@ -3,6 +3,7 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="Resources.xaml"/>
     </ResourceDictionary.MergedDictionaries>
+	
     <ControlTemplate x:Key="ComboBoxToggleButton" TargetType="ToggleButton">
         <Grid>
             <Grid.ColumnDefinitions>
@@ -28,7 +29,11 @@
         <Border x:Name="PART_ContentHost" Focusable="False" Background="{TemplateBinding Background}" />
     </ControlTemplate>
 
-    <Style x:Key="StandardComboBox" TargetType="ComboBox">
+	<ControlTemplate x:Key="ComboBoxTooltip" TargetType="ToolTip">
+		<TextBlock Text="{TemplateBinding Content}" MaxWidth="400" TextWrapping="Wrap"/>
+	</ControlTemplate>
+
+	<Style x:Key="StandardComboBox" TargetType="ComboBox">
         <Setter Property="Foreground" Value="{DynamicResource Foreground}"/>
         <Setter Property="SnapsToDevicePixels" Value="true"/>
         <Setter Property="OverridesDefaultStyle" Value="true"/>
@@ -52,7 +57,7 @@
                                           Content="{TemplateBinding SelectionBoxItem}" 
                                           ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}" 
                                           ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}" 
-                                          Margin="3,3,23,3" 
+                                          Margin="7,3,23,3" 
                                           VerticalAlignment="Center" 
                                           HorizontalAlignment="Left"/>
                         <TextBox x:Name="PART_EditableTextBox" 
@@ -61,7 +66,7 @@
                                  Template="{StaticResource ComboBoxTextBox}" 
                                  HorizontalAlignment="Left" 
                                  VerticalAlignment="Center" 
-                                 Margin="3,3,23,3" 
+                                 Margin="7,3,23,3" 
                                  Focusable="True" 
                                  Background="Transparent" 
                                  Foreground="{DynamicResource Foreground}" 
@@ -100,7 +105,7 @@
                     <Setter.Value>
                         <ControlTemplate TargetType="ComboBoxItem">
                             <Border Name="Border" Padding="2" SnapsToDevicePixels="true" BorderThickness="1">
-                                <ContentPresenter />
+                                <ContentPresenter VerticalAlignment="Center" Margin="5, 0"/>
                             </Border>
                             <ControlTemplate.Triggers>
                                 <Trigger Property="IsHighlighted" Value="true">

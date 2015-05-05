@@ -3,37 +3,23 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Авторизация" Height="350" Width="300" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Background="#FF323232" Closing="Window_Closing" Foreground="#FFE2E2E2" Icon="Content/MainIcon.png">
 	<Grid>
-		<TextBlock HorizontalAlignment="Left" Margin="15,15,0,0" TextWrapping="Wrap" Text="FLOWMODEL" VerticalAlignment="Top" FontSize="20">
-			<TextBlock.Foreground>
-				<SolidColorBrush Color="{DynamicResource YellowTabButtonColor}"/>
-			</TextBlock.Foreground>
-		</TextBlock>
-		<TextBlock HorizontalAlignment="Left" Margin="15,45,5,0" TextWrapping="Wrap" Text="Добро пожаловать, выберите режим работы" VerticalAlignment="Top" FontSize="14">
-			<TextBlock.Foreground>
-				<SolidColorBrush Color="{DynamicResource ForegroundColor}"/>
-			</TextBlock.Foreground>
-		</TextBlock>
+		<TextBlock HorizontalAlignment="Left" Margin="15,15,0,0" TextWrapping="Wrap" Text="FLOWMODEL" VerticalAlignment="Top" FontSize="20" Foreground="{DynamicResource YellowTabButtonBrush}"/>
+		<TextBlock HorizontalAlignment="Left" Margin="15,45,5,0" TextWrapping="Wrap" Text="{DynamicResource LoginWelcome}" VerticalAlignment="Top" FontSize="14" Foreground="{DynamicResource Foreground}"/>
 		<StackPanel HorizontalAlignment="Center" Margin="15,0,15,10" VerticalAlignment="Bottom">
-			<Button x:Name="ResearcherSelectButton"  Style="{DynamicResource LoginButton}" HorizontalAlignment="Left" Margin="0,0,0,10" VerticalAlignment="Top" Width="260" Height="85" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Click="ResearcherSelectButton_Click">
-				<Button.Background>
-					<SolidColorBrush Color="{DynamicResource YellowTabButtonColor}"/>
-				</Button.Background>
+			<Button x:Name="ResearcherSelectButton"  Style="{DynamicResource LoginButton}" HorizontalAlignment="Left" Margin="0,0,0,10" VerticalAlignment="Top" Width="260" Height="85" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Background="{DynamicResource YellowTabButtonBrush}" Click="ResearcherSelectButton_Click">
 				<Grid>
-					<TextBlock TextWrapping="Wrap" Text="Исследователь" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="15, 10, 0, 0"/>
+					<TextBlock TextWrapping="Wrap" Text="{DynamicResource LoginOperator}" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="15, 10, 0, 0"/>
 					<Image Height="100" Width="100" Source="Content/ResearcherLoginIcon.png" Margin="150,10,0,0" Opacity="0.5"/>
 				</Grid>
 			</Button>
 
-			<Button x:Name="AdminSelectButton" Style="{DynamicResource LoginButton}" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="260" Height="85" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Click="AdminSelectButton_Click">
-				<Button.Background>
-					<SolidColorBrush Color="{DynamicResource PlotBackgroundColor}"/>
-				</Button.Background>
+			<Button x:Name="AdminSelectButton" Style="{DynamicResource LoginButton}" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="260" Height="85" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Background="{DynamicResource PlotBackground}"  Click="AdminSelectButton_Click">
 				<Grid>
-					<TextBlock TextWrapping="Wrap" Text="Администратор" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="15, 10, 0, 0"/>
+					<TextBlock TextWrapping="Wrap" Text="{DynamicResource LoginAdmin}"  FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="15, 10, 0, 0"/>
 					<Image Height="100" Width="100" Source="Content/AdminLoginIcon.png" Margin="150,10,0,0" Opacity="0.5"/>
 					<StackPanel x:Name="AdminLoginPanel" Margin="15,40,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Orientation="Horizontal" Visibility="Hidden" >
-						<PasswordBox x:Name="AdminLoginPassword"  Width="190" Height="25" HorizontalAlignment="Left"/>
-						<Button x:Name="AdminLoginButton" Width="35">
+						<PasswordBox x:Name="AdminLoginPassword" Width="190" Height="25" HorizontalAlignment="Left" Panel.ZIndex="50"/>
+						<Button x:Name="AdminLoginButton" Width="35" Style="{DynamicResource LoginButton}" IsDefault="True" Click="AdminLoginButton_Click">
 							<Image Height="20" Width="20" Source="Content/AdminLoginAccept.png"/>
 						</Button>
 					</StackPanel>

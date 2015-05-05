@@ -6,34 +6,34 @@
     </ResourceDictionary.MergedDictionaries>
   
     <Style x:Key="StandardButton" TargetType="Button">
-      <Setter Property="Visibility" Value="Visible"/>
-      <Setter Property="Foreground" Value="{DynamicResource ForegroundColorBrush}"/>
-      <Setter Property="Background" Value="Transparent"/>
-
-      <Setter Property="Template">
-        <Setter.Value>
-          <ControlTemplate TargetType="Button">
-            <Border SnapsToDevicePixels="True" Background="{TemplateBinding Background}">
-              <Grid>
-                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" RecognizesAccessKey="True"/>
-              </Grid>
-            </Border>
-            <ControlTemplate.Triggers>
-              <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="BorderBrush" Value="{DynamicResource BlueColorBrush}" />
-                <Setter Property="Background" Value="{DynamicResource HighlightColorBrush}" />
-              </Trigger>
-              <Trigger Property="IsPressed" Value="True">
-                <Setter Property="Background" Value="{DynamicResource BlueColorBrush}"/>
-                <Setter Property="BorderBrush" Value="{DynamicResource BlueColorBrush}"/>
-              </Trigger>
-              <Trigger Property="IsEnabled" Value="False">
-                <Setter Property="Opacity" Value=".5"/>
-              </Trigger>
-            </ControlTemplate.Triggers>
-          </ControlTemplate>
-        </Setter.Value>
-      </Setter>
+		<Setter Property="Foreground" Value="{DynamicResource ForegroundColorBrush}" />
+		<Setter Property="Background" Value="{DynamicResource LightBackground}" />
+		<Setter Property="BorderThickness" Value="1" />
+		
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type Button}">
+					<!--<Grid Background="{TemplateBinding Background}">-->
+						<Border BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" BorderBrush="{DynamicResource BlueColorBrush}" SnapsToDevicePixels="True">
+							<ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" RecognizesAccessKey="True"/>
+						</Border>
+					<!--</Grid>-->
+					<ControlTemplate.Triggers>
+						<Trigger Property="IsMouseOver" Value="True">
+							<Setter Property="BorderBrush" Value="{DynamicResource BlueColorBrush}" />
+							<Setter Property="Background" Value="{DynamicResource HighlightColorBrush}" />
+						</Trigger>
+						<Trigger Property="IsPressed" Value="True">
+							<Setter Property="BorderBrush" Value="{DynamicResource BlueColorBrush}"/>
+							<Setter Property="Background" Value="{DynamicResource BlueColorBrush}" />
+						</Trigger>
+						<Trigger Property="IsEnabled" Value="false">
+							<Setter Property="Opacity" Value=".5"/>
+						</Trigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
     </Style>
 
 	<!-- Кнопка для вкладок, разделяющих все по категориям (Расчеты, Графики, Результаты) в окне программы -->

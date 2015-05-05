@@ -8,9 +8,9 @@ using System.Windows;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("FLOWMODEL")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Performs basic calculations on simplified industrial process providing data and plot results")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("TITUTEAM")]
 [assembly: AssemblyProduct("FLOWMODEL")]
 [assembly: AssemblyCopyright("Copyright ©  2015")]
 [assembly: AssemblyTrademark("")]

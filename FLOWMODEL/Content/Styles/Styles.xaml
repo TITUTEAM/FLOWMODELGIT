@@ -2,13 +2,12 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <ResourceDictionary.MergedDictionaries>
 		<!--
-        <ResourceDictionary Source="WindowStyles.xaml"/>
-        <ResourceDictionary Source="TabControlStyles.xaml"/>
         <ResourceDictionary Source="ListBoxStyles.xaml"/>
         <ResourceDictionary Source="GroupBoxStyles.xaml"/>
 		-->
 		<ResourceDictionary Source="ButtonStyles.xaml"/>
 		<ResourceDictionary Source="TextBoxStyles.xaml"/>
+		<ResourceDictionary Source="PasswordBoxStyles.xaml"/>
 		<ResourceDictionary Source="ComboBoxStyles.xaml"/>
 		<ResourceDictionary Source="DataGridStyles.xaml"/>
 		<ResourceDictionary Source="MenuStyles.xaml"/>
@@ -18,13 +17,12 @@
 	<Style TargetType="Button" BasedOn="{StaticResource StandardButton}"/>
 	<Style TargetType="TextBox" BasedOn="{StaticResource StandardTextBox}"/>
 	<Style TargetType="ComboBox" BasedOn="{StaticResource StandardComboBox}"/>
+	<Style TargetType="PasswordBox" BasedOn="{StaticResource StandartPasswordBox}"/>
 	<Style TargetType="DataGrid" BasedOn="{StaticResource StandardDataGrid}"/>
 	<Style TargetType="Menu" BasedOn="{StaticResource StandardMenu}"/>
 	<Style TargetType="ScrollBar" BasedOn="{StaticResource StandardScrollBar}"/>
 	
 	<!--
-	<Style TargetType="Window" BasedOn="{StaticResource StandardWindow}"/>
-    <Style TargetType="TabControl" BasedOn="{StaticResource StandardTabControl}"/>
     <Style TargetType="ListBox" BasedOn="{StaticResource StandardListBox}"/>
     <Style TargetType="GroupBox" BasedOn="{StaticResource StandardGroupBox}"/>
 	-->
