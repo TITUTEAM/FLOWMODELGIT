@@ -71,6 +71,7 @@
 	<system:String x:Key="MessageMaterialErrorName">You need to enter material name</system:String>
 	<system:String x:Key="MessageCalculationSuccess">Calculations finished successfully</system:String>
 	<system:String x:Key="MessageCalculationError">An error occured during the calculation</system:String>
+	<system:String x:Key="MessageReportError">An error occured during the report generation</system:String>
 	<system:String x:Key="MessageReportSaved">Report file successfully saved!</system:String>
 
 	<system:String x:Key="TableLength">Length, m</system:String>
@@ -108,4 +109,9 @@
 	<system:String x:Key="FooterNewMatTabSelected">Add new material to the database.</system:String>
 	<system:String x:Key="FooterEditMatTabSelected">Change or delete the materials that already exist.</system:String>
 	<system:String x:Key="FooterCalcSuccess">Ready. Calculation time, ms: </system:String>
+
+	<system:String x:Key="DefaultReportName">Report</system:String>
+	<system:String x:Key="Header">Report generated at </system:String>
+	<system:String x:Key="InitialData">Initial data</system:String>
+	<system:String x:Key="Output">Output</system:String>
 </ResourceDictionary>

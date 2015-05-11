@@ -29,7 +29,7 @@
 	<system:String x:Key="OperatorTabPlots">Графики</system:String>
 
 	<system:String x:Key="ModelGeomParams">Геометрические параметры:</system:String>
-		<system:String x:Key="ModelGeomParamsWidth">Ширина канала, м: </system:String>
+		<system:String x:Key="ModelGeomParamsWidth">Ширина канала, м:</system:String>
 		<system:String x:Key="ModelGeomParamsDepth">Глубина канала, м:</system:String>
 		<system:String x:Key="ModelGeomParamsLength">Длина канала, м:</system:String>
 
@@ -71,6 +71,7 @@
 	<system:String x:Key="MessageMaterialErrorName">Необходимо указать название материала</system:String>
 	<system:String x:Key="MessageCalculationSuccess">Расчеты успешно произведены</system:String>
 	<system:String x:Key="MessageCalculationError">Ошибка при выполнении алгоритма</system:String>
+	<system:String x:Key="MessageReportError">Ошибка при сохранении отчета</system:String>
 	<system:String x:Key="MessageReportSaved">Отчет был успешно сохранен!</system:String>
 	
 	<system:String x:Key="TableLength">Длина, м</system:String>
@@ -108,4 +109,10 @@
 	<system:String x:Key="FooterNewMatTabSelected">Добавление нового материала.</system:String>
 	<system:String x:Key="FooterEditMatTabSelected">Изменение и удаление материалов в базе данных.</system:String>
 	<system:String x:Key="FooterCalcSuccess">Готово. Время расчета, мс: </system:String>
+
+	<system:String x:Key="DefaultReportName">Отчет</system:String>
+	<system:String x:Key="Header">Отчет сгенирирован </system:String>
+	<system:String x:Key="InitialData">Исходные данные</system:String>
+	<system:String x:Key="Output">Выходные данные</system:String>
+
 </ResourceDictionary>

@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Diagnostics;
+using Microsoft.Win32;
 
 using OxyPlot;
 
@@ -266,10 +267,8 @@ namespace FLOWMODEL
 				catch
 				{
 					MessageBox.Show(App.Current.Resources["MessageCalculationError"].ToString(), "", MessageBoxButton.OK, MessageBoxImage.Error);
-					DefaultModel = null;
 				}
 			}
-			DefaultModel = null;
         }
 
 		// ----------------------------------------------------------------------------------------------------------
@@ -318,15 +317,22 @@ namespace FLOWMODEL
 		// Сохранение отчета
 		private void SaveReport(object sender, ExecutedRoutedEventArgs e)
 		{
-			// \/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
-			// \/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
-			// \/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
-			MessageBox.Show("Здесь должен быть функционал с сохранением результатов в отчет");
+			try
+			{
+				SaveFileDialog sfd = new SaveFileDialog();
+				sfd.FileName = App.Current.Resources["DefaultReportName"].ToString();
+				sfd.DefaultExt = ".docx";
+				sfd.Filter = "Word documents (*.docx)|*.docx|All files (*.*)|*.*";
+				sfd.ShowDialog();
 
-			MessageBox.Show(App.Current.Resources["MessageReportSaved"].ToString(), "", MessageBoxButton.OK, MessageBoxImage.Information);
-			// /\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\
-			// /\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\
-			// /\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\
+				Report ReportGeneration = new Report(sfd.FileName, DefaultModel, MatSettingsControl.MaterialTypeCombox.Text);
+
+				MessageBox.Show(App.Current.Resources["MessageReportSaved"].ToString(), "", MessageBoxButton.OK, MessageBoxImage.Information);
+			}
+			catch
+			{
+				MessageBox.Show(App.Current.Resources["MessageReportError"].ToString(), "", MessageBoxButton.OK, MessageBoxImage.Error);
+			}
 		}
 		private void CanSaveReport(object sender, CanExecuteRoutedEventArgs e)
 		{

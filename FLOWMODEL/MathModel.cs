@@ -11,7 +11,7 @@ namespace FLOWMODEL
 {
 	public class MathModel
 	{
-		private double H, W, Vu, Mu0, N, L, DeltaL, B, Tr, Tu, Alpha, Ro, C, T0;
+		public double H, W, Vu, Mu0, N, L, DeltaL, B, Tr, Tu, Alpha, Ro, C, T0;
 		private double F, Q, Gamma, qGamma, qAlpha, Li, G, Tp, EtaP;
 		private int m;
 		private double[] K, T, Eta;
