@@ -332,6 +332,8 @@ namespace FLOWMODEL
 				
 				Report ReportGeneration = new Report(sfd.FileName, DefaultModel, MatSettingsControl.MaterialTypeCombox.Text);
 
+				File.Delete(sfd.FileName + "T.png");
+				File.Delete(sfd.FileName + "V.png");
 				MessageBox.Show(App.Current.Resources["MessageReportSaved"].ToString(), "", MessageBoxButton.OK, MessageBoxImage.Information);
 			}
 			catch
