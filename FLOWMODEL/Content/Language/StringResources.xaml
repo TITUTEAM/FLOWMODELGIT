@@ -114,4 +114,7 @@
 	<system:String x:Key="Header">Report generated at </system:String>
 	<system:String x:Key="InitialData">Initial data</system:String>
 	<system:String x:Key="Output">Output</system:String>
+
+	<system:String x:Key="ViscPict">Picture 2 -- Viscosity spreading along the channel</system:String>
+	<system:String x:Key="TempPict">Picture 1 -- Temperature spreading along the channel</system:String>
 </ResourceDictionary>

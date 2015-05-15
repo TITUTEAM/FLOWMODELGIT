@@ -12,11 +12,13 @@ namespace FLOWMODEL
 		private double[] Eta;
 		private Application WordApp;
 		private object missing;
+		private String FileName;
 		public Report(String FileName, MathModel Model, String MatherialName)
 		{
 			WordApp = new Application();
 			missing = System.Reflection.Missing.Value;
 			Document WordDoc = WordApp.Documents.Add(ref missing, ref missing, ref missing, ref missing);
+			this.FileName = FileName;
 
 			Generation(WordDoc, Model, MatherialName);
 
@@ -41,8 +43,7 @@ namespace FLOWMODEL
 
 			Paragraph para1 = WordDoc.Content.Paragraphs.Add(ref missing);
 
-			para1.Range.Font.Size = 16;
-			para1.Range.Font.ColorIndex = WdColorIndex.wdBlue;
+			para1.Range.Font.Size = 18;
 			para1.Range.Font.Bold = 1;
 			para1.Range.Text = "\t" + App.Current.Resources["InitialData"].ToString();
 			para1.Range.InsertParagraphAfter();
@@ -85,8 +86,7 @@ namespace FLOWMODEL
 
 			Paragraph para2 = WordDoc.Content.Paragraphs.Add(ref missing);
 
-			para2.Range.Font.Size = 16;
-			para2.Range.Font.ColorIndex = WdColorIndex.wdBlue;
+			para2.Range.Font.Size = 18;
 			para2.Range.Font.Bold = 1;
 			para2.Range.Text = "\t" + App.Current.Resources["Output"].ToString();
 			para2.Range.InsertParagraphAfter();
@@ -98,15 +98,43 @@ namespace FLOWMODEL
 			OutputTable.Borders.Enable = 1;
 
 			OutputTable.Rows[1].Cells[1].Range.Text = App.Current.Resources["TableLength"].ToString();
+			OutputTable.Rows[1].Cells[1].Range.Font.Name = "Times New Roman";
 			OutputTable.Rows[1].Cells[2].Range.Text = App.Current.Resources["TableTemperature"].ToString();
+			OutputTable.Rows[1].Cells[2].Range.Font.Name = "Times New Roman";
 			OutputTable.Rows[1].Cells[3].Range.Text = App.Current.Resources["TableViscosity"].ToString();
+			OutputTable.Rows[1].Cells[3].Range.Font.Name = "Times New Roman";
 
 			for (int i = 1; i < OutputTable.Rows.Count; i++)
 			{
 				OutputTable.Rows[i + 1].Cells[1].Range.Text = (Convert.ToDouble(i - 1) / 10).ToString();
+				OutputTable.Rows[i + 1].Cells[1].Range.Font.Name = "Times New Roman";
 				OutputTable.Rows[i + 1].Cells[2].Range.Text = T[i - 1].ToString();
+				OutputTable.Rows[i + 1].Cells[2].Range.Font.Name = "Times New Roman";
 				OutputTable.Rows[i + 1].Cells[3].Range.Text = Eta[i - 1].ToString();
+				OutputTable.Rows[i + 1].Cells[3].Range.Font.Name = "Times New Roman";
 			}
+
+			para2.Range.InsertParagraphAfter();
+
+			Paragraph para3 = WordDoc.Content.Paragraphs.Add(ref missing);
+			para3.Alignment = WdParagraphAlignment.wdAlignParagraphCenter;
+
+			Table PicTable = WordDoc.Tables.Add(para3.Range, 4, 1, ref missing, ref missing);
+			PicTable.Rows[1].Cells[1].Range.InlineShapes.AddPicture(FileName + "T.png", ref missing, ref missing, ref missing);
+
+			PicTable.Rows[2].Cells[1].Range.Text = App.Current.Resources["TempPict"].ToString();
+			PicTable.Rows[2].Cells[1].Range.Font.Name = "Times New Roman";
+			PicTable.Rows[2].Cells[1].Range.ParagraphFormat.Alignment = WdParagraphAlignment.wdAlignParagraphCenter;
+			PicTable.Rows[2].Cells[1].Range.Font.Size = 14;
+
+			PicTable.Rows[3].Cells[1].Range.InlineShapes.AddPicture(FileName + "V.png", ref missing, ref missing, ref missing);
+
+			PicTable.Rows[4].Cells[1].Range.Text = App.Current.Resources["ViscPict"].ToString();
+			PicTable.Rows[4].Cells[1].Range.Font.Name = "Times New Roman";
+			PicTable.Rows[4].Cells[1].Range.ParagraphFormat.Alignment = WdParagraphAlignment.wdAlignParagraphCenter;
+			PicTable.Rows[4].Cells[1].Range.Font.Size = 14;
+
+
 
 		}
 	}

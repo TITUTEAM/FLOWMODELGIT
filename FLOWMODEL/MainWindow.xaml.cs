@@ -20,6 +20,8 @@ using OxyPlot;
 
 using System.Data;
 using System.Data.SQLite;
+using System.IO;
+using OxyPlot.Wpf;
 
 namespace FLOWMODEL
 {
@@ -29,6 +31,7 @@ namespace FLOWMODEL
 		public IList<DataPoint> ViscosityPoints { get; set; }
 
         private MathModel DefaultModel;
+
 		bool AlgorithmLaunched = false;
 		string FooterLastUsedResourceKey, FooterLastAdditionalString;
 		
@@ -239,7 +242,6 @@ namespace FLOWMODEL
 					ResultsGataGrid.ItemsSource = DataGridItemsList;
 
 					// Вывод значений на графики
-					var plotModel1 = new PlotModel();
 					TemperatureLine.ItemsSource = TemperaturePoints;
 					TemperatureLine.Color = Color.FromArgb(255, 67, 150, 0);
 					TemperatureGraph.InvalidatePlot();
@@ -325,6 +327,9 @@ namespace FLOWMODEL
 				sfd.Filter = "Word documents (*.docx)|*.docx|All files (*.*)|*.*";
 				sfd.ShowDialog();
 
+				TemperatureGraph.SaveBitmap(sfd.FileName + "T.png", 600, 400, OxyColors.White);
+				ViscosityGraph.SaveBitmap(sfd.FileName + "V.png", 600, 400, OxyColors.White);
+				
 				Report ReportGeneration = new Report(sfd.FileName, DefaultModel, MatSettingsControl.MaterialTypeCombox.Text);
 
 				MessageBox.Show(App.Current.Resources["MessageReportSaved"].ToString(), "", MessageBoxButton.OK, MessageBoxImage.Information);
