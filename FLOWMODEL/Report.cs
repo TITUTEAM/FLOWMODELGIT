@@ -40,6 +40,12 @@ namespace FLOWMODEL
 				headerRange.Font.Size = 10;
 				headerRange.Text = App.Current.Resources["Header"] + " " + dt.ToString();
 			}
+			Paragraph paraTit0 = WordDoc.Content.Paragraphs.Add(ref missing);
+
+			paraTit0.Range.Font.Size = 18;
+			paraTit0.Range.Font.Name = "Times New Roman";
+			paraTit0.Range.Text = "\t" + App.Current.Resources["UniverTit"].ToString();
+			paraTit0.Range.InsertParagraphAfter();
 
 			Paragraph para1 = WordDoc.Content.Paragraphs.Add(ref missing);
 
@@ -94,6 +100,14 @@ namespace FLOWMODEL
 			T = Model.GetTI();
 			Eta = Model.GetEtaI();
 
+			Paragraph paraTable = WordDoc.Content.Paragraphs.Add(ref missing);
+
+			paraTit0.Range.Font.Name = "Times New Roman";
+			paraTit0.Range.Font.Size = 14;
+			paraTit0.Range.Text = "\t" + App.Current.Resources["TableText"].ToString();
+			paraTit0.Range.Font.Name = "Times New Roman";
+			paraTit0.Range.InsertParagraphAfter();
+
 			Table OutputTable = WordDoc.Tables.Add(para2.Range, T.Length + 1, 3, ref missing, ref missing);
 			OutputTable.Borders.Enable = 1;
 
@@ -134,7 +148,23 @@ namespace FLOWMODEL
 			PicTable.Rows[4].Cells[1].Range.ParagraphFormat.Alignment = WdParagraphAlignment.wdAlignParagraphCenter;
 			PicTable.Rows[4].Cells[1].Range.Font.Size = 14;
 
+			para3.Range.InsertParagraphAfter();
 
+			Paragraph paraLast = WordDoc.Content.Paragraphs.Add(ref missing);
+
+			Table LastTable = WordDoc.Tables.Add(paraLast.Range, 3, 1, ref missing, ref missing);
+
+			LastTable.Rows[1].Cells[1].Range.Text = App.Current.Resources["ProductTemperature"].ToString() + " " + Model.GetTp().ToString();
+			LastTable.Rows[1].Cells[1].Range.Font.Name = "Times New Roman";
+			LastTable.Rows[1].Cells[1].Range.Font.Size = 14;
+
+			LastTable.Rows[2].Cells[1].Range.Text = App.Current.Resources["ProductViscosity"].ToString() + " " + Model.GetEtaP().ToString();
+			LastTable.Rows[2].Cells[1].Range.Font.Name = "Times New Roman";
+			LastTable.Rows[2].Cells[1].Range.Font.Size = 14;
+
+			LastTable.Rows[3].Cells[1].Range.Text = App.Current.Resources["ProductPerformance"].ToString() + " " + T[T.Length - 1].ToString();
+			LastTable.Rows[3].Cells[1].Range.Font.Name = "Times New Roman";
+			LastTable.Rows[3].Cells[1].Range.Font.Size = 14;
 
 		}
 	}

@@ -117,4 +117,9 @@
 
 	<system:String x:Key="ViscPict">Picture 2 -- Viscosity spreading along the channel</system:String>
 	<system:String x:Key="TempPict">Picture 1 -- Temperature spreading along the channel</system:String>
+	<system:String x:Key="TableText">Table 1. Results</system:String>
+
+	<system:String x:Key="UniverTit">Results of laboratory work "The study of non-isothermal flow of abnormally viscous materials"</system:String>
+	
+	
 </ResourceDictionary>
