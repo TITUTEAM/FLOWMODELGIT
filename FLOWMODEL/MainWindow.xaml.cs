@@ -85,6 +85,8 @@ namespace FLOWMODEL
 
 				// Вставка изначального текста внизу окна при его открытии
 				FooterSetLocalizedText("FooterAdminWelcome");
+
+				AlgorithmLaunched = false;
 			}
 			else
 			{
@@ -253,7 +255,7 @@ namespace FLOWMODEL
 					ViscosityGraph.ResetAllAxes();
 
 					MessageBox.Show(App.Current.Resources["MessageCalculationSuccess"].ToString(), "", MessageBoxButton.OK, MessageBoxImage.Information);
-					FooterSetLocalizedText("FooterCalcSuccess", ""+Time);
+					FooterSetLocalizedText("FooterCalcSuccess", " "+Time);
 
 					// Активация кнопок с результатами и графиками
 					ResultsButton.IsEnabled = true;
@@ -281,7 +283,7 @@ namespace FLOWMODEL
 			// Добавляем новый материал в базу
 			if (Database._instance.AddNewMaterial(AddMaterialControl))
 			{
-				// Если материал успешно удален:
+				// Если материал успешно добавлен:
 				// Обновляем список материалов из базы для Combobox
 				Database._instance.GetMaterials(MatSettingsControl.MaterialTypeCombox);
 				MatSettingsControl.MaterialTypeCombox.SelectedIndex = 0;
@@ -321,20 +323,37 @@ namespace FLOWMODEL
 		{
 			//try
 			//{
+			var saveProgressWin = new SavingProgressWindow();
+
 				SaveFileDialog sfd = new SaveFileDialog();
 				sfd.FileName = App.Current.Resources["DefaultReportName"].ToString();
 				sfd.DefaultExt = ".docx";
-				sfd.Filter = "Word documents (*.docx)|*.docx|All files (*.*)|*.*";
-				sfd.ShowDialog();
+				sfd.Filter = "Word 2010 (*.docx)|*.docx|All files (*.*)|*.*";
 
-				TemperatureGraph.SaveBitmap(sfd.FileName + "T.png", 600, 400, OxyColors.White);
-				ViscosityGraph.SaveBitmap(sfd.FileName + "V.png", 600, 400, OxyColors.White);
-				
-				Report ReportGeneration = new Report(sfd.FileName, DefaultModel, MatSettingsControl.MaterialTypeCombox.Text);
+				saveProgressWin.Show();
+				saveProgressWin.Focus();
 
-				File.Delete(sfd.FileName + "T.png");
-				File.Delete(sfd.FileName + "V.png");
-				MessageBox.Show(App.Current.Resources["MessageReportSaved"].ToString(), "", MessageBoxButton.OK, MessageBoxImage.Information);
+				if (sfd.ShowDialog() == true)
+				{
+					TemperatureGraph.SaveBitmap(sfd.FileName + "T.png", 600, 400, OxyColors.White);
+					ViscosityGraph.SaveBitmap(sfd.FileName + "V.png", 600, 400, OxyColors.White);
+
+					Report ReportGeneration = new Report(sfd.FileName, DefaultModel, MatSettingsControl.MaterialTypeCombox.Text);
+
+					File.Delete(sfd.FileName + "T.png");
+					File.Delete(sfd.FileName + "V.png");
+
+					saveProgressWin.Close();
+					this.Focus();
+					MessageBox.Show(App.Current.Resources["MessageReportSaved"].ToString(), "", MessageBoxButton.OK, MessageBoxImage.Information);
+				}
+				else
+				{
+					saveProgressWin.Close();
+					this.Focus();
+				}
+
+
 		//	}
 			//catch
 			//{
@@ -365,6 +384,8 @@ namespace FLOWMODEL
 			Login LoginW = new Login();
 			LoginW.Show();
 			LoginW.Activate();
+
+			AlgorithmLaunched = false;
 
 			// Получаем указатель на главное окно и закрываем его
 			Window SenderWindow = (Window)sender;

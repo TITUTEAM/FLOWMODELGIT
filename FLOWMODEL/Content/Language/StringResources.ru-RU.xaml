@@ -120,5 +120,6 @@
 
 	<system:String x:Key="UniverTit">Результаты лабораторной работы "Исследование неизотермического течения аномально-вязких материалов"</system:String>
 
-
+	<system:String x:Key="ReportSavingProcess">Идет сохранение отчета ...</system:String>
+	
 </ResourceDictionary>
