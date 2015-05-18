@@ -20,6 +20,8 @@ using OxyPlot;
 
 using System.Data;
 using System.Data.SQLite;
+using OxyPlot.Wpf;
+using System.IO;
 
 namespace FLOWMODEL
 {
@@ -31,6 +33,7 @@ namespace FLOWMODEL
         private MathModel DefaultModel;
 		bool AlgorithmLaunched = false;
 		string FooterLastUsedResourceKey, FooterLastAdditionalString;
+		public PlotModel plotModel1;
 		
 		public MainWindow(bool AdminMode = false)
 		{
@@ -239,7 +242,7 @@ namespace FLOWMODEL
 					ResultsGataGrid.ItemsSource = DataGridItemsList;
 
 					// Вывод значений на графики
-					var plotModel1 = new PlotModel();
+					plotModel1 = new PlotModel();
 					TemperatureLine.ItemsSource = TemperaturePoints;
 					TemperatureLine.Color = Color.FromArgb(255, 67, 150, 0);
 					TemperatureGraph.InvalidatePlot();
@@ -324,6 +327,14 @@ namespace FLOWMODEL
 				sfd.DefaultExt = ".docx";
 				sfd.Filter = "Word documents (*.docx)|*.docx|All files (*.*)|*.*";
 				sfd.ShowDialog();
+
+				using (FileStream Stream = File.Create(sfd.InitialDirectory))
+				{
+					var pngGraph = new PngExporter();
+					OxyPlot.OxyColor color = OxyColor.FromRgb(255, 255, 255);
+
+					pngGraph.Export(plotModel1, Stream, 600, 400, OxyColor.Parse("White"));
+				}
 
 				Report ReportGeneration = new Report(sfd.FileName, DefaultModel, MatSettingsControl.MaterialTypeCombox.Text);
 
