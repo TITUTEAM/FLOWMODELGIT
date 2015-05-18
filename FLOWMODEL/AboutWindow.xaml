@@ -24,7 +24,7 @@
 		<TextBlock HorizontalAlignment="Left" Margin="15,15,0,0" TextWrapping="Wrap" Text="FLOWMODEL" VerticalAlignment="Top" FontSize="20" Foreground="{DynamicResource YellowTabButtonBrush}"/>
 		<StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,21,25,0" >
 			<TextBlock Text="{DynamicResource AboutVersionNumber}" VerticalAlignment="Top" Foreground="{DynamicResource YellowTabButtonBrush}"/>
-			<TextBlock Margin="5, 0, 0, 0" Text="0.27.04" VerticalAlignment="Top" Foreground="{DynamicResource YellowTabButtonBrush}"/>
+			<TextBlock Margin="5, 0, 0, 0" Text="1.17.05" VerticalAlignment="Top" Foreground="{DynamicResource YellowTabButtonBrush}"/>
 		</StackPanel>
 
 		<TextBlock HorizontalAlignment="Left" Margin="169,0,0,87" Text="{DynamicResource AboutGroup424}" VerticalAlignment="Bottom" FontSize="14"/>

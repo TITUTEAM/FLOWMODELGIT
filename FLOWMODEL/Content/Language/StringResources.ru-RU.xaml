@@ -111,8 +111,15 @@
 	<system:String x:Key="FooterCalcSuccess">Готово. Время расчета, мс: </system:String>
 
 	<system:String x:Key="DefaultReportName">Отчет</system:String>
-	<system:String x:Key="Header">Отчет сгенирирован </system:String>
+	<system:String x:Key="Header">Отчет сгенерирован </system:String>
 	<system:String x:Key="InitialData">Исходные данные</system:String>
 	<system:String x:Key="Output">Выходные данные</system:String>
+	<system:String x:Key="ViscPict">Рисунок 2 — Распределение вязкости по длине канала</system:String>
+	<system:String x:Key="TempPict">Рисунок 1 — Распределение температуры по длине канала</system:String>
+	<system:String x:Key="TableText">Таблица 1 — Результаты</system:String>
 
+	<system:String x:Key="UniverTit">Результаты лабораторной работы "Исследование неизотермического течения аномально-вязких материалов"</system:String>
+
+	<system:String x:Key="ReportSavingProcess">Идет сохранение отчета ...</system:String>
+	
 </ResourceDictionary>
