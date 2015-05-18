@@ -321,8 +321,8 @@ namespace FLOWMODEL
 		// Сохранение отчета
 		private void SaveReport(object sender, ExecutedRoutedEventArgs e)
 		{
-			//try
-			//{
+			try
+			{
 			var saveProgressWin = new SavingProgressWindow();
 
 				SaveFileDialog sfd = new SaveFileDialog();
@@ -354,11 +354,11 @@ namespace FLOWMODEL
 				}
 
 
-		//	}
-			//catch
-			//{
-			//	MessageBox.Show(App.Current.Resources["MessageReportError"].ToString(), "", MessageBoxButton.OK, MessageBoxImage.Error);
-			//}
+			}
+			catch
+			{
+				MessageBox.Show(App.Current.Resources["MessageReportError"].ToString(), "", MessageBoxButton.OK, MessageBoxImage.Error);
+			}
 		}
 		private void CanSaveReport(object sender, CanExecuteRoutedEventArgs e)
 		{
