@@ -36,7 +36,7 @@
 				<!-- Температура плавления -->
 				<DockPanel Margin="0,0,0,5">
 					<TextBlock  Width="180" TextWrapping="Wrap" FontSize="14" Text="{DynamicResource ModelMaterialTemperatureMelting}" VerticalAlignment="Center"/>
-					<TextBox x:Name="Tm_TBox" TextWrapping="Wrap" Margin="5, 0, 0, 0" Text="180" Width="90" Height="25" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+					<TextBox x:Name="Tm_TBox" TextWrapping="Wrap" Margin="5, 0, 0, 0" Text="140" Width="90" Height="25" HorizontalAlignment="Right" VerticalAlignment="Center"/>
 				</DockPanel>
 				<!-- Описание материала -->
 				<TextBlock x:Name="MatDescrHeader" TextWrapping="Wrap" Text="{DynamicResource ModelMaterialDescr}" Margin="0,20,0,10" FontSize="16"  VerticalAlignment="Center"/>

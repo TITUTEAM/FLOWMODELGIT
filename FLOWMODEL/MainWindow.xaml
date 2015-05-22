@@ -248,7 +248,7 @@
 			<!-- НИЖНИЕ КНОПКИ //////////////////////////////////////////////////////////////////////////////////// -->
 			<Grid VerticalAlignment="Bottom">
 				<!-- Кнопка РАССЧИТАТЬ -->
-				<Button x:Name="CalculateButton" Content="{DynamicResource ModelCalculateButton}" Style="{DynamicResource LoginButton}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="340" Height="40" Margin="0,20,30,45" Click="CalculateButton_Click" FontSize="16" Foreground="{DynamicResource ForegroundColorBrush}"/>
+				<Button x:Name="CalculateButton" Content="{DynamicResource ModelCalculateButton}" Style="{DynamicResource LoginButton}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="340" Height="40" Margin="0,20,30,45" IsDefault="True" Click="CalculateButton_Click" FontSize="16" Foreground="{DynamicResource ForegroundColorBrush}"/>
 
 				<Grid x:Name="AdminButtons" Visibility="Hidden">
 					<!-- Кнопка Удалить -->
@@ -265,7 +265,7 @@
 		<!-- Results mode window grid =================================================================================== -->
 		<Grid x:Name="ResultGrid" Margin="0,82,0,0" Visibility="Hidden">
 			<!-- RESULTS DATA GRID -->
-			<DataGrid x:Name="ResultsGataGrid" Margin="20,20,20,105" CanUserReorderColumns="False" CanUserSortColumns="False" CanUserResizeColumns="False" MinColumnWidth="200" MaxColumnWidth="250" AutoGenerateColumns="False">
+			<DataGrid x:Name="ResultsGataGrid" Margin="20,20,20,105" CanUserReorderColumns="False" CanUserSortColumns="False" CanUserResizeColumns="False" MinColumnWidth="200" ColumnWidth="*" AutoGenerateColumns="False">
 				<DataGrid.Columns>
 					<DataGridTextColumn Header="{DynamicResource TableLength}" Binding="{Binding Path=id}"/>
 					<DataGridTextColumn Header="{DynamicResource TableTemperature}" Binding="{Binding Path=T}"/>

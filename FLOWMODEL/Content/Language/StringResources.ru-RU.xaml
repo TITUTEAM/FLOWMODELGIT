@@ -37,7 +37,7 @@
 		<system:String x:Key="ModelProcessParamsSpeed">Скорость движения крышки, м/с:</system:String>
 		<system:String x:Key="ModelProcessParamsCoverTemp">Температура крышки, С:</system:String>
 	<system:String x:Key="ModelProcessSolutionParams">Параметры решения модели:</system:String>
-		<system:String x:Key="ModelProcessSolutionParamsLength">Шаг движения по длине канала, м:</system:String>
+		<system:String x:Key="ModelProcessSolutionParamsLength">Шаг расчета по длине канала, м:</system:String>
 
 	<system:String x:Key="ModelMaterialName">Название материала:</system:String>
 		<system:String x:Key="ModelMaterialNameTextbox">Имя материала</system:String>

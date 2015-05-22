@@ -37,7 +37,7 @@
 		<system:String x:Key="ModelProcessParamsSpeed">Cover movement speed, m/s:</system:String>
 		<system:String x:Key="ModelProcessParamsCoverTemp">Cover temperature, C:</system:String>
 	<system:String x:Key="ModelProcessSolutionParams">Model calculation parameters:</system:String>
-		<system:String x:Key="ModelProcessSolutionParamsLength">Movement step along channel, m:</system:String>
+		<system:String x:Key="ModelProcessSolutionParamsLength">Calculation step along channel, m:</system:String>
 
 	<system:String x:Key="ModelMaterialName">Material name:</system:String>
 	<system:String x:Key="ModelMaterialNameTextbox">New material</system:String>

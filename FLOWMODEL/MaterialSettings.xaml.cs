@@ -50,6 +50,16 @@ namespace FLOWMODEL
 
 				MatDescrHeader.Visibility = Visibility.Visible;
 				MatDescr.Visibility = Visibility.Visible;
+
+				// Для нового материала делаем все поля параметров пустыми
+				Ro_TBox.Text = "";
+				C_TBox.Text = "";
+				Tm_TBox.Text = "";
+				Mu0_TBox.Text = "";
+				B_TBox.Text = "";
+				Tr_TBox.Text = "";
+				N_TBox.Text = "";
+				Alpha_TBox.Text = "";
 			}
 			else
 			{
